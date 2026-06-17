@@ -15,7 +15,7 @@ const NewsCard = ({ article, isFeatured = false }) => {
     >
       <Link 
         to={`/movie-news/${article.slug}`} 
-        className={`relative overflow-hidden block ${isFeatured ? 'md:w-1/2' : 'w-full aspect-[16/10]'}`}
+        className={`relative overflow-hidden block ${isFeatured ? 'w-full aspect-[16/10] md:aspect-auto md:w-1/2' : 'w-full aspect-[16/10]'}`}
       >
         <img
           src={isFeatured ? article.featuredImage : article.thumbnail}

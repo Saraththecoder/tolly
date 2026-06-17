@@ -11,7 +11,7 @@ const BoxOfficeCard = ({ boxOffice }) => {
       transition={{ duration: 0.4 }}
       className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden flex flex-col sm:flex-row group"
     >
-      <Link to={`/box-office/${boxOffice.slug}`} className="sm:w-1/3 relative overflow-hidden shrink-0">
+      <Link to={`/box-office/${boxOffice.slug}`} className="w-full h-64 sm:h-auto sm:w-1/3 relative overflow-hidden shrink-0">
         <img 
           src={boxOffice.poster} 
           alt={boxOffice.movieName} 

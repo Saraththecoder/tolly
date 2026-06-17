@@ -51,7 +51,7 @@ const SingleBoxOffice = () => {
         </div>
 
         {/* Overall Collections Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100 border-b border-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-100 border-b border-gray-100">
           <div className="p-6 text-center hover:bg-gray-50 transition-colors">
             <p className="text-sm text-gray-500 font-semibold mb-1 uppercase tracking-wider">India Net</p>
             <p className="text-2xl font-bold text-gray-900">{bo.indiaNet}</p>
