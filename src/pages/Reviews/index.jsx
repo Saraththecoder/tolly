@@ -13,12 +13,12 @@ const Reviews = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>Movie Reviews | Tollywood Portal</title>
+        <title>Movie Reviews | Chithrambalare</title>
         <meta name="description" content="Read unbiased and detailed movie reviews." />
       </Helmet>
 
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-poppins font-bold text-gray-900 mb-4">Latest Movie Reviews</h1>
+        <h1 className="text-4xl font-poppins font-bold text-white mb-4">Latest Movie Reviews</h1>
         <p className="text-gray-600 font-inter text-lg">
           Honest, unbiased, and detailed analysis of the newest releases in Tollywood and beyond.
         </p>

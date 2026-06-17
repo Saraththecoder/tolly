@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-dark text-white pt-16 pb-8">
+    <footer className="bg-[#0A0A0A] border-t border-white/10 text-white pt-16 pb-8">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="inline-block mb-6">
               <span className="text-3xl font-poppins font-bold tracking-tighter">
-                <span className="text-brand-red">Tolly</span>Portal
+                <span className="text-brand-red">Chithram</span>balare
               </span>
             </Link>
             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
@@ -63,7 +63,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} TollyPortal. All rights reserved.
+            &copy; {new Date().getFullYear()} Chithrambalare. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm">
             Designed with <span className="text-brand-red">♥</span> for Cinema Lovers

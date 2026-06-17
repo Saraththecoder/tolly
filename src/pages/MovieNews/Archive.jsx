@@ -19,11 +19,11 @@ const Archive = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>A-Z Movie News Archive | Tollywood Portal</title>
+        <title>A-Z Movie News Archive | Chithrambalare</title>
       </Helmet>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-poppins font-bold text-gray-900 mb-2">A-Z Article Directory</h1>
+        <h1 className="text-3xl font-poppins font-bold text-white mb-2">A-Z Article Directory</h1>
         <p className="text-gray-500 font-inter">Browse our complete archive of movie news alphabetically.</p>
       </div>
 
@@ -37,10 +37,10 @@ const Archive = () => {
               <button
                 key={letter}
                 onClick={() => setSelectedLetter(letter)}
-                className={`w-10 h-10 rounded text-lg font-bold font-poppins transition-colors flex items-center justify-center ${
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
                   selectedLetter === letter 
-                    ? 'bg-brand-red text-white shadow-md' 
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-brand-red text-white shadow-[0_0_15px_rgba(230,0,0,0.5)]' 
+                    : 'bg-gray-50 text-gray-300 hover:bg-white/10'
                 }`}
               >
                 {letter}
@@ -48,7 +48,7 @@ const Archive = () => {
             ))}
           </div>
 
-          <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-poppins font-bold text-white mb-6">
             Articles starting with '{selectedLetter}'
           </h2>
 
@@ -69,7 +69,7 @@ const Archive = () => {
                     to={`/movie-news/${article.slug}`}
                     className="flex flex-col md:flex-row md:items-center justify-between group"
                   >
-                    <span className="text-lg font-medium text-gray-800 group-hover:text-brand-red transition-colors mb-1 md:mb-0">
+                    <span className="text-lg font-medium text-white group-hover:text-brand-red transition-colors mb-1 md:mb-0">
                       {article.title}
                     </span>
                     <span className="text-sm text-gray-500 whitespace-nowrap">

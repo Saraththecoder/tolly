@@ -57,13 +57,13 @@ const SingleArticle = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>{article.title} | Tollywood News</title>
+        <title>{article.title} | Chithrambalare</title>
         <meta name="description" content={article.excerpt} />
       </Helmet>
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content */}
-        <article className="w-full lg:w-[70%] bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <article className="w-full lg:w-[70%] glass-card rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
           {/* Top Section */}
           <div className="p-6 md:p-8">
             <div className="mb-4">
@@ -72,11 +72,11 @@ const SingleArticle = () => {
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-5xl font-poppins font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-poppins font-bold text-white leading-tight mb-6">
               {article.title}
             </h1>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-b border-gray-100 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-b border-white/10 mb-8">
               <div className="flex items-center space-x-6">
                 <div className="flex items-center text-gray-600">
                   <User className="w-4 h-4 mr-2" />
@@ -101,7 +101,7 @@ const SingleArticle = () => {
                 <button className="w-8 h-8 rounded-full bg-[#1DA1F2] text-white flex items-center justify-center hover:opacity-80 transition-opacity">
                   <span className="font-bold text-sm">X</span>
                 </button>
-                <button onClick={handleShare} className="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                <button onClick={handleShare} className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
                   <Link2 className="w-4 h-4" />
                 </button>
               </div>
@@ -117,7 +117,7 @@ const SingleArticle = () => {
             </div>
 
             {/* Content Section */}
-            <div className="prose prose-lg max-w-none prose-p:font-inter prose-p:text-gray-700 prose-p:leading-relaxed prose-headings:font-poppins prose-a:text-brand-red">
+            <div className="prose prose-invert prose-lg max-w-none font-inter text-gray-300 leading-relaxed prose-headings:font-poppins prose-a:text-brand-red">
               {article.content.map((block, idx) => {
                 if (block.type === 'paragraph') {
                   return <p key={idx} className="mb-6">{block.value}</p>;
@@ -133,11 +133,11 @@ const SingleArticle = () => {
             </div>
             
             {/* Tags */}
-            <div className="mt-10 pt-6 border-t border-gray-100">
-              <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wider">Tags:</h4>
+            <div className="mt-10 pt-6 border-t border-white/10">
+              <h4 className="text-sm font-bold text-white mb-3 uppercase tracking-wider">Tags:</h4>
               <div className="flex flex-wrap gap-2">
                 {article.tags?.map(tag => (
-                  <Link key={tag} to={`/movie-news?category=${tag}`} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded hover:bg-brand-red hover:text-white transition-colors">
+                  <Link key={tag} to={`/movie-news?category=${tag}`} className="bg-brand-gray/40 border border-white/10 text-gray-300 px-4 py-2 rounded-full text-sm font-medium hover:bg-brand-red hover:text-white hover:border-brand-red transition-colors">
                     {tag}
                   </Link>
                 ))}
@@ -146,8 +146,8 @@ const SingleArticle = () => {
           </div>
           
           {/* Internal Linking / Related Articles */}
-          <div className="bg-gray-50 p-6 md:p-8 border-t border-gray-100">
-            <h3 className="text-2xl font-poppins font-bold text-gray-900 mb-6 border-l-4 border-brand-red pl-3">
+          <div className="bg-[#0A0A0A]/50 p-6 md:p-8 border-t border-white/10">
+            <h3 className="text-2xl font-poppins font-bold text-white mb-6 border-l-4 border-brand-red pl-3">
               Related Articles
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -156,7 +156,7 @@ const SingleArticle = () => {
               ))}
             </div>
 
-            <h3 className="text-2xl font-poppins font-bold text-gray-900 mb-6 border-l-4 border-brand-red pl-3">
+            <h3 className="text-2xl font-poppins font-bold text-white mb-6 border-l-4 border-brand-red pl-3">
               Related Reviews
             </h3>
             <div className="grid grid-cols-2 gap-4 md:gap-6">

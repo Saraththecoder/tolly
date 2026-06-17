@@ -2,29 +2,58 @@
 
 @theme {
   --color-brand-red: #E60000;
-  --color-brand-dark: #111111;
-  --color-brand-gray: #F5F5F5;
+  --color-brand-dark: #0A0A0A;
+  --color-brand-gray: #1F1F1F;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
   --font-inter: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
+  
+  --animate-pulse-glow: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.7);
+  }
+  50% {
+    opacity: .7;
+    box-shadow: 0 0 0 10px rgba(230, 0, 0, 0);
+  }
 }
 
 @layer base {
   html {
     font-family: var(--font-inter);
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
   
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-[#0A0A0A] text-gray-100 antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-poppins);
+    @apply text-white;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .glass-card {
+    @apply bg-brand-gray/40 backdrop-blur-md border border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)];
+  }
+  
+  .glow-red {
+    text-shadow: 0 0 20px rgba(230, 0, 0, 0.6);
+  }
+  
+  .glow-box-red {
+    box-shadow: 0 0 20px rgba(230, 0, 0, 0.3);
   }
 }

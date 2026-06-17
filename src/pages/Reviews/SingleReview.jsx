@@ -28,13 +28,13 @@ const SingleReview = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>{review.movieName} Review | Tollywood Portal</title>
+        <title>{review.movieName} Review | Chithrambalare</title>
         <meta name="description" content={review.snippet} />
       </Helmet>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+      <div className="max-w-4xl mx-auto glass-card rounded-2xl overflow-hidden border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
         {/* Header Section */}
-        <div className="bg-brand-dark text-white p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+        <div className="bg-[#0A0A0A]/50 text-white p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden border-b border-white/10">
           {/* Background blur */}
           <div 
             className="absolute inset-0 opacity-20 blur-3xl scale-110"
@@ -65,38 +65,38 @@ const SingleReview = () => {
         <div className="p-8 md:p-12 space-y-10">
           
           <section>
-            <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-4 flex items-center">
+            <h2 className="text-2xl font-poppins font-bold text-white mb-4 flex items-center">
               <span className="w-1.5 h-6 bg-brand-red mr-3 rounded-full"></span>
               Story
             </h2>
-            <p className="text-gray-700 leading-relaxed font-inter text-lg">
+            <p className="text-gray-300 leading-relaxed font-inter text-lg">
               {review.story}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-4 flex items-center">
+            <h2 className="text-2xl font-poppins font-bold text-white mb-4 flex items-center">
               <span className="w-1.5 h-6 bg-brand-red mr-3 rounded-full"></span>
               Performances
             </h2>
-            <p className="text-gray-700 leading-relaxed font-inter text-lg">
+            <p className="text-gray-300 leading-relaxed font-inter text-lg">
               {review.performances}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-4 flex items-center">
+            <h2 className="text-2xl font-poppins font-bold text-white mb-4 flex items-center">
               <span className="w-1.5 h-6 bg-brand-red mr-3 rounded-full"></span>
               Technical Aspects
             </h2>
-            <p className="text-gray-700 leading-relaxed font-inter text-lg">
+            <p className="text-gray-300 leading-relaxed font-inter text-lg">
               {review.technicalAspects}
             </p>
           </section>
 
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-8 mt-12 text-center">
-            <h2 className="text-2xl font-poppins font-bold text-gray-900 mb-4">Verdict</h2>
-            <p className="text-xl font-bold text-brand-red">
+          <div className="bg-[#0A0A0A]/80 border border-brand-red/30 rounded-xl p-8 mt-12 text-center shadow-[0_0_20px_rgba(230,0,0,0.1)]">
+            <h2 className="text-2xl font-poppins font-bold text-white mb-4">Verdict</h2>
+            <p className="text-2xl font-bold text-brand-red drop-shadow-[0_0_10px_rgba(230,0,0,0.5)]">
               {review.verdict}
             </p>
           </div>

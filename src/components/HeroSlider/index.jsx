@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
-import { Calendar } from 'lucide-react';
+import { Calendar, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
@@ -29,29 +30,39 @@ const HeroSlider = ({ articles }) => {
                 alt={article.title} 
                 className="w-full h-full object-cover"
               />
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/40 to-transparent"></div>
+              {/* Cinematic Vignette Fade */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent z-10" />
               
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 md:w-3/4 lg:w-2/3">
-                <div className="mb-4 flex items-center space-x-3">
-                  <span className="bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    {article.category}
-                  </span>
-                  <div className="flex items-center text-gray-300 text-sm font-medium">
-                    <Calendar className="w-4 h-4 mr-1.5" />
-                    {new Date(article.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 md:w-3/4 lg:w-2/3 z-20">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <div className="flex items-center space-x-3 mb-4">
+                    <span className="bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-[0_0_15px_rgba(230,0,0,0.6)]">
+                      <span className="w-2 h-2 rounded-full bg-white mr-2 animate-pulse-glow"></span>
+                      {article.category}
+                    </span>
                   </div>
-                </div>
-                
-                <Link to={`/movie-news/${article.slug}`}>
-                  <h2 className="text-3xl md:text-5xl font-poppins font-bold text-white leading-tight mb-4 hover:text-brand-red transition-colors line-clamp-2">
-                    {article.title}
-                  </h2>
-                </Link>
-                
-                <p className="text-gray-200 text-base md:text-lg line-clamp-2 mb-6 max-w-3xl">
-                  {article.excerpt}
-                </p>
+                  
+                  <Link to={`/movie-news/${article.slug}`}>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-poppins font-bold text-white leading-tight mb-4 hover:text-gray-200 transition-colors drop-shadow-lg tracking-tight">
+                      {article.title}
+                    </h2>
+                  </Link>
+                  
+                  <p className="text-gray-300 text-sm md:text-lg mb-8 line-clamp-2 max-w-2xl text-shadow">
+                    {article.excerpt}
+                  </p>
+                  
+                  <Link 
+                    to={`/movie-news/${article.slug}`}
+                    className="inline-flex items-center bg-brand-red text-white font-bold px-8 py-4 rounded-full hover:bg-red-700 transition-all shadow-[0_0_20px_rgba(230,0,0,0.5)] hover:shadow-[0_0_30px_rgba(230,0,0,0.8)] hover:-translate-y-1"
+                  >
+                    Read Full Story <ChevronRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </SwiperSlide>
@@ -66,6 +77,13 @@ const HeroSlider = ({ articles }) => {
         .swiper-pagination-bullet-active {
           background-color: var(--color-brand-red) !important;
           opacity: 1;
+        }
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .animate-pulse-glow {
+          animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
       `}</style>
     </div>

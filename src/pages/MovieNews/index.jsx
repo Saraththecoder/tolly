@@ -52,13 +52,13 @@ const MovieNews = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>Movie News | Tollywood Entertainment News Portal</title>
+        <title>Movie News | Chithrambalare</title>
       </Helmet>
 
       {/* Header and Search */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-poppins font-bold text-gray-900 mb-2">Movie News</h1>
+          <h1 className="text-3xl font-poppins font-bold text-white mb-2">Movie News</h1>
           <p className="text-gray-500 font-inter">Browse the latest updates and breaking news.</p>
         </div>
         
@@ -68,7 +68,7 @@ const MovieNews = () => {
             placeholder="Search news..." 
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-red focus:border-transparent font-inter text-sm"
+            className="w-full pl-10 pr-4 py-2 border border-white/10 bg-brand-gray/40 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-red text-sm font-inter text-white"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <button type="submit" className="hidden">Search</button>
@@ -85,10 +85,10 @@ const MovieNews = () => {
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                   category === cat 
-                    ? 'bg-brand-red text-white shadow-md' 
-                    : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                    ? 'bg-brand-red text-white' 
+                    : 'bg-brand-gray/40 text-gray-300 hover:bg-white/10'
                 }`}
               >
                 {cat}

@@ -9,7 +9,7 @@ const NewsCard = ({ article, isFeatured = false }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className={`group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 ${
+      className={`group flex flex-col glass-card rounded-2xl overflow-hidden hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 ${
         isFeatured ? 'md:flex-row md:col-span-2' : ''
       }`}
     >
@@ -20,9 +20,16 @@ const NewsCard = ({ article, isFeatured = false }) => {
         <img
           src={isFeatured ? article.featuredImage : article.thumbnail}
           alt={article.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-60"
         />
-        <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+          <span className="bg-brand-red text-white font-bold px-6 py-2 rounded-full shadow-[0_0_15px_rgba(230,0,0,0.5)]">
+            Read Now
+          </span>
+        </div>
+        <div className="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md flex items-center">
+          {isFeatured && <span className="w-1.5 h-1.5 rounded-full bg-white mr-1.5 animate-pulse-glow"></span>}
           {article.category}
         </div>
       </Link>
@@ -42,20 +49,20 @@ const NewsCard = ({ article, isFeatured = false }) => {
         </div>
         
         <Link to={`/movie-news/${article.slug}`}>
-          <h3 className={`font-poppins font-bold text-gray-900 group-hover:text-brand-red transition-colors mb-3 ${
+          <h3 className={`font-poppins font-bold text-white group-hover:text-brand-red transition-colors mb-3 ${
             isFeatured ? 'text-2xl md:text-3xl line-clamp-3' : 'text-xl line-clamp-2'
           }`}>
             {article.title}
           </h3>
         </Link>
         
-        <p className={`text-gray-600 line-clamp-3 mb-4 flex-grow text-sm ${
+        <p className={`text-gray-400 line-clamp-3 mb-4 flex-grow text-sm ${
           isFeatured ? 'md:text-base' : ''
         }`}>
           {article.excerpt}
         </p>
         
-        <div className="mt-auto pt-4 border-t border-gray-100">
+        <div className="mt-auto pt-4 border-t border-white/10">
           <Link 
             to={`/movie-news/${article.slug}`}
             className="text-brand-red font-semibold text-sm hover:text-red-700 transition-colors flex items-center"

@@ -17,11 +17,11 @@ const Search = () => {
   return (
     <div className="container mx-auto px-4 py-20 flex flex-col items-center min-h-[60vh]">
       <Helmet>
-        <title>Search | Tollywood Portal</title>
+        <title>Search | Chithrambalare</title>
       </Helmet>
       
       <div className="w-full max-w-2xl text-center">
-        <h1 className="text-4xl font-poppins font-bold text-gray-900 mb-6">Search Tollywood Portal</h1>
+        <h1 className="text-4xl font-poppins font-bold text-white mb-6">Search Chithrambalare</h1>
         <p className="text-gray-500 mb-8 font-inter">Find the latest news, reviews, and box office updates.</p>
         
         <form onSubmit={handleSearch} className="relative w-full shadow-lg rounded-full overflow-hidden flex">
@@ -32,7 +32,7 @@ const Search = () => {
               placeholder="What are you looking for?" 
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-16 pr-6 py-4 text-lg border-0 focus:ring-0 text-gray-900 font-inter outline-none"
+              className="w-full pl-16 pr-6 py-4 text-lg border-0 bg-brand-gray/40 focus:ring-0 text-white font-inter outline-none"
               autoFocus
             />
           </div>

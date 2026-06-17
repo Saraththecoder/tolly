@@ -6,11 +6,11 @@ const NotFound = () => {
   return (
     <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[70vh] text-center">
       <Helmet>
-        <title>Page Not Found | Tollywood Portal</title>
+        <title>Page Not Found | Chithrambalare</title>
       </Helmet>
 
       <h1 className="text-9xl font-poppins font-black text-gray-200 mb-4">404</h1>
-      <h2 className="text-3xl font-poppins font-bold text-gray-900 mb-4">Oops! Page not found</h2>
+      <h2 className="text-3xl font-poppins font-bold text-white mb-4">Oops! Page not found</h2>
       <p className="text-gray-500 font-inter max-w-md mb-8">
         The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
       </p>

@@ -13,12 +13,12 @@ const BoxOffice = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>Box Office Collections | Tollywood Portal</title>
+        <title>Box Office Collections | Chithrambalare</title>
         <meta name="description" content="Latest box office collections and tracking for Tollywood movies." />
       </Helmet>
 
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-poppins font-bold text-gray-900 mb-4">Box Office Collections</h1>
+        <h1 className="text-4xl font-poppins font-bold text-white mb-4">Box Office Collections</h1>
         <p className="text-gray-600 font-inter text-lg">
           Track the latest worldwide and domestic collections, day-wise breakdowns, and final verdicts.
         </p>

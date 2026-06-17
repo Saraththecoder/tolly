@@ -39,8 +39,8 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>Tollywood Entertainment News Portal | Latest Movie News & Reviews</title>
-        <meta name="description" content="Get the latest Tollywood movie news, unbiased reviews, box office collections, and exclusive celebrity interviews." />
+        <title>Chithrambalare | Latest Movie News & Reviews</title>
+        <meta name="description" content="Get the latest Tollywood movie news, unbiased reviews, box office collections, and exclusive celebrity interviews on Chithrambalare." />
       </Helmet>
 
       {/* Hero Section */}
@@ -52,8 +52,8 @@ const Home = () => {
           
           {/* Latest Movie News Grid */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-gray-100 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-900 border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
                 Latest Movie News
               </h2>
               <Link to="/movie-news" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
@@ -71,8 +71,8 @@ const Home = () => {
           {/* OTT Updates */}
           {ottNews.length > 0 && (
             <section>
-              <div className="flex justify-between items-center mb-6 border-b-2 border-gray-100 pb-2">
-                <h2 className="text-2xl font-poppins font-bold text-gray-900 border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
+                <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
                   OTT Updates
                 </h2>
                 <Link to="/movie-news?category=OTT" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
@@ -90,8 +90,8 @@ const Home = () => {
 
           {/* Latest Reviews */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-gray-100 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-900 border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
                 Latest Reviews
               </h2>
               <Link to="/reviews" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
@@ -112,8 +112,8 @@ const Home = () => {
 
           {/* Box Office Updates */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-gray-100 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-900 border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
                 Box Office Collections
               </h2>
               <Link to="/box-office" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
