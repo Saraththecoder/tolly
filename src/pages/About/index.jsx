@@ -5,15 +5,15 @@ const About = () => {
   return (
     <div className="bg-[#0A0A0A] text-white">
       <Helmet>
-        <title>About Us | Chithrambalare</title>
-        <meta name="description" content="Learn more about Chithrambalare, our mission, vision, and the editorial team." />
+        <title>About Us | CHITRAMBHALARE</title>
+        <meta name="description" content="Learn more about CHITRAMBHALARE, our mission, vision, and the editorial team." />
       </Helmet>
 
       {/* Banner */}
       <div className="bg-[#0A0A0A]/50 border-b border-white/10 text-white py-20 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-brand-red/5 blur-[100px]"></div>
         <div className="container mx-auto">
-          <h1 className="text-4xl md:text-5xl font-poppins font-bold mb-4">About Chithrambalare</h1>
+          <h1 className="text-4xl md:text-5xl font-poppins font-bold mb-4">About CHITRAMBHALARE</h1>
           <p className="text-xl text-gray-400 font-inter max-w-2xl mx-auto">
             Your most trusted source for Tollywood news, reviews, and box office tracking.
           </p>
@@ -27,7 +27,7 @@ const About = () => {
           <section className="text-center">
             <h2 className="text-3xl font-poppins font-bold text-white mb-6">Who We Are</h2>
             <p className="text-gray-300 text-lg leading-relaxed font-inter">
-              Founded in 2026, Chithrambalare has quickly grown to become the premier destination for all things related to the Telugu film industry. We are dedicated to providing our readers with accurate, timely, and engaging content, ranging from breaking news to in-depth analytical reviews and exclusive interviews.
+              Founded in 2018, CHITRAMBHALARE has quickly grown to become the premier destination for all things related to the Telugu film industry. We are dedicated to providing our readers with accurate, timely, and engaging content, ranging from breaking news to in-depth analytical reviews and exclusive interviews.
             </p>
           </section>
 
@@ -77,7 +77,7 @@ const About = () => {
                   <Mail className="w-6 h-6" />
                 </div>
                 <h4 className="font-bold mb-2">Email</h4>
-                <p className="text-gray-400">contact@chithrambalare.com</p>
+                <p className="text-gray-400">CHITRAMBHALARE1984@GMAIL.COM</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 bg-[#1A1A1A] rounded-full flex items-center justify-center mb-4 text-brand-red shadow-[0_0_15px_rgba(230,0,0,0.3)]">
@@ -91,7 +91,7 @@ const About = () => {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <h4 className="font-bold mb-2">Office</h4>
-                <p className="text-gray-400">Jubilee Hills, Hyderabad</p>
+                <p className="text-gray-400">JUST SHOW HYDERABAD</p>
               </div>
             </div>
           </section>

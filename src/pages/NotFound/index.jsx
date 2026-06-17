@@ -6,7 +6,7 @@ const NotFound = () => {
   return (
     <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[70vh] text-center">
       <Helmet>
-        <title>Page Not Found | Chithrambalare</title>
+        <title>Page Not Found | CHITRAMBHALARE</title>
       </Helmet>
 
       <h1 className="text-9xl font-poppins font-black text-gray-200 mb-4">404</h1>

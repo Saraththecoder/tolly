@@ -52,7 +52,7 @@ const MovieNews = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>Movie News | Chithrambalare</title>
+        <title>Movie News | CHITRAMBHALARE</title>
       </Helmet>
 
       {/* Header and Search */}

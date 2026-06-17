@@ -28,7 +28,7 @@ const SingleReview = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>{review.movieName} Review | Chithrambalare</title>
+        <title>{review.movieName} Review | CHITRAMBHALARE</title>
         <meta name="description" content={review.snippet} />
       </Helmet>
 

@@ -57,7 +57,7 @@ const SingleArticle = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>{article.title} | Chithrambalare</title>
+        <title>{article.title} | CHITRAMBHALARE</title>
         <meta name="description" content={article.excerpt} />
       </Helmet>
 

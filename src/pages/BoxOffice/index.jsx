@@ -13,7 +13,7 @@ const BoxOffice = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>Box Office Collections | Chithrambalare</title>
+        <title>Box Office Collections | CHITRAMBHALARE</title>
         <meta name="description" content="Latest box office collections and tracking for Tollywood movies." />
       </Helmet>
 

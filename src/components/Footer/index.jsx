@@ -7,12 +7,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="inline-block mb-6">
-              <span className="text-3xl font-poppins font-bold tracking-tighter">
-                <span className="text-brand-red">Chithram</span>balare
-              </span>
+              <img src="/logo.png" alt="CHITRAMBHALARE" className="h-12 w-auto" />
             </Link>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Your ultimate destination for the latest Tollywood news, unbiased movie reviews, exclusive interviews, and authentic box office collections.
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed uppercase">
+              PROVIDING NON STOP FILM NEWS , BOX OFFICE UPDATES, REVIEWS, AND GOSSIPS FROM TOLLYWOOD
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-red transition-colors text-white font-bold">
@@ -63,7 +61,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Chithrambalare. All rights reserved.
+            &copy; {new Date().getFullYear()} CHITRAMBHALARE. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm">
             Designed with <span className="text-brand-red">♥</span> for Cinema Lovers

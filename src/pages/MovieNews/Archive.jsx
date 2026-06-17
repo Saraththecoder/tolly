@@ -19,7 +19,7 @@ const Archive = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>A-Z Movie News Archive | Chithrambalare</title>
+        <title>A-Z Movie News Archive | CHITRAMBHALARE</title>
       </Helmet>
 
       <div className="mb-8">

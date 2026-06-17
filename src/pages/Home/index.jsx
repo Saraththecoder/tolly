@@ -39,8 +39,8 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-8">
       <Helmet>
-        <title>Chithrambalare | Latest Movie News & Reviews</title>
-        <meta name="description" content="Get the latest Tollywood movie news, unbiased reviews, box office collections, and exclusive celebrity interviews on Chithrambalare." />
+        <title>CHITRAMBHALARE | Latest Movie News & Reviews</title>
+        <meta name="description" content="Get the latest Tollywood movie news, unbiased reviews, box office collections, and exclusive celebrity interviews on CHITRAMBHALARE." />
       </Helmet>
 
       {/* Hero Section */}

@@ -13,7 +13,7 @@ const Reviews = () => {
   return (
     <div className="container mx-auto px-4 lg:px-8 py-10">
       <Helmet>
-        <title>Movie Reviews | Chithrambalare</title>
+        <title>Movie Reviews | CHITRAMBHALARE</title>
         <meta name="description" content="Read unbiased and detailed movie reviews." />
       </Helmet>
 
