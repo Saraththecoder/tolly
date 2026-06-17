@@ -1,0 +1,2708 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "slug": "movie-news-article-1",
+      "title": "Exciting Update on Upcoming Blockbuster Project 1",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 1. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 1. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article1_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article1_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb1/400/250",
+      "featuredImage": "https://picsum.photos/seed/article1_1/1200/600",
+      "date": "2026-05-20T15:20:24.575Z",
+      "category": "Gossips",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "movie-news-article-2",
+      "title": "Exciting Update on Upcoming Blockbuster Project 2",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 2. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 2. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article2_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article2_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb2/400/250",
+      "featuredImage": "https://picsum.photos/seed/article2_1/1200/600",
+      "date": "2026-03-13T01:04:43.710Z",
+      "category": "Interviews",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "movie-news-article-3",
+      "title": "Exciting Update on Upcoming Blockbuster Project 3",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 3. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 3. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article3_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article3_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb3/400/250",
+      "featuredImage": "https://picsum.photos/seed/article3_1/1200/600",
+      "date": "2026-06-07T05:51:38.597Z",
+      "category": "Bollywood",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "movie-news-article-4",
+      "title": "Exciting Update on Upcoming Blockbuster Project 4",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 4. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 4. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article4_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article4_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb4/400/250",
+      "featuredImage": "https://picsum.photos/seed/article4_1/1200/600",
+      "date": "2026-04-01T02:17:29.540Z",
+      "category": "Bollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "movie-news-article-5",
+      "title": "Exciting Update on Upcoming Blockbuster Project 5",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 5. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 5. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article5_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article5_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb5/400/250",
+      "featuredImage": "https://picsum.photos/seed/article5_1/1200/600",
+      "date": "2026-06-09T23:57:20.959Z",
+      "category": "Gossips",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "movie-news-article-6",
+      "title": "Exciting Update on Upcoming Blockbuster Project 6",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 6. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 6. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article6_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article6_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb6/400/250",
+      "featuredImage": "https://picsum.photos/seed/article6_1/1200/600",
+      "date": "2026-03-11T16:05:11.342Z",
+      "category": "Hollywood",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "movie-news-article-7",
+      "title": "Exciting Update on Upcoming Blockbuster Project 7",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 7. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 7. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article7_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article7_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb7/400/250",
+      "featuredImage": "https://picsum.photos/seed/article7_1/1200/600",
+      "date": "2026-05-29T14:28:44.349Z",
+      "category": "Tollywood",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "movie-news-article-8",
+      "title": "Exciting Update on Upcoming Blockbuster Project 8",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 8. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 8. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article8_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article8_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb8/400/250",
+      "featuredImage": "https://picsum.photos/seed/article8_1/1200/600",
+      "date": "2026-06-15T09:15:07.635Z",
+      "category": "OTT",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "movie-news-article-9",
+      "title": "Exciting Update on Upcoming Blockbuster Project 9",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 9. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 9. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article9_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article9_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb9/400/250",
+      "featuredImage": "https://picsum.photos/seed/article9_1/1200/600",
+      "date": "2026-05-11T10:50:48.202Z",
+      "category": "Hollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 10,
+      "slug": "movie-news-article-10",
+      "title": "Exciting Update on Upcoming Blockbuster Project 10",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 10. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 10. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article10_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article10_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb10/400/250",
+      "featuredImage": "https://picsum.photos/seed/article10_1/1200/600",
+      "date": "2026-05-27T08:39:45.135Z",
+      "category": "Hollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 11,
+      "slug": "movie-news-article-11",
+      "title": "Exciting Update on Upcoming Blockbuster Project 11",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 11. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 11. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article11_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article11_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb11/400/250",
+      "featuredImage": "https://picsum.photos/seed/article11_1/1200/600",
+      "date": "2026-05-01T20:52:27.998Z",
+      "category": "Hollywood",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 12,
+      "slug": "movie-news-article-12",
+      "title": "Exciting Update on Upcoming Blockbuster Project 12",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 12. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 12. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article12_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article12_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb12/400/250",
+      "featuredImage": "https://picsum.photos/seed/article12_1/1200/600",
+      "date": "2026-05-07T12:41:24.479Z",
+      "category": "Interviews",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 13,
+      "slug": "movie-news-article-13",
+      "title": "Exciting Update on Upcoming Blockbuster Project 13",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 13. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 13. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article13_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article13_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb13/400/250",
+      "featuredImage": "https://picsum.photos/seed/article13_1/1200/600",
+      "date": "2026-06-12T05:52:15.065Z",
+      "category": "Bollywood",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 14,
+      "slug": "movie-news-article-14",
+      "title": "Exciting Update on Upcoming Blockbuster Project 14",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 14. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 14. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article14_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article14_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb14/400/250",
+      "featuredImage": "https://picsum.photos/seed/article14_1/1200/600",
+      "date": "2026-03-14T10:18:43.936Z",
+      "category": "Hollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 15,
+      "slug": "movie-news-article-15",
+      "title": "Exciting Update on Upcoming Blockbuster Project 15",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 15. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 15. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article15_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article15_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb15/400/250",
+      "featuredImage": "https://picsum.photos/seed/article15_1/1200/600",
+      "date": "2026-04-01T05:02:18.481Z",
+      "category": "Tollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 16,
+      "slug": "movie-news-article-16",
+      "title": "Exciting Update on Upcoming Blockbuster Project 16",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 16. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 16. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article16_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article16_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb16/400/250",
+      "featuredImage": "https://picsum.photos/seed/article16_1/1200/600",
+      "date": "2026-03-26T22:02:56.525Z",
+      "category": "OTT",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 17,
+      "slug": "movie-news-article-17",
+      "title": "Exciting Update on Upcoming Blockbuster Project 17",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 17. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 17. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article17_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article17_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb17/400/250",
+      "featuredImage": "https://picsum.photos/seed/article17_1/1200/600",
+      "date": "2026-04-05T13:40:59.105Z",
+      "category": "Bollywood",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 18,
+      "slug": "movie-news-article-18",
+      "title": "Exciting Update on Upcoming Blockbuster Project 18",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 18. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 18. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article18_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article18_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb18/400/250",
+      "featuredImage": "https://picsum.photos/seed/article18_1/1200/600",
+      "date": "2026-06-02T15:53:02.248Z",
+      "category": "Tollywood",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 19,
+      "slug": "movie-news-article-19",
+      "title": "Exciting Update on Upcoming Blockbuster Project 19",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 19. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 19. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article19_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article19_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb19/400/250",
+      "featuredImage": "https://picsum.photos/seed/article19_1/1200/600",
+      "date": "2026-04-13T04:27:50.140Z",
+      "category": "Tollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 20,
+      "slug": "movie-news-article-20",
+      "title": "Exciting Update on Upcoming Blockbuster Project 20",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 20. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 20. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article20_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article20_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb20/400/250",
+      "featuredImage": "https://picsum.photos/seed/article20_1/1200/600",
+      "date": "2026-05-23T16:02:46.031Z",
+      "category": "Tollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 21,
+      "slug": "movie-news-article-21",
+      "title": "Exciting Update on Upcoming Blockbuster Project 21",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 21. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 21. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article21_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article21_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb21/400/250",
+      "featuredImage": "https://picsum.photos/seed/article21_1/1200/600",
+      "date": "2026-06-14T22:00:34.989Z",
+      "category": "OTT",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 22,
+      "slug": "movie-news-article-22",
+      "title": "Exciting Update on Upcoming Blockbuster Project 22",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 22. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 22. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article22_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article22_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb22/400/250",
+      "featuredImage": "https://picsum.photos/seed/article22_1/1200/600",
+      "date": "2026-04-15T00:57:59.435Z",
+      "category": "Interviews",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 23,
+      "slug": "movie-news-article-23",
+      "title": "Exciting Update on Upcoming Blockbuster Project 23",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 23. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 23. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article23_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article23_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb23/400/250",
+      "featuredImage": "https://picsum.photos/seed/article23_1/1200/600",
+      "date": "2026-04-06T09:08:52.441Z",
+      "category": "OTT",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 24,
+      "slug": "movie-news-article-24",
+      "title": "Exciting Update on Upcoming Blockbuster Project 24",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 24. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 24. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article24_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article24_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb24/400/250",
+      "featuredImage": "https://picsum.photos/seed/article24_1/1200/600",
+      "date": "2026-03-02T19:41:17.037Z",
+      "category": "Tollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 25,
+      "slug": "movie-news-article-25",
+      "title": "Exciting Update on Upcoming Blockbuster Project 25",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 25. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 25. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article25_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article25_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb25/400/250",
+      "featuredImage": "https://picsum.photos/seed/article25_1/1200/600",
+      "date": "2026-03-22T17:57:38.109Z",
+      "category": "Gossips",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 26,
+      "slug": "movie-news-article-26",
+      "title": "Exciting Update on Upcoming Blockbuster Project 26",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 26. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 26. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article26_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article26_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb26/400/250",
+      "featuredImage": "https://picsum.photos/seed/article26_1/1200/600",
+      "date": "2026-05-21T01:11:20.817Z",
+      "category": "Gossips",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 27,
+      "slug": "movie-news-article-27",
+      "title": "Exciting Update on Upcoming Blockbuster Project 27",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 27. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 27. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article27_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article27_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb27/400/250",
+      "featuredImage": "https://picsum.photos/seed/article27_1/1200/600",
+      "date": "2026-05-21T21:06:52.272Z",
+      "category": "Interviews",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 28,
+      "slug": "movie-news-article-28",
+      "title": "Exciting Update on Upcoming Blockbuster Project 28",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 28. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 28. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article28_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article28_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb28/400/250",
+      "featuredImage": "https://picsum.photos/seed/article28_1/1200/600",
+      "date": "2026-06-07T05:46:40.849Z",
+      "category": "OTT",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 29,
+      "slug": "movie-news-article-29",
+      "title": "Exciting Update on Upcoming Blockbuster Project 29",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 29. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 29. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article29_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article29_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb29/400/250",
+      "featuredImage": "https://picsum.photos/seed/article29_1/1200/600",
+      "date": "2026-04-04T23:25:19.541Z",
+      "category": "Interviews",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 30,
+      "slug": "movie-news-article-30",
+      "title": "Exciting Update on Upcoming Blockbuster Project 30",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 30. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 30. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article30_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article30_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb30/400/250",
+      "featuredImage": "https://picsum.photos/seed/article30_1/1200/600",
+      "date": "2026-06-11T11:17:55.253Z",
+      "category": "Bollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 31,
+      "slug": "movie-news-article-31",
+      "title": "Exciting Update on Upcoming Blockbuster Project 31",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 31. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 31. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article31_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article31_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb31/400/250",
+      "featuredImage": "https://picsum.photos/seed/article31_1/1200/600",
+      "date": "2026-05-05T14:28:55.908Z",
+      "category": "Interviews",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 32,
+      "slug": "movie-news-article-32",
+      "title": "Exciting Update on Upcoming Blockbuster Project 32",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 32. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 32. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article32_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article32_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb32/400/250",
+      "featuredImage": "https://picsum.photos/seed/article32_1/1200/600",
+      "date": "2026-02-23T03:21:05.990Z",
+      "category": "Tollywood",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 33,
+      "slug": "movie-news-article-33",
+      "title": "Exciting Update on Upcoming Blockbuster Project 33",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 33. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 33. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article33_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article33_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb33/400/250",
+      "featuredImage": "https://picsum.photos/seed/article33_1/1200/600",
+      "date": "2026-06-07T15:11:44.714Z",
+      "category": "OTT",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 34,
+      "slug": "movie-news-article-34",
+      "title": "Exciting Update on Upcoming Blockbuster Project 34",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 34. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 34. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article34_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article34_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb34/400/250",
+      "featuredImage": "https://picsum.photos/seed/article34_1/1200/600",
+      "date": "2026-04-11T08:15:57.283Z",
+      "category": "Interviews",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 35,
+      "slug": "movie-news-article-35",
+      "title": "Exciting Update on Upcoming Blockbuster Project 35",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 35. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 35. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article35_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article35_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb35/400/250",
+      "featuredImage": "https://picsum.photos/seed/article35_1/1200/600",
+      "date": "2026-05-27T10:30:52.477Z",
+      "category": "Interviews",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 36,
+      "slug": "movie-news-article-36",
+      "title": "Exciting Update on Upcoming Blockbuster Project 36",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 36. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 36. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article36_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article36_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb36/400/250",
+      "featuredImage": "https://picsum.photos/seed/article36_1/1200/600",
+      "date": "2026-04-13T03:10:30.547Z",
+      "category": "Tollywood",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 37,
+      "slug": "movie-news-article-37",
+      "title": "Exciting Update on Upcoming Blockbuster Project 37",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 37. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 37. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article37_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article37_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb37/400/250",
+      "featuredImage": "https://picsum.photos/seed/article37_1/1200/600",
+      "date": "2026-05-06T01:49:17.846Z",
+      "category": "Bollywood",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 38,
+      "slug": "movie-news-article-38",
+      "title": "Exciting Update on Upcoming Blockbuster Project 38",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 38. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 38. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article38_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article38_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb38/400/250",
+      "featuredImage": "https://picsum.photos/seed/article38_1/1200/600",
+      "date": "2026-05-30T07:27:24.215Z",
+      "category": "Interviews",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 39,
+      "slug": "movie-news-article-39",
+      "title": "Exciting Update on Upcoming Blockbuster Project 39",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 39. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 39. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article39_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article39_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb39/400/250",
+      "featuredImage": "https://picsum.photos/seed/article39_1/1200/600",
+      "date": "2026-04-03T22:24:35.346Z",
+      "category": "Tollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 40,
+      "slug": "movie-news-article-40",
+      "title": "Exciting Update on Upcoming Blockbuster Project 40",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 40. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 40. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article40_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article40_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb40/400/250",
+      "featuredImage": "https://picsum.photos/seed/article40_1/1200/600",
+      "date": "2026-04-26T02:45:18.249Z",
+      "category": "Tollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 41,
+      "slug": "movie-news-article-41",
+      "title": "Exciting Update on Upcoming Blockbuster Project 41",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 41. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 41. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article41_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article41_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb41/400/250",
+      "featuredImage": "https://picsum.photos/seed/article41_1/1200/600",
+      "date": "2026-06-14T21:12:50.483Z",
+      "category": "Gossips",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 42,
+      "slug": "movie-news-article-42",
+      "title": "Exciting Update on Upcoming Blockbuster Project 42",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 42. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 42. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article42_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article42_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb42/400/250",
+      "featuredImage": "https://picsum.photos/seed/article42_1/1200/600",
+      "date": "2026-03-07T19:54:50.364Z",
+      "category": "Gossips",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 43,
+      "slug": "movie-news-article-43",
+      "title": "Exciting Update on Upcoming Blockbuster Project 43",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 43. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 43. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article43_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article43_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb43/400/250",
+      "featuredImage": "https://picsum.photos/seed/article43_1/1200/600",
+      "date": "2026-03-11T22:47:58.718Z",
+      "category": "Interviews",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 44,
+      "slug": "movie-news-article-44",
+      "title": "Exciting Update on Upcoming Blockbuster Project 44",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 44. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 44. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article44_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article44_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb44/400/250",
+      "featuredImage": "https://picsum.photos/seed/article44_1/1200/600",
+      "date": "2026-05-27T17:20:28.975Z",
+      "category": "Tollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 45,
+      "slug": "movie-news-article-45",
+      "title": "Exciting Update on Upcoming Blockbuster Project 45",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 45. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 45. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article45_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article45_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb45/400/250",
+      "featuredImage": "https://picsum.photos/seed/article45_1/1200/600",
+      "date": "2026-03-03T06:08:09.815Z",
+      "category": "Interviews",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 46,
+      "slug": "movie-news-article-46",
+      "title": "Exciting Update on Upcoming Blockbuster Project 46",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 46. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 46. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article46_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article46_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb46/400/250",
+      "featuredImage": "https://picsum.photos/seed/article46_1/1200/600",
+      "date": "2026-03-01T09:31:15.314Z",
+      "category": "Interviews",
+      "author": "Author 2",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 47,
+      "slug": "movie-news-article-47",
+      "title": "Exciting Update on Upcoming Blockbuster Project 47",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 47. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 47. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article47_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article47_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb47/400/250",
+      "featuredImage": "https://picsum.photos/seed/article47_1/1200/600",
+      "date": "2026-03-12T15:42:23.613Z",
+      "category": "Hollywood",
+      "author": "Author 3",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 48,
+      "slug": "movie-news-article-48",
+      "title": "Exciting Update on Upcoming Blockbuster Project 48",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 48. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 48. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article48_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article48_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb48/400/250",
+      "featuredImage": "https://picsum.photos/seed/article48_1/1200/600",
+      "date": "2026-06-02T02:58:10.942Z",
+      "category": "OTT",
+      "author": "Author 4",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 49,
+      "slug": "movie-news-article-49",
+      "title": "Exciting Update on Upcoming Blockbuster Project 49",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 49. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 49. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article49_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article49_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb49/400/250",
+      "featuredImage": "https://picsum.photos/seed/article49_1/1200/600",
+      "date": "2026-06-12T23:08:24.051Z",
+      "category": "Hollywood",
+      "author": "Author 5",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    },
+    {
+      "id": 50,
+      "slug": "movie-news-article-50",
+      "title": "Exciting Update on Upcoming Blockbuster Project 50",
+      "excerpt": "Here is a quick sneak peek into the highly anticipated movie project 50. The team is working hard to deliver an unforgettable experience.",
+      "content": [
+        {
+          "type": "paragraph",
+          "value": "This is the detailed first paragraph for article 50. The filmmakers have revealed that the pre-production phase is almost complete."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article50_1/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "The lead actor shared some behind-the-scenes moments on social media, creating a massive buzz among fans."
+        },
+        {
+          "type": "image",
+          "value": "https://picsum.photos/seed/article50_2/800/400"
+        },
+        {
+          "type": "paragraph",
+          "value": "Stay tuned for more updates as we get closer to the official teaser launch next month."
+        }
+      ],
+      "thumbnail": "https://picsum.photos/seed/article_thumb50/400/250",
+      "featuredImage": "https://picsum.photos/seed/article50_1/1200/600",
+      "date": "2026-04-15T16:19:48.444Z",
+      "category": "Bollywood",
+      "author": "Author 1",
+      "tags": [
+        "Trending",
+        "Exclusive",
+        "Update"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "slug": "movie-review-1",
+      "movieName": "Epic Saga Part 1",
+      "poster": "https://picsum.photos/seed/review1/300/450",
+      "rating": "4.2",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-13T06:49:47.734Z"
+    },
+    {
+      "id": 2,
+      "slug": "movie-review-2",
+      "movieName": "Epic Saga Part 2",
+      "poster": "https://picsum.photos/seed/review2/300/450",
+      "rating": "3.1",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-27T06:54:16.678Z"
+    },
+    {
+      "id": 3,
+      "slug": "movie-review-3",
+      "movieName": "Epic Saga Part 3",
+      "poster": "https://picsum.photos/seed/review3/300/450",
+      "rating": "4.1",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-04-23T08:04:22.373Z"
+    },
+    {
+      "id": 4,
+      "slug": "movie-review-4",
+      "movieName": "Epic Saga Part 4",
+      "poster": "https://picsum.photos/seed/review4/300/450",
+      "rating": "3.7",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-22T15:46:34.707Z"
+    },
+    {
+      "id": 5,
+      "slug": "movie-review-5",
+      "movieName": "Epic Saga Part 5",
+      "poster": "https://picsum.photos/seed/review5/300/450",
+      "rating": "4.1",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-14T08:24:17.595Z"
+    },
+    {
+      "id": 6,
+      "slug": "movie-review-6",
+      "movieName": "Epic Saga Part 6",
+      "poster": "https://picsum.photos/seed/review6/300/450",
+      "rating": "2.7",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-06-02T07:30:11.305Z"
+    },
+    {
+      "id": 7,
+      "slug": "movie-review-7",
+      "movieName": "Epic Saga Part 7",
+      "poster": "https://picsum.photos/seed/review7/300/450",
+      "rating": "2.8",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-24T19:28:36.213Z"
+    },
+    {
+      "id": 8,
+      "slug": "movie-review-8",
+      "movieName": "Epic Saga Part 8",
+      "poster": "https://picsum.photos/seed/review8/300/450",
+      "rating": "3.8",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-06T04:29:53.196Z"
+    },
+    {
+      "id": 9,
+      "slug": "movie-review-9",
+      "movieName": "Epic Saga Part 9",
+      "poster": "https://picsum.photos/seed/review9/300/450",
+      "rating": "4.4",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-06-10T19:28:10.094Z"
+    },
+    {
+      "id": 10,
+      "slug": "movie-review-10",
+      "movieName": "Epic Saga Part 10",
+      "poster": "https://picsum.photos/seed/review10/300/450",
+      "rating": "4.3",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-09T22:03:44.620Z"
+    },
+    {
+      "id": 11,
+      "slug": "movie-review-11",
+      "movieName": "Epic Saga Part 11",
+      "poster": "https://picsum.photos/seed/review11/300/450",
+      "rating": "3.4",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-04-25T00:58:07.208Z"
+    },
+    {
+      "id": 12,
+      "slug": "movie-review-12",
+      "movieName": "Epic Saga Part 12",
+      "poster": "https://picsum.photos/seed/review12/300/450",
+      "rating": "4.2",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-12T04:25:21.389Z"
+    },
+    {
+      "id": 13,
+      "slug": "movie-review-13",
+      "movieName": "Epic Saga Part 13",
+      "poster": "https://picsum.photos/seed/review13/300/450",
+      "rating": "2.7",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-29T14:08:38.395Z"
+    },
+    {
+      "id": 14,
+      "slug": "movie-review-14",
+      "movieName": "Epic Saga Part 14",
+      "poster": "https://picsum.photos/seed/review14/300/450",
+      "rating": "4.0",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-06T15:27:26.286Z"
+    },
+    {
+      "id": 15,
+      "slug": "movie-review-15",
+      "movieName": "Epic Saga Part 15",
+      "poster": "https://picsum.photos/seed/review15/300/450",
+      "rating": "4.5",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-09T04:33:14.318Z"
+    },
+    {
+      "id": 16,
+      "slug": "movie-review-16",
+      "movieName": "Epic Saga Part 16",
+      "poster": "https://picsum.photos/seed/review16/300/450",
+      "rating": "3.9",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-22T19:15:55.012Z"
+    },
+    {
+      "id": 17,
+      "slug": "movie-review-17",
+      "movieName": "Epic Saga Part 17",
+      "poster": "https://picsum.photos/seed/review17/300/450",
+      "rating": "2.5",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-10T18:25:00.470Z"
+    },
+    {
+      "id": 18,
+      "slug": "movie-review-18",
+      "movieName": "Epic Saga Part 18",
+      "poster": "https://picsum.photos/seed/review18/300/450",
+      "rating": "3.9",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-05-24T14:50:35.594Z"
+    },
+    {
+      "id": 19,
+      "slug": "movie-review-19",
+      "movieName": "Epic Saga Part 19",
+      "poster": "https://picsum.photos/seed/review19/300/450",
+      "rating": "3.9",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-04-20T17:40:52.021Z"
+    },
+    {
+      "id": 20,
+      "slug": "movie-review-20",
+      "movieName": "Epic Saga Part 20",
+      "poster": "https://picsum.photos/seed/review20/300/450",
+      "rating": "4.1",
+      "snippet": "A visually stunning cinematic experience that keeps you on the edge of your seat.",
+      "story": "The story revolves around a protagonist facing impossible odds in a futuristic society...",
+      "performances": "The lead cast delivers career-best performances, bringing emotional depth to the narrative.",
+      "technicalAspects": "Cinematography is top-notch. The VFX team has outdone themselves with breathtaking visuals.",
+      "verdict": "A must-watch for fans of the genre. It sets a new benchmark for upcoming films.",
+      "date": "2026-06-10T10:17:11.078Z"
+    }
+  ],
+  "boxOffice": [
+    {
+      "id": 1,
+      "slug": "box-office-movie-1",
+      "movieName": "Blockbuster Hit 1",
+      "poster": "https://picsum.photos/seed/boxoffice1/300/450",
+      "dayCollection": "8.5 Cr",
+      "worldwideGross": "81.3 Cr",
+      "indiaNet": "65.3 Cr",
+      "indiaGross": "56.6 Cr",
+      "overseas": "17.5 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "15.5 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "9.3 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "12.5 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-16T07:33:46.407Z"
+    },
+    {
+      "id": 2,
+      "slug": "box-office-movie-2",
+      "movieName": "Blockbuster Hit 2",
+      "poster": "https://picsum.photos/seed/boxoffice2/300/450",
+      "dayCollection": "8.1 Cr",
+      "worldwideGross": "89.6 Cr",
+      "indiaNet": "40.4 Cr",
+      "indiaGross": "45.5 Cr",
+      "overseas": "48.3 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "12.8 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "12.1 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "8.0 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-05-29T16:25:39.457Z"
+    },
+    {
+      "id": 3,
+      "slug": "box-office-movie-3",
+      "movieName": "Blockbuster Hit 3",
+      "poster": "https://picsum.photos/seed/boxoffice3/300/450",
+      "dayCollection": "3.3 Cr",
+      "worldwideGross": "51.4 Cr",
+      "indiaNet": "52.5 Cr",
+      "indiaGross": "52.5 Cr",
+      "overseas": "37.6 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "12.7 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "5.9 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "11.4 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-10T19:14:15.466Z"
+    },
+    {
+      "id": 4,
+      "slug": "box-office-movie-4",
+      "movieName": "Blockbuster Hit 4",
+      "poster": "https://picsum.photos/seed/boxoffice4/300/450",
+      "dayCollection": "8.1 Cr",
+      "worldwideGross": "92.6 Cr",
+      "indiaNet": "20.3 Cr",
+      "indiaGross": "61.5 Cr",
+      "overseas": "23.5 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "13.2 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "5.5 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "13.1 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-05-29T10:07:03.709Z"
+    },
+    {
+      "id": 5,
+      "slug": "box-office-movie-5",
+      "movieName": "Blockbuster Hit 5",
+      "poster": "https://picsum.photos/seed/boxoffice5/300/450",
+      "dayCollection": "11.9 Cr",
+      "worldwideGross": "106.0 Cr",
+      "indiaNet": "34.0 Cr",
+      "indiaGross": "79.7 Cr",
+      "overseas": "36.2 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "15.3 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "11.8 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "13.4 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-05T04:19:20.421Z"
+    },
+    {
+      "id": 6,
+      "slug": "box-office-movie-6",
+      "movieName": "Blockbuster Hit 6",
+      "poster": "https://picsum.photos/seed/boxoffice6/300/450",
+      "dayCollection": "7.1 Cr",
+      "worldwideGross": "115.9 Cr",
+      "indiaNet": "31.7 Cr",
+      "indiaGross": "69.9 Cr",
+      "overseas": "44.9 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "11.7 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "14.0 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "13.8 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-04T04:24:45.085Z"
+    },
+    {
+      "id": 7,
+      "slug": "box-office-movie-7",
+      "movieName": "Blockbuster Hit 7",
+      "poster": "https://picsum.photos/seed/boxoffice7/300/450",
+      "dayCollection": "10.7 Cr",
+      "worldwideGross": "68.5 Cr",
+      "indiaNet": "55.2 Cr",
+      "indiaGross": "77.7 Cr",
+      "overseas": "40.0 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "14.7 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "15.0 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "9.3 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-14T09:45:47.702Z"
+    },
+    {
+      "id": 8,
+      "slug": "box-office-movie-8",
+      "movieName": "Blockbuster Hit 8",
+      "poster": "https://picsum.photos/seed/boxoffice8/300/450",
+      "dayCollection": "3.9 Cr",
+      "worldwideGross": "79.6 Cr",
+      "indiaNet": "50.8 Cr",
+      "indiaGross": "26.9 Cr",
+      "overseas": "46.0 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "12.3 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "11.5 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "10.1 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-05-26T11:42:48.016Z"
+    },
+    {
+      "id": 9,
+      "slug": "box-office-movie-9",
+      "movieName": "Blockbuster Hit 9",
+      "poster": "https://picsum.photos/seed/boxoffice9/300/450",
+      "dayCollection": "5.9 Cr",
+      "worldwideGross": "63.7 Cr",
+      "indiaNet": "44.3 Cr",
+      "indiaGross": "58.2 Cr",
+      "overseas": "32.2 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "11.7 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "9.9 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "18.8 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-10T04:56:01.155Z"
+    },
+    {
+      "id": 10,
+      "slug": "box-office-movie-10",
+      "movieName": "Blockbuster Hit 10",
+      "poster": "https://picsum.photos/seed/boxoffice10/300/450",
+      "dayCollection": "9.1 Cr",
+      "worldwideGross": "66.0 Cr",
+      "indiaNet": "57.0 Cr",
+      "indiaGross": "69.3 Cr",
+      "overseas": "17.2 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "13.2 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "8.5 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "11.5 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-10T03:53:24.695Z"
+    },
+    {
+      "id": 11,
+      "slug": "box-office-movie-11",
+      "movieName": "Blockbuster Hit 11",
+      "poster": "https://picsum.photos/seed/boxoffice11/300/450",
+      "dayCollection": "9.0 Cr",
+      "worldwideGross": "113.0 Cr",
+      "indiaNet": "62.0 Cr",
+      "indiaGross": "27.9 Cr",
+      "overseas": "37.6 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "8.2 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "9.6 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "14.3 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-12T18:23:19.656Z"
+    },
+    {
+      "id": 12,
+      "slug": "box-office-movie-12",
+      "movieName": "Blockbuster Hit 12",
+      "poster": "https://picsum.photos/seed/boxoffice12/300/450",
+      "dayCollection": "6.3 Cr",
+      "worldwideGross": "80.8 Cr",
+      "indiaNet": "30.9 Cr",
+      "indiaGross": "69.6 Cr",
+      "overseas": "10.3 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "17.0 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "6.8 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "10.8 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-05-28T08:37:41.962Z"
+    },
+    {
+      "id": 13,
+      "slug": "box-office-movie-13",
+      "movieName": "Blockbuster Hit 13",
+      "poster": "https://picsum.photos/seed/boxoffice13/300/450",
+      "dayCollection": "6.0 Cr",
+      "worldwideGross": "50.1 Cr",
+      "indiaNet": "45.1 Cr",
+      "indiaGross": "31.8 Cr",
+      "overseas": "15.9 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "10.1 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "15.1 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "15.9 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-14T00:43:45.704Z"
+    },
+    {
+      "id": 14,
+      "slug": "box-office-movie-14",
+      "movieName": "Blockbuster Hit 14",
+      "poster": "https://picsum.photos/seed/boxoffice14/300/450",
+      "dayCollection": "10.1 Cr",
+      "worldwideGross": "65.0 Cr",
+      "indiaNet": "56.7 Cr",
+      "indiaGross": "46.4 Cr",
+      "overseas": "18.7 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "7.3 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "4.8 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "12.2 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-13T07:28:22.142Z"
+    },
+    {
+      "id": 15,
+      "slug": "box-office-movie-15",
+      "movieName": "Blockbuster Hit 15",
+      "poster": "https://picsum.photos/seed/boxoffice15/300/450",
+      "dayCollection": "9.2 Cr",
+      "worldwideGross": "136.4 Cr",
+      "indiaNet": "35.8 Cr",
+      "indiaGross": "42.2 Cr",
+      "overseas": "17.4 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "7.3 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "11.7 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "12.4 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-15T02:02:37.953Z"
+    },
+    {
+      "id": 16,
+      "slug": "box-office-movie-16",
+      "movieName": "Blockbuster Hit 16",
+      "poster": "https://picsum.photos/seed/boxoffice16/300/450",
+      "dayCollection": "6.1 Cr",
+      "worldwideGross": "140.4 Cr",
+      "indiaNet": "25.1 Cr",
+      "indiaGross": "34.6 Cr",
+      "overseas": "48.1 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "16.6 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "14.0 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "11.3 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-11T19:52:26.374Z"
+    },
+    {
+      "id": 17,
+      "slug": "box-office-movie-17",
+      "movieName": "Blockbuster Hit 17",
+      "poster": "https://picsum.photos/seed/boxoffice17/300/450",
+      "dayCollection": "8.3 Cr",
+      "worldwideGross": "138.2 Cr",
+      "indiaNet": "25.0 Cr",
+      "indiaGross": "45.3 Cr",
+      "overseas": "13.2 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "15.6 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "7.7 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "16.2 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-05-28T03:27:49.369Z"
+    },
+    {
+      "id": 18,
+      "slug": "box-office-movie-18",
+      "movieName": "Blockbuster Hit 18",
+      "poster": "https://picsum.photos/seed/boxoffice18/300/450",
+      "dayCollection": "4.5 Cr",
+      "worldwideGross": "99.1 Cr",
+      "indiaNet": "21.4 Cr",
+      "indiaGross": "78.5 Cr",
+      "overseas": "25.4 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "16.0 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "11.6 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "18.7 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-14T06:46:53.928Z"
+    },
+    {
+      "id": 19,
+      "slug": "box-office-movie-19",
+      "movieName": "Blockbuster Hit 19",
+      "poster": "https://picsum.photos/seed/boxoffice19/300/450",
+      "dayCollection": "4.7 Cr",
+      "worldwideGross": "97.8 Cr",
+      "indiaNet": "38.6 Cr",
+      "indiaGross": "41.8 Cr",
+      "overseas": "21.3 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "6.0 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "7.6 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "19.5 Cr"
+        }
+      ],
+      "verdict": "Blockbuster",
+      "date": "2026-06-12T22:30:18.242Z"
+    },
+    {
+      "id": 20,
+      "slug": "box-office-movie-20",
+      "movieName": "Blockbuster Hit 20",
+      "poster": "https://picsum.photos/seed/boxoffice20/300/450",
+      "dayCollection": "2.9 Cr",
+      "worldwideGross": "137.2 Cr",
+      "indiaNet": "55.9 Cr",
+      "indiaGross": "32.5 Cr",
+      "overseas": "22.8 Cr",
+      "collections": [
+        {
+          "day": "Day 1",
+          "collection": "10.8 Cr"
+        },
+        {
+          "day": "Day 2",
+          "collection": "6.3 Cr"
+        },
+        {
+          "day": "Day 3",
+          "collection": "6.3 Cr"
+        }
+      ],
+      "verdict": "Hit",
+      "date": "2026-06-11T08:26:16.412Z"
+    }
+  ]
+}
