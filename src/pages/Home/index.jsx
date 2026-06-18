@@ -8,6 +8,7 @@ import ReviewCard from '../../components/ReviewCard';
 import BoxOfficeCard from '../../components/BoxOfficeCard';
 import Sidebar from '../../components/Sidebar';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
+import GalleryGrid from '../../components/GalleryGrid';
 import { getArticles, getReviews, getBoxOffice } from '../../services/api';
 
 const Home = () => {
@@ -45,6 +46,9 @@ const Home = () => {
 
       {/* Hero Section */}
       <HeroSlider articles={articles} />
+      
+      {/* Photo Galleries Section */}
+      <GalleryGrid />
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Content Area - 70% */}
@@ -52,11 +56,11 @@ const Home = () => {
           
           {/* Latest Movie News Grid */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
                 Latest Movie News
               </h2>
-              <Link to="/movie-news" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
+              <Link to="/movie-news" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
                 View All <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
@@ -71,11 +75,11 @@ const Home = () => {
           {/* OTT Updates */}
           {ottNews.length > 0 && (
             <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
-                <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+                <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
                   OTT Updates
                 </h2>
-                <Link to="/movie-news?category=OTT" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
+                <Link to="/movie-news?category=OTT" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
                   View All <ChevronRight className="w-4 h-4 ml-1" />
                 </Link>
               </div>
@@ -90,11 +94,11 @@ const Home = () => {
 
           {/* Latest Reviews */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
                 Latest Reviews
               </h2>
-              <Link to="/reviews" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
+              <Link to="/reviews" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
                 View All <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
@@ -112,11 +116,11 @@ const Home = () => {
 
           {/* Box Office Updates */}
           <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-white/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-white border-b-2 border-brand-red -mb-[10px] pb-2">
+            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
                 Box Office Collections
               </h2>
-              <Link to="/box-office" className="text-sm font-semibold text-brand-red hover:text-red-700 flex items-center">
+              <Link to="/box-office" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
                 View All <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
@@ -142,3 +146,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

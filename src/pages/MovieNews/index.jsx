@@ -58,8 +58,8 @@ const MovieNews = () => {
       {/* Header and Search */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-poppins font-bold text-white mb-2">Movie News</h1>
-          <p className="text-gray-500 font-inter">Browse the latest updates and breaking news.</p>
+          <h1 className="text-3xl font-poppins font-bold text-gray-100 mb-2">Movie News</h1>
+          <p className="text-gray-100/60 font-inter">Browse the latest updates and breaking news.</p>
         </div>
         
         <form onSubmit={handleSearch} className="relative w-full md:w-80">
@@ -68,9 +68,9 @@ const MovieNews = () => {
             placeholder="Search news..." 
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-white/10 bg-brand-gray/40 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-red text-sm font-inter text-white"
+            className="w-full pl-10 pr-4 py-2 border border-brand-red/20 bg-[#18181B] rounded-full focus:outline-none focus:ring-2 focus:ring-brand-red text-sm font-inter text-gray-100"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-100/70 w-4 h-4" />
           <button type="submit" className="hidden">Search</button>
         </form>
       </div>
@@ -80,7 +80,7 @@ const MovieNews = () => {
         <div className="w-full lg:w-[70%] space-y-8">
           
           {/* Categories Filter */}
-          <div className="flex flex-wrap gap-2 pb-4 border-b border-gray-100">
+          <div className="flex flex-wrap gap-2 pb-4 border-b border-brand-red/10">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
@@ -88,7 +88,7 @@ const MovieNews = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                   category === cat 
                     ? 'bg-brand-red text-white' 
-                    : 'bg-brand-gray/40 text-gray-300 hover:bg-white/10'
+                    : 'bg-[#18181B] text-gray-300 hover:bg-brand-red/20 hover:text-white'
                 }`}
               >
                 {cat}
@@ -98,16 +98,16 @@ const MovieNews = () => {
 
           {/* A-Z Directory Link */}
           <div className="flex justify-end">
-             <Link to="/movie-news/archive" className="text-sm font-semibold text-brand-red hover:underline">
+             <Link to="/movie-news/archive" className="text-sm font-semibold text-gray-100 hover:underline">
                Browse A-Z Archive Directory &rarr;
              </Link>
           </div>
 
           {/* Results Info */}
           {search && (
-            <div className="bg-gray-50 p-4 rounded-lg flex items-center justify-between">
-              <span className="text-gray-700">Showing results for: <span className="font-bold">"{search}"</span></span>
-              <button onClick={() => handleCategoryChange('All')} className="text-brand-red text-sm font-semibold hover:underline">
+            <div className="bg-[#18181B] p-4 rounded-lg flex items-center justify-between border border-brand-red/10">
+              <span className="text-gray-100">Showing results for: <span className="font-bold">"{search}"</span></span>
+              <button onClick={() => handleCategoryChange('All')} className="text-gray-100 text-sm font-semibold hover:underline">
                 Clear Search
               </button>
             </div>
@@ -119,8 +119,8 @@ const MovieNews = () => {
               {[...Array(4)].map((_, i) => <LoadingSkeleton key={i} type="card" />)}
             </div>
           ) : data?.data.length === 0 ? (
-            <div className="text-center py-12 bg-gray-50 rounded-xl border border-gray-100">
-              <p className="text-gray-500 font-inter text-lg">No articles found matching your criteria.</p>
+            <div className="text-center py-12 bg-[#18181B] rounded-xl border border-brand-red/10">
+              <p className="text-gray-100/60 font-inter text-lg">No articles found matching your criteria.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -132,11 +132,11 @@ const MovieNews = () => {
 
           {/* Pagination */}
           {data?.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-2 pt-8 border-t border-gray-100 mt-8">
+            <div className="flex justify-center items-center space-x-2 pt-8 border-t border-brand-red/10 mt-8">
               <button
                 onClick={() => handlePageChange(page - 1)}
                 disabled={page === 1}
-                className="px-4 py-2 border border-gray-300 rounded text-sm font-medium disabled:opacity-50 hover:bg-gray-50"
+                className="px-4 py-2 border border-brand-red/20 rounded text-sm font-medium disabled:opacity-50 hover:bg-[#18181B]"
               >
                 Previous
               </button>
@@ -148,7 +148,7 @@ const MovieNews = () => {
                     className={`w-10 h-10 rounded flex items-center justify-center text-sm font-medium transition-colors ${
                       page === i + 1
                         ? 'bg-brand-red text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        : 'text-gray-100 hover:bg-[#18181B]'
                     }`}
                   >
                     {i + 1}
@@ -158,7 +158,7 @@ const MovieNews = () => {
               <button
                 onClick={() => handlePageChange(page + 1)}
                 disabled={page === data.totalPages}
-                className="px-4 py-2 border border-gray-300 rounded text-sm font-medium disabled:opacity-50 hover:bg-gray-50"
+                className="px-4 py-2 border border-brand-red/20 rounded text-sm font-medium disabled:opacity-50 hover:bg-[#18181B]"
               >
                 Next
               </button>
@@ -175,3 +175,5 @@ const MovieNews = () => {
 };
 
 export default MovieNews;
+
+

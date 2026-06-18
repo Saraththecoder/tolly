@@ -1,16 +1,16 @@
-const LoadingSkeleton = ({ type = 'page' }) => {
+﻿const LoadingSkeleton = ({ type = 'page' }) => {
   if (type === 'page') {
     return (
       <div className="w-full h-screen flex flex-col items-center justify-center space-y-4">
         <div className="w-12 h-12 border-4 border-gray-200 border-t-brand-red rounded-full animate-spin"></div>
-        <p className="text-gray-500 font-inter font-medium">Loading...</p>
+        <p className="text-gray-100/60 font-inter font-medium">Loading...</p>
       </div>
     );
   }
 
   if (type === 'card') {
     return (
-      <div className="flex flex-col bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden animate-pulse">
+      <div className="flex flex-col bg-white rounded-xl shadow-sm border border-brand-red/10 overflow-hidden animate-pulse">
         <div className="w-full h-48 bg-gray-200"></div>
         <div className="p-4 space-y-3">
           <div className="h-4 bg-gray-200 rounded w-1/4"></div>
@@ -28,3 +28,5 @@ const LoadingSkeleton = ({ type = 'page' }) => {
 };
 
 export default LoadingSkeleton;
+
+

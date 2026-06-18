@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+﻿import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import BoxOfficeCard from '../../components/BoxOfficeCard';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
@@ -18,8 +18,8 @@ const BoxOffice = () => {
       </Helmet>
 
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-poppins font-bold text-white mb-4">Box Office Collections</h1>
-        <p className="text-gray-600 font-inter text-lg">
+        <h1 className="text-4xl font-poppins font-bold text-gray-100 mb-4">Box Office Collections</h1>
+        <p className="text-gray-100/50 font-inter text-lg">
           Track the latest worldwide and domestic collections, day-wise breakdowns, and final verdicts.
         </p>
       </div>
@@ -40,3 +40,5 @@ const BoxOffice = () => {
 };
 
 export default BoxOffice;
+
+

@@ -2,10 +2,12 @@ import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
+import FlashNews from '../components/FlashNews';
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0A0A0A] text-gray-100 font-inter">
+    <div className="flex flex-col min-h-screen bg-brand-light text-gray-100 font-inter">
+      <FlashNews />
       <ScrollToTop />
       <Header />
       <main className="flex-grow">
@@ -17,3 +19,5 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+
+

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+﻿import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 
 // Lazy load pages for better performance
@@ -93,3 +93,5 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
+

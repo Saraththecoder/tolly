@@ -70,3 +70,9 @@ export const getBoxOfficeBySlug = async (slug) => {
   if (!bo) throw new Error('Box office entry not found');
   return bo;
 };
+
+export const getGalleries = async () => {
+  await delay(500);
+  return mockData.galleries || [];
+};
+

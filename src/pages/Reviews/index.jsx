@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+﻿import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import ReviewCard from '../../components/ReviewCard';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
@@ -18,8 +18,8 @@ const Reviews = () => {
       </Helmet>
 
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-poppins font-bold text-white mb-4">Latest Movie Reviews</h1>
-        <p className="text-gray-600 font-inter text-lg">
+        <h1 className="text-4xl font-poppins font-bold text-gray-100 mb-4">Latest Movie Reviews</h1>
+        <p className="text-gray-100/50 font-inter text-lg">
           Honest, unbiased, and detailed analysis of the newest releases in Tollywood and beyond.
         </p>
       </div>
@@ -40,3 +40,5 @@ const Reviews = () => {
 };
 
 export default Reviews;
+
+

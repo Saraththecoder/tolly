@@ -1,25 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-red: #E60000;
-  --color-brand-dark: #0A0A0A;
-  --color-brand-gray: #1F1F1F;
-  --color-glass: rgba(255, 255, 255, 0.05);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-brand-red: #E50914;
+  --color-brand-dark: #09090B;
+  --color-brand-gray: #18181B;
+  --color-brand-surface: #27272A;
   --font-inter: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
   
   --animate-pulse-glow: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-marquee: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(230, 0, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.5);
   }
   50% {
     opacity: .7;
-    box-shadow: 0 0 0 10px rgba(230, 0, 0, 0);
+    box-shadow: 0 0 0 10px rgba(229, 9, 20, 0);
   }
 }
 
@@ -28,15 +33,38 @@
     font-family: var(--font-inter);
     scroll-behavior: smooth;
     color-scheme: dark;
+    background-color: var(--color-brand-dark);
   }
   
   body {
-    @apply bg-[#0A0A0A] text-gray-100 antialiased;
+    @apply bg-brand-dark text-gray-200 antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-poppins);
-    @apply text-white;
+    @apply text-gray-50;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-brand-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-red);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff3333;
+  }
+  
+  /* Text Selection */
+  ::selection {
+    background-color: var(--color-brand-red);
+    color: white;
   }
 }
 
@@ -46,14 +74,18 @@
   }
   
   .glass-card {
-    @apply bg-brand-gray/40 backdrop-blur-md border border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)];
+    @apply bg-brand-gray/90 backdrop-blur-md border border-brand-red/10 shadow-[0_4px_20px_rgba(0,0,0,0.5)] transition-colors duration-300;
+  }
+  
+  .glass-card:hover {
+    @apply border-brand-red/30 shadow-[0_4px_25px_rgba(229,9,20,0.15)];
   }
   
   .glow-red {
-    text-shadow: 0 0 20px rgba(230, 0, 0, 0.6);
+    text-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
   }
   
   .glow-box-red {
-    box-shadow: 0 0 20px rgba(230, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
   }
 }
