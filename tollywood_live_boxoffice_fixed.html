@@ -1,0 +1,642 @@
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;width:100%;}
+:root{--navy:#0A0F1E;--card:#131a2b;--mid:#1a2235;--gold:#F5C842;--crimson:#D42B2B;--green:#22c55e;--text:#F0EDE8;--muted:#8A95A8;--border:rgba(255,255,255,0.08);}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--text);font-size:14px;}
+
+/* TICKER */
+.topbar{background:var(--crimson);padding:5px 0;overflow:hidden;width:100%;}
+.tick-wrap{display:flex;align-items:center;padding:0 14px;overflow:hidden;}
+.tlabel{background:#fff;color:var(--crimson);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 7px;margin-right:10px;flex-shrink:0;border-radius:2px;}
+.ticker-inner{display:inline-flex;animation:ticker 40s linear infinite;white-space:nowrap;}
+.ticker-item{font-size:11px;font-weight:500;color:#fff;padding-right:32px;white-space:nowrap;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HEADER */
+header{background:var(--navy);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;width:100%;}
+.h-top{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;max-width:1200px;margin:0 auto;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);flex-shrink:0;}
+.logo span{color:var(--gold);}
+.h-right{display:flex;align-items:center;gap:8px;min-width:0;}
+.sbtn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-family:'Inter',sans-serif;flex-shrink:0;}
+.ham{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 9px;border-radius:6px;cursor:pointer;font-size:17px;line-height:1;flex-shrink:0;}
+.nav-drawer{display:none;flex-direction:column;border-top:1px solid var(--border);background:var(--card);width:100%;}
+.nav-drawer.open{display:flex;}
+.nav-drawer a{display:block;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);padding:11px 16px;border-bottom:1px solid var(--border);cursor:pointer;text-decoration:none;}
+.nav-drawer a:hover,.nav-drawer a.act{color:var(--gold);background:rgba(245,200,66,0.06);}
+.nav-hot-m{background:var(--crimson)!important;color:#fff!important;}
+
+/* WRAP — key fix: prevent children pushing past container */
+.wrap{max-width:1200px;margin:0 auto;padding:0 14px;width:100%;overflow-x:hidden;}
+
+/* PAGE HERO */
+.page-hero{padding:20px 0 16px;}
+.page-hero-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.page-eyebrow{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+.live-dot{width:7px;height:7px;background:var(--crimson);border-radius:50%;animation:pulse 1.4s ease-in-out infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--text);line-height:1;margin-bottom:6px;}
+.page-subtitle{font-size:12px;color:var(--muted);line-height:1.6;max-width:100%;}
+.last-updated{font-size:10px;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:6px 11px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.last-updated span{color:var(--gold);}
+.hero-stats{display:flex;gap:8px;flex-wrap:wrap;}
+.hstat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:11px 14px;text-align:center;min-width:80px;}
+.hstat-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);line-height:1;}
+.hstat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:3px;}
+
+/* FILTER TABS — contained scroll, never bleeds */
+.filter-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:14px 0 12px;width:100%;}
+.filter-scroll::-webkit-scrollbar{display:none;}
+.filter-tabs{display:flex;gap:6px;width:max-content;padding-right:2px;}
+.ftab{font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);padding:7px 12px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all 0.15s;}
+.ftab.on,.ftab:hover{color:var(--gold);border-color:rgba(245,200,66,0.4);background:rgba(245,200,66,0.07);}
+.ftab.live-tab.on{color:var(--crimson);border-color:rgba(212,43,43,0.4);background:rgba(212,43,43,0.07);}
+
+/* MAIN LAYOUT — single column by default, grid on desktop */
+.main-layout{display:block;min-width:0;}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:9px;border-bottom:2px solid var(--gold);}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--text);}
+.sec-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(212,43,43,0.15);color:var(--crimson);padding:3px 8px;border-radius:4px;border:1px solid rgba(212,43,43,0.3);white-space:nowrap;}
+.sec-link{font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;}
+
+/* LIVE CARDS — horizontal scroll container, strict width */
+.live-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-bottom:20px;width:100%;}
+.live-scroll::-webkit-scrollbar{display:none;}
+.live-row{display:flex;gap:10px;width:max-content;}
+.live-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 15px;width:175px;flex-shrink:0;cursor:pointer;transition:border-color 0.15s,transform 0.15s;position:relative;}
+.live-card:hover{border-color:rgba(245,200,66,0.35);transform:translateY(-2px);}
+.live-card.hot{border-color:rgba(212,43,43,0.3);}
+.lc-indicator{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.lc-dot{width:6px;height:6px;border-radius:50%;background:var(--crimson);animation:pulse 1.4s ease-in-out infinite;flex-shrink:0;}
+.lc-dot.green{background:var(--green);}
+.lc-label-live{color:var(--crimson);}
+.lc-label-new{color:var(--green);}
+.lc-movie{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.5px;color:var(--text);margin-bottom:3px;line-height:1.1;padding-right:44px;}
+.lc-dir{font-size:10px;color:var(--muted);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lc-amount{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);line-height:1;margin-bottom:2px;}
+.lc-amt-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.lc-days{font-size:10px;color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+.lc-bar-wrap{margin-top:8px;background:rgba(255,255,255,0.07);border-radius:4px;height:4px;overflow:hidden;}
+.lc-bar{height:100%;border-radius:4px;background:var(--gold);}
+.lc-bar.red{background:var(--crimson);}
+
+/* TRACKING TABLE — key: min-width on table, scrollable wrapper */
+.track-table-wrap{background:var(--card);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:20px;width:100%;}
+.track-table-hdr{background:var(--gold);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+.track-table-hdr-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:var(--navy);}
+.track-table-hdr-sub{font-size:10px;font-weight:700;color:var(--navy);opacity:0.6;}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;}
+.tbl-scroll::-webkit-scrollbar{display:none;}
+.track-table{width:100%;border-collapse:collapse;min-width:520px;table-layout:auto;}
+.track-table th{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--card);white-space:nowrap;}
+.track-table th:not(:first-child){text-align:right;}
+.track-table td{padding:10px 12px;font-size:12px;color:var(--text);border-bottom:1px solid var(--border);vertical-align:middle;}
+.track-table td:not(:first-child){text-align:right;}
+.track-table tr:last-child td{border-bottom:none;}
+.track-table tr:hover td{background:rgba(245,200,66,0.03);}
+.t-rank{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--gold);display:inline-block;width:22px;}
+.t-movie{font-weight:600;color:var(--text);line-height:1.2;display:inline-block;}
+.t-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+.t-amt{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--gold);}
+.t-share{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--text);}
+.t-days{font-size:11px;color:var(--muted);}
+.verdict{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;white-space:nowrap;}
+.v-hit{background:rgba(34,197,94,0.12);color:#22c55e;border:1px solid rgba(34,197,94,0.25);}
+.v-blockbuster{background:rgba(245,200,66,0.12);color:var(--gold);border:1px solid rgba(245,200,66,0.3);}
+.v-flop{background:rgba(212,43,43,0.12);color:var(--crimson);border:1px solid rgba(212,43,43,0.25);}
+.v-running{background:rgba(138,149,168,0.12);color:var(--muted);border:1px solid var(--border);}
+.trend-up{color:#22c55e;font-size:10px;font-weight:700;white-space:nowrap;}
+.trend-dn{color:var(--crimson);font-size:10px;font-weight:700;white-space:nowrap;}
+
+/* ALL TIME RECORDS — use minmax to prevent overflow */
+.records-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px;width:100%;}
+.record-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color 0.15s;min-width:0;}
+.record-card:hover{border-color:rgba(245,200,66,0.3);}
+.rc-rank{font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(245,200,66,0.18);line-height:1;width:36px;flex-shrink:0;text-align:center;}
+.rc-rank.gold-rank{color:rgba(245,200,66,0.5);}
+.rc-body{flex:1;min-width:0;}
+.rc-movie{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.5px;color:var(--text);line-height:1;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rc-meta{font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rc-amount{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--gold);text-align:right;flex-shrink:0;white-space:nowrap;}
+.rc-bar-wrap{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;margin-top:6px;overflow:hidden;}
+.rc-bar{height:100%;border-radius:2px;background:var(--gold);}
+
+/* AREA TABLES */
+.area-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:20px;width:100%;}
+.area-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;min-width:0;}
+.area-hdr{padding:9px 13px;background:var(--mid);display:flex;align-items:center;justify-content:space-between;}
+.area-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--text);}
+.area-total{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);}
+.area-row{display:flex;align-items:center;padding:8px 13px;border-bottom:1px solid var(--border);gap:10px;}
+.area-row:last-child{border-bottom:none;}
+.area-pos{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--gold);width:16px;flex-shrink:0;}
+.area-movie{flex:1;font-size:12px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.area-share{font-family:'Bebas Neue',sans-serif;font-size:12px;color:var(--text);flex-shrink:0;white-space:nowrap;}
+
+/* SIDEBAR */
+.sidebar{margin-top:18px;min-width:0;}
+.sw{background:var(--card);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;min-width:0;}
+.sw-hdr{padding:10px 14px 9px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.sw-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:var(--text);}
+.ud-row{display:flex;align-items:center;padding:9px 13px;gap:10px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;min-width:0;}
+.ud-row:last-child{border-bottom:none;}
+.ud-row:hover{background:rgba(245,200,66,0.03);}
+.ud-rank{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--gold);width:18px;flex-shrink:0;line-height:1;}
+.ud-body{flex:1;min-width:0;}
+.ud-movie{font-size:12px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ud-day{font-size:10px;color:var(--muted);margin-top:2px;}
+.ud-right{text-align:right;flex-shrink:0;}
+.ud-amt{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);}
+.ud-trend{font-size:10px;font-weight:700;}
+.quick-link{padding:8px 10px;background:var(--mid);border-radius:6px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.quick-link span{color:var(--gold);}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:7px;padding:10px 13px;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+footer{background:#0d1220;border-top:1px solid var(--border);padding:18px 0;margin-top:8px;width:100%;}
+.fbot{display:flex;flex-direction:column;gap:10px;padding:0 14px;}
+.fcopy{font-size:11px;color:var(--muted);}
+.flinks{display:flex;gap:14px;flex-wrap:wrap;}
+.flinks a{font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer;}
+.flinks a:hover{color:var(--text);}
+
+/* ── DESKTOP BREAKPOINTS ── */
+@media(min-width:680px){
+  .wrap{padding:0 20px;}
+  .h-top{padding:14px 20px;}
+  .ham{display:none;}
+  .nav-drawer{display:flex!important;flex-direction:row;border-top:none;background:transparent;padding:0;width:auto;}
+  .nav-drawer a{padding:6px 9px;border-bottom:none;font-size:11px;}
+  .page-title{font-size:44px;}
+  .hstat-val{font-size:24px;}
+  .records-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .area-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .fbot{flex-direction:row;align-items:center;justify-content:space-between;padding:0 20px;}
+  footer{padding:20px 0;}
+}
+@media(min-width:900px){
+  /* Two-column layout — key fix: minmax(0,1fr) stops sidebar overflowing */
+  .main-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:22px;align-items:start;}
+  .sidebar{margin-top:0;}
+  .records-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .page-title{font-size:52px;}
+  .live-card{width:190px;}
+}
+@media(min-width:1100px){
+  .records-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .main-layout{grid-template-columns:minmax(0,1fr) 280px;}
+}
+</style>
+
+<!-- TICKER -->
+<div class="topbar">
+  <div class="tick-wrap">
+    <div class="tlabel">LIVE</div>
+    <div style="overflow:hidden;flex:1;">
+      <div class="ticker-inner">
+        <span class="ticker-item">Peddi ₹320 Cr WW · Day 14 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Drishyam 3 ₹236 Cr WW · Day 24 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Obsession ₹85 Cr WW · Day 18 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Maa Inti Bangaaram — New Release Today &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Sing Geetham ₹5 Cr · Day 14 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Peddi ₹320 Cr WW · Day 14 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Drishyam 3 ₹236 Cr WW · Day 24 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Obsession ₹85 Cr WW · Day 18 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Maa Inti Bangaaram — New Release Today &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Sing Geetham ₹5 Cr · Day 14 &nbsp;◆&nbsp; </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="h-top">
+    <div class="logo">Chitram<span>Bhalare</span></div>
+    <div class="h-right">
+      <button class="sbtn">🔍</button>
+      <button class="ham" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+      <nav id="nav" class="nav-drawer">
+        <a href="#">Home</a>
+        <a href="#">Movie News</a>
+        <a href="#" class="act">Box Office</a>
+        <a href="#">Reviews</a>
+        <a href="#">Gallery</a>
+        <a href="#">OTT</a>
+        <a href="#" class="nav-hot-m">🎬 Live Tracking</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-left">
+        <div class="page-eyebrow">
+          <div class="live-dot"></div>
+          Box Office Portal · Live Tracking
+        </div>
+        <div class="page-title">Live Box Office<br>Tracking</div>
+        <div class="page-subtitle">Real-time worldwide &amp; AP/TS collections for all running Telugu, Tamil &amp; Hindi films.</div>
+        <div class="last-updated">Last updated: <span>June 18, 2026 · 11:45 PM IST</span> &nbsp;🔄</div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-val">8</div><div class="hstat-lbl">Live Films</div></div>
+        <div class="hstat"><div class="hstat-val">₹720Cr</div><div class="hstat-lbl">WW Total</div></div>
+        <div class="hstat"><div class="hstat-val">Daily</div><div class="hstat-lbl">Updates</div></div>
+        <div class="hstat"><div class="hstat-val">3</div><div class="hstat-lbl">New This Week</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-scroll">
+    <div class="filter-tabs">
+      <button class="ftab live-tab on">🔴 Running Now</button>
+      <button class="ftab">All Telugu</button>
+      <button class="ftab">All Hindi</button>
+      <button class="ftab">All Tamil</button>
+      <button class="ftab">OTT Releases</button>
+      <button class="ftab">Closed Films</button>
+      <button class="ftab">All Time Records</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+
+    <!-- LEFT CONTENT -->
+    <div style="min-width:0;">
+
+      <!-- LIVE NOW CARDS -->
+      <div class="sec-hdr">
+        <div class="sec-title">Running Now</div>
+        <span class="sec-badge">🔴 8 Films Live</span>
+      </div>
+      <div class="live-scroll">
+        <div class="live-row">
+          <div class="live-card hot">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Peddi</div>
+            <div class="lc-dir">Ram Charan · Buchi Babu</div>
+            <div class="lc-amount">₹320 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 14 · Telugu · Hindi</div>
+            <div class="lc-bar-wrap"><div class="lc-bar red" style="width:88%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Drishyam 3</div>
+            <div class="lc-dir">Mohanlal · Jeethu Joseph</div>
+            <div class="lc-amount">₹236 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 24 · Malayalam</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:65%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Obsession</div>
+            <div class="lc-dir">Vijay Sethupathi · Atlee</div>
+            <div class="lc-amount">₹84.9 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 18 · Tamil · Telugu</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:38%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Hai Jawani Toh Ishq</div>
+            <div class="lc-dir">Saif Ali Khan · Karan J</div>
+            <div class="lc-amount">₹55.2 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 21 · Hindi</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:30%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot green"></div><span class="lc-label-new">New</span></div>
+            <div class="lc-movie">Maa Inti Bangaaram</div>
+            <div class="lc-dir">Nithya Menen · Suresh P</div>
+            <div class="lc-amount">TBA</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 1 · Telugu</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:5%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Disclosure Day</div>
+            <div class="lc-dir">Vidyut Jammwal</div>
+            <div class="lc-amount">₹9.5 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 10 · Hindi · Telugu</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:18%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot green"></div><span class="lc-label-new">New</span></div>
+            <div class="lc-movie">Sing Geetham</div>
+            <div class="lc-dir">Singeetham S. Rao</div>
+            <div class="lc-amount">₹5.0 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 14 · Telugu</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:12%"></div></div>
+          </div>
+          <div class="live-card">
+            <div class="lc-indicator"><div class="lc-dot"></div><span class="lc-label-live">Live</span></div>
+            <div class="lc-movie">Mollywood Times</div>
+            <div class="lc-dir">Mammootty · Joshiy</div>
+            <div class="lc-amount">₹9.5 Cr</div>
+            <div class="lc-amt-lbl">Worldwide Gross</div>
+            <div class="lc-days">Day 11 · Malayalam</div>
+            <div class="lc-bar-wrap"><div class="lc-bar" style="width:15%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETAILED TABLE -->
+      <div class="sec-hdr">
+        <div class="sec-title">Detailed Collections</div>
+        <span class="sec-link">Full Portal →</span>
+      </div>
+      <div class="track-table-wrap">
+        <div class="track-table-hdr">
+          <div class="track-table-hdr-title">Telugu Films — Running Collections</div>
+          <div class="track-table-hdr-sub">Updated June 18, 2026</div>
+        </div>
+        <div class="tbl-scroll">
+          <table class="track-table">
+            <thead>
+              <tr>
+                <th style="text-align:left;"># &nbsp;Film</th>
+                <th>WW Gross</th>
+                <th>Tel. Share</th>
+                <th>Days</th>
+                <th>Verdict</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="t-rank">1</span><div class="t-movie">Peddi<div class="t-sub">Ram Charan · Buchi Babu Sana</div></div></td>
+                <td><span class="t-amt">₹320 Cr</span></td>
+                <td><span class="t-share">₹195 Cr</span></td>
+                <td><span class="t-days">14</span></td>
+                <td><span class="verdict v-blockbuster">Blockbuster</span></td>
+                <td><span class="trend-up">▲ Strong</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">2</span><div class="t-movie">Drishyam 3<div class="t-sub">Mohanlal · Jeethu Joseph</div></div></td>
+                <td><span class="t-amt">₹236 Cr</span></td>
+                <td><span class="t-share">₹42 Cr</span></td>
+                <td><span class="t-days">24</span></td>
+                <td><span class="verdict v-hit">Hit</span></td>
+                <td><span class="trend-dn">▼ Slowing</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">3</span><div class="t-movie">Obsession<div class="t-sub">Vijay Sethupathi · Atlee</div></div></td>
+                <td><span class="t-amt">₹84.9 Cr</span></td>
+                <td><span class="t-share">₹18 Cr</span></td>
+                <td><span class="t-days">18</span></td>
+                <td><span class="verdict v-hit">Hit</span></td>
+                <td><span class="trend-dn">▼ Declining</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">4</span><div class="t-movie">Hai Jawani Toh Ishq<div class="t-sub">Saif Ali Khan · Karan J</div></div></td>
+                <td><span class="t-amt">₹55.2 Cr</span></td>
+                <td><span class="t-share">₹4 Cr</span></td>
+                <td><span class="t-days">21</span></td>
+                <td><span class="verdict v-hit">Average</span></td>
+                <td><span class="trend-dn">▼ Low</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">5</span><div class="t-movie">Disclosure Day<div class="t-sub">Vidyut Jammwal</div></div></td>
+                <td><span class="t-amt">₹9.5 Cr</span></td>
+                <td><span class="t-share">₹2 Cr</span></td>
+                <td><span class="t-days">10</span></td>
+                <td><span class="verdict v-flop">Flop</span></td>
+                <td><span class="trend-dn">▼ Closing</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">6</span><div class="t-movie">Mollywood Times<div class="t-sub">Mammootty · Joshiy</div></div></td>
+                <td><span class="t-amt">₹9.5 Cr</span></td>
+                <td><span class="t-share">₹1.5 Cr</span></td>
+                <td><span class="t-days">11</span></td>
+                <td><span class="verdict v-running">Running</span></td>
+                <td><span class="trend-up">▲ Steady</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">7</span><div class="t-movie">Sing Geetham<div class="t-sub">Singeetham S. Rao</div></div></td>
+                <td><span class="t-amt">₹5.0 Cr</span></td>
+                <td><span class="t-share">₹3.2 Cr</span></td>
+                <td><span class="t-days">14</span></td>
+                <td><span class="verdict v-flop">Flop</span></td>
+                <td><span class="trend-dn">▼ Closing</span></td>
+              </tr>
+              <tr>
+                <td><span class="t-rank">8</span><div class="t-movie">Maa Inti Bangaaram<div class="t-sub">Nithya Menen · Suresh P</div></div></td>
+                <td><span class="t-amt">TBA</span></td>
+                <td><span class="t-share">—</span></td>
+                <td><span class="t-days">1</span></td>
+                <td><span class="verdict v-running">New</span></td>
+                <td><span class="trend-up">▲ Awaited</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--gold);"></div>Blockbuster</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--green);"></div>Hit</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--muted);"></div>Average / Running</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--crimson);"></div>Flop</div>
+        </div>
+      </div>
+
+      <!-- ALL TIME RECORDS -->
+      <div class="sec-hdr">
+        <div class="sec-title">All Time WW Records</div>
+        <span class="sec-link">Full List →</span>
+      </div>
+      <div class="records-grid">
+        <div class="record-card">
+          <div class="rc-rank gold-rank">1</div>
+          <div class="rc-body">
+            <div class="rc-movie">RRR</div>
+            <div class="rc-meta">SS Rajamouli · 2022</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:100%"></div></div>
+          </div>
+          <div class="rc-amount">₹365.8Cr</div>
+        </div>
+        <div class="record-card">
+          <div class="rc-rank">2</div>
+          <div class="rc-body">
+            <div class="rc-movie">Baahubali 2</div>
+            <div class="rc-meta">SS Rajamouli · 2017</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:85%"></div></div>
+          </div>
+          <div class="rc-amount">₹310Cr</div>
+        </div>
+        <div class="record-card">
+          <div class="rc-rank">3</div>
+          <div class="rc-body">
+            <div class="rc-movie">Pushpa 2</div>
+            <div class="rc-meta">Sukumar · 2024</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:83%"></div></div>
+          </div>
+          <div class="rc-amount">₹302Cr</div>
+        </div>
+        <div class="record-card">
+          <div class="rc-rank">4</div>
+          <div class="rc-body">
+            <div class="rc-movie">Kalki 2898 AD</div>
+            <div class="rc-meta">Nag Ashwin · 2024</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:79%"></div></div>
+          </div>
+          <div class="rc-amount">₹290Cr</div>
+        </div>
+        <div class="record-card">
+          <div class="rc-rank">5</div>
+          <div class="rc-body">
+            <div class="rc-movie">Peddi</div>
+            <div class="rc-meta">Buchi Babu Sana · 2026 · Running</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:88%;background:var(--crimson);"></div></div>
+          </div>
+          <div class="rc-amount" style="color:var(--crimson);">₹320Cr+</div>
+        </div>
+        <div class="record-card">
+          <div class="rc-rank">6</div>
+          <div class="rc-body">
+            <div class="rc-movie">Salaar</div>
+            <div class="rc-meta">Prashanth Neel · 2023</div>
+            <div class="rc-bar-wrap"><div class="rc-bar" style="width:58%"></div></div>
+          </div>
+          <div class="rc-amount">₹213.5Cr</div>
+        </div>
+      </div>
+
+      <!-- AP/TS AREA WISE -->
+      <div class="sec-hdr">
+        <div class="sec-title">AP/TS Area Wise Top 5</div>
+        <span class="sec-link">All Areas →</span>
+      </div>
+      <div class="area-grid">
+        <div class="area-card">
+          <div class="area-hdr">
+            <div class="area-name">Day 1 — AP/TS</div>
+            <div class="area-total">All-Time</div>
+          </div>
+          <div class="area-row"><div class="area-pos">1</div><div class="area-movie">Pushpa 2</div><div class="area-share">₹74.33 Cr</div></div>
+          <div class="area-row"><div class="area-pos">2</div><div class="area-movie">RRR</div><div class="area-share">₹73.99 Cr</div></div>
+          <div class="area-row"><div class="area-pos">3</div><div class="area-movie">OG</div><div class="area-share">₹62.69 Cr</div></div>
+          <div class="area-row"><div class="area-pos">4</div><div class="area-movie">Devara: Part 1</div><div class="area-share">₹61.25 Cr</div></div>
+          <div class="area-row"><div class="area-pos">5</div><div class="area-movie">Salaar</div><div class="area-share">₹47.48 Cr</div></div>
+        </div>
+        <div class="area-card">
+          <div class="area-hdr">
+            <div class="area-name">Day 1 — Worldwide</div>
+            <div class="area-total">All-Time</div>
+          </div>
+          <div class="area-row"><div class="area-pos">1</div><div class="area-movie">RRR</div><div class="area-share">₹108.79 Cr</div></div>
+          <div class="area-row"><div class="area-pos">2</div><div class="area-movie">Pushpa 2</div><div class="area-share">₹105.33 Cr</div></div>
+          <div class="area-row"><div class="area-pos">3</div><div class="area-movie">OG</div><div class="area-share">₹88.45 Cr</div></div>
+          <div class="area-row"><div class="area-pos">4</div><div class="area-movie">Devara: Part 1</div><div class="area-share">₹87.45 Cr</div></div>
+          <div class="area-row"><div class="area-pos">5</div><div class="area-movie">Kalki 2898 AD</div><div class="area-share">₹77.65 Cr</div></div>
+        </div>
+      </div>
+
+    </div><!-- end left -->
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div style="position:sticky;top:70px;display:flex;flex-direction:column;gap:14px;min-width:0;">
+
+        <div class="sw">
+          <div class="sw-hdr"><div class="live-dot"></div><div class="sw-title">Today's Updates</div></div>
+          <div class="ud-row">
+            <div class="ud-rank">1</div>
+            <div class="ud-body"><div class="ud-movie">Peddi</div><div class="ud-day">Day 14 · WW Gross</div></div>
+            <div class="ud-right"><div class="ud-amt">₹320 Cr</div><div class="ud-trend trend-up">▲ Running</div></div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-rank">2</div>
+            <div class="ud-body"><div class="ud-movie">Drishyam 3</div><div class="ud-day">Day 24 · WW Gross</div></div>
+            <div class="ud-right"><div class="ud-amt">₹236 Cr</div><div class="ud-trend trend-dn">▼ Slowing</div></div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-rank">3</div>
+            <div class="ud-body"><div class="ud-movie">Obsession</div><div class="ud-day">Day 18 · WW Gross</div></div>
+            <div class="ud-right"><div class="ud-amt">₹85 Cr</div><div class="ud-trend trend-dn">▼ Declining</div></div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-rank">4</div>
+            <div class="ud-body"><div class="ud-movie">Hai Jawani Toh Ishq</div><div class="ud-day">Day 21 · WW Gross</div></div>
+            <div class="ud-right"><div class="ud-amt">₹55 Cr</div><div class="ud-trend trend-dn">▼ Low</div></div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-rank">5</div>
+            <div class="ud-body"><div class="ud-movie">Maa Inti Bangaaram</div><div class="ud-day">Day 1 · New</div></div>
+            <div class="ud-right"><div class="ud-amt">TBA</div><div class="ud-trend trend-up">▲ New</div></div>
+          </div>
+        </div>
+
+        <div class="sw">
+          <div class="sw-hdr"><div class="sw-title">Upcoming Releases</div></div>
+          <div class="ud-row">
+            <div class="ud-body"><div class="ud-movie">Nagabandham</div><div class="ud-day">Telugu · June 27, 2026</div></div>
+            <div class="ud-right" style="font-size:11px;color:var(--muted);">9 Days</div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-body"><div class="ud-movie">Raghuvaran B.Tech</div><div class="ud-day">Re-Release · July 4, 2026</div></div>
+            <div class="ud-right" style="font-size:11px;color:var(--muted);">16 Days</div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-body"><div class="ud-movie">Vishwambhara</div><div class="ud-day">Telugu · TBA 2026</div></div>
+            <div class="ud-right" style="font-size:11px;color:var(--muted);">TBA</div>
+          </div>
+          <div class="ud-row">
+            <div class="ud-body"><div class="ud-movie">Aadarsha Kutumbam</div><div class="ud-day">Telugu · Summer 2027</div></div>
+            <div class="ud-right" style="font-size:11px;color:var(--muted);">2027</div>
+          </div>
+        </div>
+
+        <div class="sw">
+          <div class="sw-hdr"><div class="sw-title">Quick Access</div></div>
+          <div style="padding:10px 13px;display:flex;flex-direction:column;gap:7px;">
+            <div class="quick-link">AP/TS Day 1 Top 5 <span>→</span></div>
+            <div class="quick-link">AP/TS Week 1 Top 5 <span>→</span></div>
+            <div class="quick-link">WW Day 1 Top 10 <span>→</span></div>
+            <div class="quick-link">WW Closing Top 15 <span>→</span></div>
+            <div class="quick-link">Telugu Verdicts <span>→</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fbot">
+      <div class="logo" style="font-size:20px;">Chitram<span style="color:var(--gold);">Bhalare</span></div>
+      <div class="flinks"><a>About</a><a>Advertise</a><a>Privacy</a><a>Contact</a></div>
+      <div class="fcopy">© 2020–2026 chitrambhalare</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.ftab').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.ftab').forEach(function(b){b.classList.remove('on');});
+      btn.classList.add('on');
+    });
+  });
+})();
+</script>

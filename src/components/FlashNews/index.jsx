@@ -1,33 +1,25 @@
-import { Link } from 'react-router-dom';
-import { Zap } from 'lucide-react';
-
-const flashNewsData = [
-  { id: 1, text: 'Breaking: Massive Pre-release Event Planned for Project X in Dubai!', link: '/movie-news/project-x-dubai' },
-  { id: 2, text: 'Box Office: Latest Blockbuster crosses 100 Crore mark worldwide in 3 days.', link: '/box-office/latest-blockbuster' },
-  { id: 3, text: 'OTT Update: Superstar\'s action thriller to stream from this Friday.', link: '/movie-news/ott-release-update' },
-  { id: 4, text: 'Exclusive Interview: Director reveals sequel plans for hit franchise.', link: '/movie-news/director-interview' },
-];
+import React from 'react';
 
 const FlashNews = () => {
+  const tickerItems = [
+    "Peddi crosses ₹320 Cr worldwide in 2 weeks",
+    "Drishyam 3 streaming on Amazon Prime Video",
+    "Nagabandham trailer at Prasads PCX June 19",
+    "Dhurandhar unedited on Netflix from June 19"
+  ];
+
   return (
-    <div className="bg-brand-red text-white text-sm font-semibold overflow-hidden flex items-center h-10 shadow-lg relative z-[60]">
-      <div className="bg-[#110000] px-4 h-full flex items-center justify-center shrink-0 z-10 border-r border-brand-red/50 shadow-[5px_0_15px_rgba(0,0,0,0.5)]">
-        <Zap className="w-4 h-4 text-brand-red mr-2 fill-current animate-pulse" />
-        <span className="uppercase tracking-wider">Flash News</span>
-      </div>
-      
-      <div className="flex-1 overflow-hidden relative h-full flex items-center">
-        <div className="animate-marquee whitespace-nowrap flex space-x-12">
-          {/* Double the array for seamless looping */}
-          {[...flashNewsData, ...flashNewsData].map((news, index) => (
-            <Link 
-              key={`${news.id}-${index}`} 
-              to={news.link}
-              className="hover:text-black transition-colors inline-block"
-            >
-              • {news.text}
-            </Link>
-          ))}
+    <div className="topbar">
+      <div className="tick-wrap">
+        <div className="tlabel">LIVE</div>
+        <div style={{ overflow: 'hidden', flex: 1 }}>
+          <div className="ticker-inner">
+            {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
+              <span key={index} className="ticker-item">
+                {item} &nbsp;◆&nbsp;
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
-import { Search } from 'lucide-react';
-import { motion } from 'framer-motion';
-import NewsCard from '../../components/NewsCard';
-import LoadingSkeleton from '../../components/LoadingSkeleton';
-import Sidebar from '../../components/Sidebar';
 import { getArticles } from '../../services/api';
 
-const CATEGORIES = ['All', 'Tollywood', 'Bollywood', 'Hollywood', 'OTT', 'Interviews', 'Gossips'];
+const CATEGORIES = [
+  { name: 'All', value: 'All' },
+  { name: 'Casting', value: 'Casting' },
+  { name: 'Release Dates', value: 'Release Date' },
+  { name: 'OTT Dates', value: 'OTT' },
+  { name: 'Re-Release', value: 'Re-Release' },
+  { name: 'Production', value: 'Production' }
+];
 
 const MovieNews = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchInput, setSearchInput] = useState('');
+  const navigate = useNavigate();
   
   const category = searchParams.get('category') || 'All';
   const page = parseInt(searchParams.get('page') || '1', 10);
@@ -23,24 +25,14 @@ const MovieNews = () => {
     queryKey: ['articles', { category, page, search }],
     queryFn: () => getArticles({ 
       page, 
-      limit: 10, 
+      limit: 12, 
       category: category === 'All' ? null : category,
       search
     }),
   });
 
-  const handleCategoryChange = (cat) => {
-    setSearchParams({ category: cat, page: '1' });
-    setSearchInput('');
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchInput.trim()) {
-      setSearchParams({ search: searchInput, page: '1' });
-    } else {
-      setSearchParams({ page: '1' });
-    }
+  const handleCategoryChange = (catVal) => {
+    setSearchParams({ category: catVal, page: '1' });
   };
 
   const handlePageChange = (newPage) => {
@@ -49,131 +41,287 @@ const MovieNews = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const allFetchedArticles = data?.data || [];
+  const featuredArticle = page === 1 && allFetchedArticles[0] ? allFetchedArticles[0] : null;
+  const sideArticles = page === 1 ? allFetchedArticles.slice(1, 4) : [];
+  const gridArticles = page === 1 ? allFetchedArticles.slice(4) : allFetchedArticles;
+
   return (
-    <div className="container mx-auto px-4 lg:px-8 py-8">
+    <div className="wrap">
       <Helmet>
         <title>Movie News | CHITRAMBHALARE</title>
+        <meta name="description" content="Browse the latest updates, casting news, release dates, and production rumors from Tollywood." />
       </Helmet>
 
-      {/* Header and Search */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-        <div>
-          <h1 className="text-3xl font-poppins font-bold text-gray-100 mb-2">Movie News</h1>
-          <p className="text-gray-100/60 font-inter">Browse the latest updates and breaking news.</p>
-        </div>
-        
-        <form onSubmit={handleSearch} className="relative w-full md:w-80">
-          <input 
-            type="text" 
-            placeholder="Search news..." 
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-brand-red/20 bg-[#18181B] rounded-full focus:outline-none focus:ring-2 focus:ring-brand-red text-sm font-inter text-gray-100"
-          />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-100/70 w-4 h-4" />
-          <button type="submit" className="hidden">Search</button>
-        </form>
+      {/* Breadcrumb */}
+      <div style={{ padding: '12px 0 0', fontSize: '11px', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+        <Link to="/" style={{ cursor: 'pointer', color: 'var(--gold)', textDecoration: 'none' }}>Home</Link>
+        <span>/</span>
+        <span style={{ color: 'var(--text)' }}>Movie News</span>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Main Content Area */}
-        <div className="w-full lg:w-[70%] space-y-8">
-          
-          {/* Categories Filter */}
-          <div className="flex flex-wrap gap-2 pb-4 border-b border-brand-red/10">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                  category === cat 
-                    ? 'bg-brand-red text-white' 
-                    : 'bg-[#18181B] text-gray-300 hover:bg-brand-red/20 hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      {/* Category Banner */}
+      <div className="cat-banner">
+        <div>
+          <div className="cat-eyebrow">Browse Category</div>
+          <div className="cat-title">Movie News</div>
+          <div className="cat-desc">Latest updates, announcements, casting & release dates from Tollywood.</div>
+          <div className="cat-stats">
+            <div><div className="cat-stat-val">2,400+</div><div className="cat-stat-lbl">Articles</div></div>
+            <div><div className="cat-stat-val">Daily</div><div className="cat-stat-lbl">Updates</div></div>
+            <div><div className="cat-stat-val">12</div><div className="cat-stat-lbl">Today</div></div>
           </div>
+        </div>
+        <div className="cat-icon">NEWS</div>
+      </div>
 
-          {/* A-Z Directory Link */}
-          <div className="flex justify-end">
-             <Link to="/movie-news/archive" className="text-sm font-semibold text-gray-100 hover:underline">
-               Browse A-Z Archive Directory &rarr;
-             </Link>
-          </div>
-
-          {/* Results Info */}
-          {search && (
-            <div className="bg-[#18181B] p-4 rounded-lg flex items-center justify-between border border-brand-red/10">
-              <span className="text-gray-100">Showing results for: <span className="font-bold">"{search}"</span></span>
-              <button onClick={() => handleCategoryChange('All')} className="text-gray-100 text-sm font-semibold hover:underline">
-                Clear Search
-              </button>
-            </div>
-          )}
-
-          {/* Articles Grid */}
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[...Array(4)].map((_, i) => <LoadingSkeleton key={i} type="card" />)}
-            </div>
-          ) : data?.data.length === 0 ? (
-            <div className="text-center py-12 bg-[#18181B] rounded-xl border border-brand-red/10">
-              <p className="text-gray-100/60 font-inter text-lg">No articles found matching your criteria.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {data?.data.map((article) => (
-                <NewsCard key={article.id} article={article} />
+      <div className="desktop-grid">
+        <div>
+          {/* Filter tabs */}
+          <div className="filter-scroll">
+            <div className="filter-tabs">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.name}
+                  className={`ftab ${category === cat.value ? 'on' : ''}`}
+                  onClick={() => handleCategoryChange(cat.value)}
+                >
+                  {cat.name}
+                </button>
               ))}
             </div>
-          )}
+          </div>
 
-          {/* Pagination */}
-          {data?.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-2 pt-8 border-t border-brand-red/10 mt-8">
-              <button
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1}
-                className="px-4 py-2 border border-brand-red/20 rounded text-sm font-medium disabled:opacity-50 hover:bg-[#18181B]"
-              >
-                Previous
-              </button>
-              <div className="flex space-x-1">
-                {[...Array(data.totalPages)].map((_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => handlePageChange(i + 1)}
-                    className={`w-10 h-10 rounded flex items-center justify-center text-sm font-medium transition-colors ${
-                      page === i + 1
-                        ? 'bg-brand-red text-white'
-                        : 'text-gray-100 hover:bg-[#18181B]'
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === data.totalPages}
-                className="px-4 py-2 border border-brand-red/20 rounded text-sm font-medium disabled:opacity-50 hover:bg-[#18181B]"
-              >
-                Next
-              </button>
+          {isLoading ? (
+            <div style={{ color: 'var(--muted)', padding: '40px 0', textAlign: 'center' }}>
+              Loading Movie News...
             </div>
-          )}
+          ) : allFetchedArticles.length === 0 ? (
+            <div style={{ padding: '60px 0', textAlign: 'center', background: 'var(--card)', borderRadius: '10px', border: '1px solid var(--border)' }}>
+              <p style={{ color: 'var(--muted)' }}>No articles found. Try another category or search term.</p>
+            </div>
+          ) : (
+            <>
+              {/* Featured Section */}
+              {featuredArticle && (
+                <>
+                  <div className="section-hdr">
+                    <div className="section-hdr-title">Featured</div>
+                    <span className="see-all">See all →</span>
+                  </div>
+                  <Link to={`/movie-news/${featuredArticle.slug}`} className="feat-main" style={{ display: 'block', textDecoration: 'none' }}>
+                    <div className="feat-img">
+                      {featuredArticle.title.split(' ')[0]}
+                      <div className="feat-badge">🔥 Top Story</div>
+                    </div>
+                    <div className="feat-body">
+                      <div className="feat-title">{featuredArticle.title}</div>
+                      <div className="feat-excerpt">{featuredArticle.excerpt}</div>
+                      <div className="feat-meta">
+                        <span>By {featuredArticle.author}</span>
+                        <span className="dot">◆</span>
+                        <span>{new Date(featuredArticle.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                        <span className="dot">◆</span>
+                        <span>3 min read</span>
+                      </div>
+                    </div>
+                  </Link>
+                </>
+              )}
 
+              {/* Side Scroll Section */}
+              {sideArticles.length > 0 && (
+                <div className="side-scroll">
+                  {sideArticles.map((art) => (
+                    <Link to={`/movie-news/${art.slug}`} key={art.id} className="side-card">
+                      <div className="side-cat">{art.category}</div>
+                      <div className="side-title">{art.title}</div>
+                      <div className="side-date">
+                        {new Date(art.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* Mobile Sidebar (Box Office lists inline on mobile) */}
+              <div className="mobile-sidebar">
+                <div className="sw">
+                  <div className="sw-hdr">
+                    <div className="live-dot"></div>
+                    <div className="sw-title">Live Box Office</div>
+                  </div>
+                  <Link to="/box-office" className="bo-row">
+                    <div className="bo-rank">1</div>
+                    <div className="bo-name">Peddi</div>
+                    <div className="bo-amt">₹320 Cr</div>
+                  </Link>
+                  <Link to="/box-office" className="bo-row">
+                    <div className="bo-rank">2</div>
+                    <div className="bo-name">Drishyam 3</div>
+                    <div className="bo-amt">₹236 Cr</div>
+                  </Link>
+                  <Link to="/box-office" className="bo-row">
+                    <div className="bo-rank">3</div>
+                    <div className="bo-name">Obsession</div>
+                    <div className="bo-amt">₹85 Cr</div>
+                  </Link>
+                  <Link to="/box-office" className="bo-row">
+                    <div className="bo-rank">4</div>
+                    <div className="bo-name">Hai Jawani Toh Ishq</div>
+                    <div className="bo-amt">₹55 Cr</div>
+                  </Link>
+                </div>
+              </div>
+
+              {/* All News Grid */}
+              {gridArticles.length > 0 && (
+                <>
+                  <div className="section-hdr">
+                    <div className="section-hdr-title">All Movie News</div>
+                    <span className="see-all">2,400+ →</span>
+                  </div>
+                  <div className="news-grid">
+                    {gridArticles.map((art) => (
+                      <Link to={`/movie-news/${art.slug}`} key={art.id} className="n-card">
+                        <div className="n-thumb" style={{ background: '#0d1b30' }}>🎬</div>
+                        <div className="n-body">
+                          <div className="n-cat">{art.category}</div>
+                          <div className="n-title">{art.title}</div>
+                          <div className="n-meta">
+                            {new Date(art.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {/* Pagination */}
+              {data?.totalPages > 1 && (
+                <div className="pagination">
+                  <button 
+                    className="pg-btn" 
+                    onClick={() => handlePageChange(page - 1)}
+                    disabled={page === 1}
+                  >
+                    ‹
+                  </button>
+                  {[...Array(data.totalPages)].map((_, i) => (
+                    <button
+                      key={i + 1}
+                      className={`pg-btn ${page === i + 1 ? 'cur' : ''}`}
+                      onClick={() => handlePageChange(i + 1)}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button 
+                    className="pg-btn" 
+                    onClick={() => handlePageChange(page + 1)}
+                    disabled={page === data.totalPages}
+                  >
+                    ›
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
-        {/* Sidebar */}
-        <Sidebar />
+        {/* Desktop Sidebar */}
+        <div className="sidebar-desktop" style={{ display: 'none' }}>
+          <div style={{ position: 'sticky', top: '76px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="sw">
+              <div className="sw-hdr">
+                <div className="live-dot"></div>
+                <div className="sw-title">Live Box Office</div>
+              </div>
+              <Link to="/box-office" className="bo-row">
+                <div className="bo-rank">1</div>
+                <div className="bo-name">Peddi</div>
+                <div className="bo-amt">₹320 Cr</div>
+              </Link>
+              <Link to="/box-office" className="bo-row">
+                <div className="bo-rank">2</div>
+                <div className="bo-name">Drishyam 3</div>
+                <div className="bo-amt">₹236 Cr</div>
+              </Link>
+              <Link to="/box-office" className="bo-row">
+                <div className="bo-rank">3</div>
+                <div className="bo-name">Obsession</div>
+                <div className="bo-amt">₹85 Cr</div>
+              </Link>
+              <Link to="/box-office" className="bo-row">
+                <div className="bo-rank">4</div>
+                <div className="bo-name">Hai Jawani Toh Ishq</div>
+                <div className="bo-amt">₹55 Cr</div>
+              </Link>
+            </div>
+            
+            <div className="sw">
+              <div className="sw-hdr">
+                <div className="sw-title">Popular Stories</div>
+              </div>
+              <Link to="/movie-news/peddi-crosses-320-cr-worldwide-in-2-weeks-telugu-dominates" className="pop-item">
+                <div className="pop-num">1</div>
+                <div>
+                  <div className="pop-text">Peddi Joins the ₹300 Cr Club at the Box Office</div>
+                  <div className="pop-meta">Box Office · June 14</div>
+                </div>
+              </Link>
+              <Link to="/movie-news/chiranjeevi-venkatesh-rumors-films-not-postponed" className="pop-item">
+                <div className="pop-num">2</div>
+                <div>
+                  <div className="pop-text">Chiranjeevi & Venkatesh Rumors: Films Not Postponed</div>
+                  <div className="pop-meta">Movie News · June 18</div>
+                </div>
+              </Link>
+              <Link to="/movie-news/dhurandhar-unedited-version-streams-on-netflix-june-19" className="pop-item">
+                <div className="pop-num">3</div>
+                <div>
+                  <div className="pop-text">Dhurandhar Unedited Version Streams on Netflix June 19</div>
+                  <div className="pop-meta">OTT · June 18</div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="sw">
+              <div className="sw-hdr">
+                <div className="sw-title">Browse Topics</div>
+              </div>
+              <div className="tag-cloud">
+                <Link to="/movie-news?search=Ram Charan" className="tag">Ram Charan</Link>
+                <Link to="/movie-news?search=Pawan Kalyan" className="tag">Pawan Kalyan</Link>
+                <Link to="/movie-news?search=Chiranjeevi" className="tag">Chiranjeevi</Link>
+                <Link to="/movie-news?category=OTT" className="tag">OTT</Link>
+                <Link to="/box-office" className="tag">Box Office</Link>
+                <Link to="/reviews" className="tag">Reviews</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Topics Cloud (Mobile Only) */}
+      <div className="mobile-sidebar">
+        <div className="sw">
+          <div className="sw-hdr">
+            <div className="sw-title">Browse Topics</div>
+          </div>
+          <div className="tag-cloud">
+            <Link to="/movie-news?search=Ram Charan" className="tag">Ram Charan</Link>
+            <Link to="/movie-news?search=Pawan Kalyan" className="tag">Pawan Kalyan</Link>
+            <Link to="/movie-news?search=Chiranjeevi" className="tag">Chiranjeevi</Link>
+            <Link to="/movie-news?category=OTT" className="tag">OTT</Link>
+            <Link to="/box-office" className="tag">Box Office</Link>
+            <Link to="/reviews" className="tag">Reviews</Link>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default MovieNews;
-
-

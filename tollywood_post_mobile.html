@@ -1,0 +1,402 @@
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0A0F1E;--card:#131a2b;--gold:#F5C842;--crimson:#D42B2B;--text:#F0EDE8;--muted:#8A95A8;--border:rgba(255,255,255,0.08);}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--text);font-size:14px;}
+
+/* TICKER */
+.topbar{background:var(--crimson);padding:5px 0;overflow:hidden;}
+.tick-wrap{display:flex;align-items:center;padding:0 12px;overflow:hidden;}
+.tlabel{background:#fff;color:var(--crimson);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 7px;margin-right:10px;flex-shrink:0;border-radius:2px;}
+.ticker-inner{display:inline-flex;animation:ticker 36s linear infinite;white-space:nowrap;}
+.ticker-item{font-size:11px;font-weight:500;color:#fff;padding-right:32px;white-space:nowrap;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* HEADER */
+header{background:var(--navy);border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:200;}
+.h-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);}
+.logo span{color:var(--gold);}
+.h-right{display:flex;align-items:center;gap:8px;}
+.sbtn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-family:'Inter',sans-serif;}
+.ham{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 9px;border-radius:6px;cursor:pointer;font-size:16px;line-height:1;}
+.nav-drawer{display:none;flex-direction:column;border-top:1px solid var(--border);background:var(--card);}
+.nav-drawer.open{display:flex;}
+.nav-drawer a{display:block;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);padding:11px 16px;border-bottom:1px solid var(--border);cursor:pointer;text-decoration:none;}
+.nav-drawer a:hover,.nav-drawer a.act{color:var(--gold);background:rgba(245,200,66,0.06);}
+.nav-hot-m{background:var(--crimson)!important;color:#fff!important;}
+
+/* WRAP */
+.wrap{max-width:1200px;margin:0 auto;padding:0 14px;}
+
+/* BREADCRUMB */
+.breadcrumb{padding:12px 0 0;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.breadcrumb .bc-link{cursor:pointer;color:var(--gold);}
+
+/* ARTICLE LAYOUT */
+.art-layout{display:block;padding:0 0 24px;}
+
+/* ARTICLE HEADER */
+.art-cat-badge{display:inline-block;background:var(--crimson);color:#fff;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:3px;margin:14px 0 12px;}
+.art-title{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1.0;letter-spacing:0.5px;color:var(--text);margin-bottom:12px;}
+.art-deck{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:16px;font-family:'Lora',serif;font-style:italic;}
+
+/* BYLINE */
+.art-byline{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px;flex-wrap:wrap;}
+.avatar{width:36px;height:36px;border-radius:50%;background:rgba(245,200,66,0.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.byline-name{font-size:13px;font-weight:700;color:var(--text);}
+.byline-meta{font-size:10px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.bdot{color:var(--gold);}
+.art-actions{display:flex;gap:6px;margin-left:auto;}
+.act-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.act-btn:hover{border-color:rgba(245,200,66,0.35);color:var(--gold);}
+
+/* HERO IMAGE */
+.art-hero-img{width:100%;height:200px;background:#0d1b30;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;position:relative;overflow:hidden;}
+.art-hero-text{font-family:'Bebas Neue',sans-serif;font-size:60px;letter-spacing:5px;color:rgba(245,200,66,0.07);user-select:none;}
+.img-caption{font-size:11px;color:var(--muted);text-align:center;margin-bottom:20px;font-style:italic;}
+
+/* BODY */
+.art-body{font-family:'Lora',serif;font-size:15px;line-height:1.8;color:rgba(240,237,232,0.9);}
+.art-body p{margin-bottom:16px;}
+.art-body h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--text);margin:24px 0 10px;padding-bottom:7px;border-bottom:2px solid var(--gold);}
+.art-body h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.5px;color:var(--text);margin:18px 0 8px;}
+.pullquote{border-left:3px solid var(--gold);padding:12px 16px;margin:20px 0;background:rgba(245,200,66,0.05);border-radius:0 8px 8px 0;}
+.pullquote p{font-family:'Lora',serif;font-size:15px;line-height:1.6;color:var(--gold);margin:0;font-style:italic;}
+.pullquote cite{display:block;font-size:10px;color:var(--muted);margin-top:6px;font-style:normal;font-family:'Inter',sans-serif;}
+
+/* BOX OFFICE TABLE */
+.bo-table-wrap{background:var(--card);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin:20px 0;}
+.bo-table-hdr{background:var(--gold);padding:9px 14px;}
+.bo-table-hdr-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:#0A0F1E;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.table-scroll::-webkit-scrollbar{display:none;}
+.bo-table{width:100%;border-collapse:collapse;min-width:400px;}
+.bo-table th{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.bo-table td{padding:9px 12px;font-size:12px;color:var(--text);border-bottom:1px solid var(--border);}
+.bo-table tr:last-child td{border-bottom:none;}
+.bo-table tr:hover td{background:rgba(245,200,66,0.03);}
+.rank{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);}
+.amt{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--gold);}
+.trend-up{color:#22c55e;font-size:10px;font-weight:700;}
+
+/* TAGS */
+.art-tags{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0;padding-top:16px;border-top:1px solid var(--border);}
+.atag{font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--border);padding:5px 9px;border-radius:5px;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;transition:all 0.15s;}
+.atag:hover{color:var(--gold);border-color:rgba(245,200,66,0.35);}
+
+/* SHARE */
+.share-bar{display:flex;align-items:center;gap:8px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:22px;flex-wrap:wrap;}
+.share-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.share-btn{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text);font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.share-btn:hover{background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.3);color:var(--gold);}
+
+/* AUTHOR BOX */
+.author-box{background:var(--card);border-radius:10px;border:1px solid var(--border);padding:16px;display:flex;gap:14px;margin-bottom:24px;}
+.author-av{width:48px;height:48px;border-radius:50%;background:rgba(245,200,66,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.author-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.author-role{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.author-bio{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* RELATED */
+.related-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--text);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gold);}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.rel-card{background:var(--card);border-radius:8px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color 0.15s,transform 0.15s;}
+.rel-card:hover{border-color:rgba(245,200,66,0.3);transform:translateY(-2px);}
+.rel-thumb{height:80px;display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0.4;}
+.rel-body{padding:9px 11px;}
+.rel-cat{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.rel-title{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;}
+.rel-date{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* SIDEBAR WIDGETS */
+.sw{background:var(--card);border-radius:10px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;}
+.sw-hdr{padding:10px 14px 9px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.sw-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--text);}
+.live-dot{width:7px;height:7px;background:var(--crimson);border-radius:50%;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.bo-row{display:flex;align-items:center;padding:9px 14px;gap:10px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;}
+.bo-row:last-child{border-bottom:none;}
+.bo-row:hover{background:rgba(245,200,66,0.04);}
+.bo-rank2{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);width:18px;flex-shrink:0;line-height:1;}
+.bo-name2{flex:1;font-size:12px;font-weight:600;color:var(--text);}
+.bo-amt2{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--gold);}
+.pop-item{display:flex;align-items:flex-start;gap:9px;padding:9px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.pop-item:last-child{border-bottom:none;}
+.pop-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:rgba(245,200,66,0.2);flex-shrink:0;width:20px;line-height:1;}
+.pop-text{font-size:12px;font-weight:500;color:var(--text);line-height:1.4;}
+.pop-meta{font-size:10px;color:var(--muted);margin-top:3px;}
+
+/* PROGRESS BAR — reading indicator */
+.read-progress{position:sticky;top:54px;height:3px;background:var(--border);z-index:199;}
+.read-bar{height:100%;background:var(--gold);width:0%;transition:width 0.1s linear;}
+
+footer{background:#0d1220;border-top:1px solid var(--border);padding:18px 0;margin-top:8px;}
+.fbot{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:0 14px;}
+.fcopy{font-size:11px;color:var(--muted);}
+.flinks{display:flex;gap:14px;flex-wrap:wrap;}
+.flinks a{font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer;}
+
+/* DESKTOP */
+@media(min-width:700px){
+  .wrap{padding:0 20px;}
+  .h-top{padding:14px 20px;}
+  .ham{display:none;}
+  .nav-drawer{display:flex!important;flex-direction:row;border-top:none;background:transparent;padding:0;}
+  .nav-drawer a{padding:6px 9px;border-bottom:none;font-size:11px;}
+  .art-layout{display:grid;grid-template-columns:1fr 270px;gap:28px;padding:0 0 32px;}
+  .art-hero-img{height:280px;}
+  .art-hero-text{font-size:80px;}
+  .art-title{font-size:42px;}
+  .art-deck{font-size:16px;}
+  .art-body{font-size:16px;}
+  .art-body h2{font-size:24px;}
+  .related-grid{grid-template-columns:1fr 1fr;}
+  .rel-thumb{height:90px;}
+  .read-progress{top:58px;}
+  .fbot{flex-direction:row;align-items:center;justify-content:space-between;padding:0 20px;}
+  footer{padding:20px 0;}
+  .mob-sidebar-inline{display:none!important;}
+}
+@media(min-width:1000px){
+  .art-layout{grid-template-columns:1fr 290px;}
+  .art-title{font-size:46px;}
+}
+</style>
+
+<!-- READING PROGRESS -->
+<div class="read-progress"><div class="read-bar" id="readBar"></div></div>
+
+<div class="topbar">
+  <div class="tick-wrap">
+    <div class="tlabel">LIVE</div>
+    <div style="overflow:hidden;flex:1;">
+      <div class="ticker-inner">
+        <span class="ticker-item">Peddi crosses ₹320 Cr worldwide in 2 weeks &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Drishyam 3 streaming on Amazon Prime Video &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Nagabandham trailer at Prasads PCX June 19 &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Peddi crosses ₹320 Cr worldwide in 2 weeks &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Drishyam 3 streaming on Amazon Prime Video &nbsp;◆&nbsp; </span>
+        <span class="ticker-item">Nagabandham trailer at Prasads PCX June 19 &nbsp;◆&nbsp; </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="h-top">
+    <div class="logo">CHITRAM<span>BHALARE</span></div>
+    <div class="h-right">
+      <button class="sbtn">🔍</button>
+      <button class="ham" onclick="document.getElementById('nav2').classList.toggle('open')">☰</button>
+      <nav id="nav2" class="nav-drawer">
+        <a href="#">Home</a>
+        <a href="#" class="act">Movie News</a>
+        <a href="#">Box Office</a>
+        <a href="#">Reviews</a>
+        <a href="#">Gallery</a>
+        <a href="#">OTT</a>
+        <a href="#" class="nav-hot-m">🎬 Live Tracking</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <span class="bc-link">Home</span><span>/</span>
+    <span class="bc-link">Box Office News</span><span>/</span>
+    <span style="color:var(--text);">Peddi Crosses ₹320 Cr…</span>
+  </div>
+
+  <div class="art-layout">
+    <!-- ARTICLE -->
+    <article>
+      <div class="art-cat-badge">Box Office</div>
+      <h1 class="art-title">Peddi Crosses ₹320 Cr Worldwide in 2 Weeks; Telugu Dominates</h1>
+      <p class="art-deck">Ram Charan's sports drama continues its record-breaking run, cementing its place among the biggest Telugu hits of the decade.</p>
+
+      <div class="art-byline">
+        <div class="avatar">AD</div>
+        <div>
+          <div class="byline-name">Aditya</div>
+          <div class="byline-meta">
+            <span>June 18, 2026</span><span class="bdot">◆</span><span>5 min read</span><span class="bdot">◆</span><span>Box Office</span>
+          </div>
+        </div>
+        <div class="art-actions">
+          <button class="act-btn">♡</button>
+          <button class="act-btn">↗</button>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="art-hero-img">
+        <div class="art-hero-text">PEDDI</div>
+      </div>
+      <div class="img-caption">Ram Charan in Peddi (2026) — Directed by Buchi Babu Sana</div>
+
+      <!-- INLINE BOX OFFICE (mobile only) -->
+      <div class="mob-sidebar-inline">
+        <div class="sw">
+          <div class="sw-hdr"><div class="live-dot"></div><div class="sw-title">Live Box Office</div></div>
+          <div class="bo-row"><div class="bo-rank2">1</div><div class="bo-name2">Peddi</div><div class="bo-amt2">₹320 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">2</div><div class="bo-name2">Drishyam 3</div><div class="bo-amt2">₹236 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">3</div><div class="bo-name2">Karuppu</div><div class="bo-amt2">₹150 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">4</div><div class="bo-name2">Obsession</div><div class="bo-amt2">₹85 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">5</div><div class="bo-name2">Sing Geetham</div><div class="bo-amt2">₹5 Cr</div></div>
+        </div>
+      </div>
+
+      <div class="art-body" id="artBody">
+        <p>Ram Charan's sports action drama Peddi has crossed the ₹320 Crore mark in worldwide gross collections within two weeks of its theatrical release, emerging as one of the fastest Telugu films to achieve this milestone. Directed by Buchi Babu Sana, the film has delivered a dominant run at the Telugu box office with collections showing strong hold even in the second week.</p>
+
+        <div class="pullquote">
+          <p>The second week alone contributed over ₹68 Cr to the worldwide tally — a remarkable hold that points to exceptional word of mouth and repeat viewing.</p>
+          <cite>— CHITRAMBHALARE Box Office Desk</cite>
+        </div>
+
+        <h2>Week-by-Week Breakdown</h2>
+        <p>The film opened to massive numbers on Day 1, recording the biggest opening in the Telugu states for a sports drama. The first week closed at approximately ₹252 Cr worldwide, while the second week added a further ₹68+ Cr, taking the running total past ₹320 Cr by Day 14.</p>
+
+        <div class="bo-table-wrap">
+          <div class="bo-table-hdr"><div class="bo-table-hdr-title">Peddi — Worldwide Gross Collections</div></div>
+          <div class="table-scroll">
+            <table class="bo-table">
+              <thead>
+                <tr><th>#</th><th>Period</th><th>WW Gross</th><th>Telugu Share</th><th>Trend</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="rank">1</td><td>Day 1 Opening</td><td class="amt">₹73 Cr</td><td>₹42 Cr</td><td class="trend-up">▲ Record</td></tr>
+                <tr><td class="rank">2</td><td>First Weekend</td><td class="amt">₹190 Cr</td><td>₹108 Cr</td><td class="trend-up">▲ Strong</td></tr>
+                <tr><td class="rank">3</td><td>First Week</td><td class="amt">₹252 Cr</td><td>₹164 Cr</td><td class="trend-up">▲ Solid</td></tr>
+                <tr><td class="rank">4</td><td>Second Weekend</td><td class="amt">₹290 Cr</td><td>₹180 Cr</td><td class="trend-up">▲ Holding</td></tr>
+                <tr><td class="rank">5</td><td>Two Weeks</td><td class="amt">₹320 Cr+</td><td>₹195 Cr+</td><td class="trend-up">▲ Running</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2>Where Does It Stand in Telugu History?</h2>
+        <p>At ₹320 Cr in two weeks, Peddi has already surpassed the lifetime collections of several major Telugu blockbusters. It now sits within striking distance of the ₹350 Cr club, a territory only RRR, Baahubali 2, and Pushpa 2 have entered in Telugu cinema history.</p>
+
+        <p>The film's performance in the AP/TS circuits has been particularly noteworthy. The Telugu share from the home circuits alone is estimated at over ₹195 Cr, making it one of the highest-grossing Telugu-language films in its home territory within the first fortnight.</p>
+
+        <h3>Overseas Performance</h3>
+        <p>The overseas market has contributed meaningfully — with the USA, Australia, and the Middle East being the top territories. The global reach reflects Ram Charan's rising worldwide fanbase following the international success of RRR.</p>
+
+        <h2>What's Next?</h2>
+        <p>With a new director's cut version rolling out in theatres — featuring added scenes and an improved audio mix — the film is expected to see a bump heading into the third weekend. Trade analysts project a ₹380–₹400 Cr worldwide closing gross if the hold continues at this pace.</p>
+      </div>
+
+      <div class="art-tags">
+        <span class="atag">Ram Charan</span>
+        <span class="atag">Peddi</span>
+        <span class="atag">Box Office</span>
+        <span class="atag">Buchi Babu Sana</span>
+        <span class="atag">Telugu Cinema</span>
+        <span class="atag">300 Cr Club</span>
+      </div>
+
+      <div class="share-bar">
+        <span class="share-lbl">Share:</span>
+        <button class="share-btn">Facebook</button>
+        <button class="share-btn">Twitter</button>
+        <button class="share-btn">WhatsApp</button>
+        <button class="share-btn">Copy Link</button>
+      </div>
+
+      <div class="author-box">
+        <div class="author-av">AD</div>
+        <div>
+          <div class="author-name">Aditya</div>
+          <div class="author-role">Senior Editor, Box Office</div>
+          <div class="author-bio">Aditya covers box office collections and trade analysis for Chitrambhalare. With 8+ years tracking Telugu cinema, he's known for detailed data breakdowns and sharp verdict analysis.</div>
+        </div>
+      </div>
+
+      <div class="related-title">Related Articles</div>
+      <div class="related-grid">
+        <div class="rel-card">
+          <div class="rel-thumb" style="background:#0d1b30;">🎬</div>
+          <div class="rel-body"><div class="rel-cat">Box Office</div><div class="rel-title">Peddi Box Office Report: 11 Days Worldwide</div><div class="rel-date">June 15, 2026</div></div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-thumb" style="background:#1a0d0d;">🏆</div>
+          <div class="rel-body"><div class="rel-cat">Box Office</div><div class="rel-title">Peddi Joins the ₹300 Cr Club at Box Office</div><div class="rel-date">June 14, 2026</div></div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-thumb" style="background:#0d1f0d;">🎥</div>
+          <div class="rel-body"><div class="rel-cat">Review</div><div class="rel-title">Peddi Review: Ram Charan Powers an Engaging Drama</div><div class="rel-date">June 4, 2026</div></div>
+        </div>
+        <div class="rel-card">
+          <div class="rel-thumb" style="background:#1a1a14;">📈</div>
+          <div class="rel-body"><div class="rel-cat">Box Office</div><div class="rel-title">Peddi Second Weekend: ₹290 Cr in 9 Days</div><div class="rel-date">June 13, 2026</div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- DESKTOP SIDEBAR -->
+    <aside style="display:none;" id="deskSidebar">
+      <div style="position:sticky;top:76px;display:flex;flex-direction:column;gap:16px;">
+        <div class="sw">
+          <div class="sw-hdr"><div class="live-dot"></div><div class="sw-title">Live Box Office</div></div>
+          <div class="bo-row"><div class="bo-rank2">1</div><div class="bo-name2">Peddi</div><div class="bo-amt2">₹320 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">2</div><div class="bo-name2">Drishyam 3</div><div class="bo-amt2">₹236 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">3</div><div class="bo-name2">Karuppu</div><div class="bo-amt2">₹150 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">4</div><div class="bo-name2">Obsession</div><div class="bo-amt2">₹85 Cr</div></div>
+          <div class="bo-row"><div class="bo-rank2">5</div><div class="bo-name2">Sing Geetham</div><div class="bo-amt2">₹5 Cr</div></div>
+        </div>
+        <div class="sw">
+          <div class="sw-hdr"><div class="sw-title">You May Also Like</div></div>
+          <div class="pop-item"><div class="pop-num">1</div><div><div class="pop-text">All Time Worldwide Top 15 Telugu Movies</div><div class="pop-meta">Records</div></div></div>
+          <div class="pop-item"><div class="pop-num">2</div><div><div class="pop-text">Drishyam 3 — ₹236 Cr in 24 Days Worldwide</div><div class="pop-meta">Box Office · June 14</div></div></div>
+          <div class="pop-item"><div class="pop-num">3</div><div><div class="pop-text">Peddi Review: Ram Charan Powers Engaging Drama</div><div class="pop-meta">Review · June 4</div></div></div>
+          <div class="pop-item"><div class="pop-num">4</div><div><div class="pop-text">RRR All-Time WW — ₹365.8 Cr Telugu Share</div><div class="pop-meta">Records</div></div></div>
+          <div class="pop-item"><div class="pop-num">5</div><div><div class="pop-text">Karuppu — ₹150 Cr Club Entry, First for Suriya</div><div class="pop-meta">Box Office · May 19</div></div></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fbot">
+      <div class="logo" style="font-size:20px;">Chitram<span style="color:var(--gold);">Bhalare</span></div>
+      <div class="flinks"><a>About</a><a>Advertise</a><a>Privacy</a><a>Contact</a></div>
+      <div class="fcopy">© 2020–2026 Chitrambhalare</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function checkWidth(){
+    var w=window.innerWidth;
+    var aside=document.getElementById('deskSidebar');
+    var mobileInlines=document.querySelectorAll('.mob-sidebar-inline');
+    if(w>=700){
+      aside.style.display='block';
+      mobileInlines.forEach(function(el){el.style.display='none';});
+    } else {
+      aside.style.display='none';
+      mobileInlines.forEach(function(el){el.style.display='block';});
+    }
+  }
+  checkWidth();
+  window.addEventListener('resize',checkWidth);
+
+  var bar=document.getElementById('readBar');
+  var body=document.getElementById('artBody');
+  if(bar&&body){
+    document.addEventListener('scroll',function(){
+      var rect=body.getBoundingClientRect();
+      var total=body.offsetHeight;
+      var scrolled=Math.max(0,-rect.top);
+      var pct=Math.min(100,Math.round((scrolled/total)*100));
+      bar.style.width=pct+'%';
+    },{passive:true});
+  }
+})();
+</script>
