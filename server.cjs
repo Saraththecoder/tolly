@@ -718,6 +718,10 @@ app.get('*all', (req, res) => {
 });
 
 // Start listening
-app.listen(PORT, () => {
-  console.log(`Live Scraper Backend Server running at http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Live Scraper Backend Server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
