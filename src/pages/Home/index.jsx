@@ -56,22 +56,24 @@ const Home = () => {
         <div className="w-full lg:w-[70%] space-y-12">
           
           {/* Latest Movie News Grid */}
-          <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
-                Latest Movie News
-              </h2>
-              <Link to="/movie-news" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
-                View All <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {latestNews.map((article, idx) => (
-                <NewsCard key={article.id} article={article} isFeatured={idx === 0} />
-              ))}
-            </div>
-          </section>
+          {latestNews.length > 0 && (
+            <section>
+              <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+                <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
+                  Latest Movie News
+                </h2>
+                <Link to="/movie-news" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
+                  View All <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {latestNews.map((article, idx) => (
+                  <NewsCard key={article.id} article={article} isFeatured={idx === 0} />
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* OTT Updates */}
           {ottNews.length > 0 && (
@@ -97,48 +99,52 @@ const Home = () => {
           <NorthAmericaCollections />
 
           {/* Latest Reviews */}
-          <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
-                Latest Reviews
-              </h2>
-              <Link to="/reviews" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
-                View All <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
-            </div>
-            
-            {reviewsLoading ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4"><LoadingSkeleton type="card"/><LoadingSkeleton type="card"/></div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {reviewsData?.map(review => (
-                  <ReviewCard key={review.id} review={review} />
-                ))}
-              </div>
-            )}
-          </section>
+          {reviewsLoading ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4"><LoadingSkeleton type="card"/><LoadingSkeleton type="card"/></div>
+          ) : (
+            reviewsData && reviewsData.length > 0 && (
+              <section>
+                <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+                  <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
+                    Latest Reviews
+                  </h2>
+                  <Link to="/reviews" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
+                    View All <ChevronRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                  {reviewsData.map(review => (
+                    <ReviewCard key={review.id} review={review} />
+                  ))}
+                </div>
+              </section>
+            )
+          )}
 
           {/* Box Office Updates */}
-          <section>
-            <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
-              <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
-                Box Office Collections
-              </h2>
-              <Link to="/box-office" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
-                View All <ChevronRight className="w-4 h-4 ml-1" />
-              </Link>
-            </div>
-            
-            {boxOfficeLoading ? (
-              <LoadingSkeleton type="card" />
-            ) : (
-              <div className="grid grid-cols-1 gap-6">
-                {boxOfficeData?.map(bo => (
-                  <BoxOfficeCard key={bo.id} boxOffice={bo} />
-                ))}
-              </div>
-            )}
-          </section>
+          {boxOfficeLoading ? (
+            <LoadingSkeleton type="card" />
+          ) : (
+            boxOfficeData && boxOfficeData.length > 0 && (
+              <section>
+                <div className="flex justify-between items-center mb-6 border-b-2 border-brand-red/10 pb-2">
+                  <h2 className="text-2xl font-poppins font-bold text-gray-100 border-b-2 border-brand-red -mb-[10px] pb-2">
+                    Box Office Collections
+                  </h2>
+                  <Link to="/box-office" className="text-sm font-semibold text-gray-100 hover:text-gray-300 flex items-center">
+                    View All <ChevronRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-6">
+                  {boxOfficeData.map(bo => (
+                    <BoxOfficeCard key={bo.id} boxOffice={bo} />
+                  ))}
+                </div>
+              </section>
+            )
+          )}
 
         </div>
 

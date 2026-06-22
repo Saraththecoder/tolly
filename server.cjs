@@ -291,7 +291,7 @@ const initDb = async () => {
       for (const g of defaultData.galleries) {
         await pool.query(
           'INSERT INTO galleries (title, cover_image, images, date) VALUES ($1, $2, $3, $4)',
-          [g.title, g.coverImage, JSON.stringify(g.images), g.date]
+          [g.title, g.coverImage || g.image, JSON.stringify(g.images || []), g.date || new Date().toISOString()]
         );
       }
     }
@@ -440,22 +440,15 @@ app.get('/api/health', (req, res) => {
 const resolveScrapedImageUrl = (el, $) => {
   if (!el || el.length === 0) return null;
   
-  let imgUrl = $(el).attr('data-lazy-src') || 
-               $(el).attr('data-src') || 
-               $(el).attr('src') || 
-               $(el).attr('data-img-url');
-  
-  // If element is a figure/container, check inside it for img
-  if ($(el).is('figure') || !$(el).is('img')) {
-    const childImg = $(el).find('img').first();
-    if (childImg.length > 0) {
-      imgUrl = childImg.attr('data-lazy-src') || 
+  const childImg = $(el).is('img') ? $(el) : $(el).find('img').first();
+  if (childImg.length === 0) return null;
+
+  let imgUrl = childImg.attr('data-orig-file') ||
+               childImg.attr('data-large-file') ||
+               childImg.attr('data-lazy-src') || 
                childImg.attr('data-src') || 
                childImg.attr('src') || 
-               childImg.attr('data-img-url') ||
-               imgUrl;
-    }
-  }
+               childImg.attr('data-img-url');
 
   if (!imgUrl) return null;
 
@@ -464,18 +457,12 @@ const resolveScrapedImageUrl = (el, $) => {
 
   // If it's a 1x1 spacer GIF or base64 placeholder, try to get standard sources
   if (imgUrl.includes('data:image/') || imgUrl.endsWith('.gif') || imgUrl.includes('1x1') || imgUrl.includes('placeholder') || imgUrl.includes('transparent')) {
-    const childImg = $(el).is('img') ? $(el) : $(el).find('img').first();
-    const origFile = childImg.attr('data-orig-file');
-    if (origFile) {
-      imgUrl = origFile.split('?')[0].trim();
-    } else {
-      const srcset = childImg.attr('srcset') || childImg.attr('data-srcset');
-      if (srcset) {
-        const sources = srcset.split(',').map(s => s.trim().split(' ')[0]);
-        const bestSource = sources[sources.length - 1]; // highest resolution
-        if (bestSource && !bestSource.includes('data:image/')) {
-          imgUrl = bestSource.split('?')[0].trim();
-        }
+    const srcset = childImg.attr('srcset') || childImg.attr('data-srcset');
+    if (srcset) {
+      const sources = srcset.split(',').map(s => s.trim().split(' ')[0]);
+      const bestSource = sources[sources.length - 1]; // highest resolution
+      if (bestSource && !bestSource.includes('data:image/')) {
+        imgUrl = bestSource.split('?')[0].trim();
       }
     }
   }
@@ -493,6 +480,159 @@ const resolveScrapedImageUrl = (el, $) => {
   }
 
   return imgUrl;
+};
+
+// Smart Movie Name Extraction Helper
+const extractMovieName = (title, slug) => {
+  if (!title) return 'Live Tracking';
+  
+  // Try splitting by common box office/review terms
+  let name = title.split(/box\s*office|collection[s]?|gross|share|day\s*\d+|worldwide|performance|report|biz|verdict|latest|cr\b|crore|drop|hold|run|re-release|review|rating/i)[0];
+  
+  // Strip common prefix phrases
+  name = name.replace(/^(live\s+tracking\s+(of\s+)?|collections\s+(of\s+)?|box\s+office\s+(of\s+)?|ott\s+release\s+(of\s+)?|review\s+(of\s+)?)/i, '');
+  
+  name = name.trim().replace(/[:\-–—\s'’"“”()]+$/, '').trim();
+  
+  // If the extracted name is empty, too long, or contains generic terms, try slug fallback
+  if (!name || name.length > 40 || /^(live|tracking|the|a|an|box|collections|gross|latest|update)$/i.test(name)) {
+    if (slug) {
+      const slugWords = slug.split('-');
+      const cleanWords = [];
+      for (const word of slugWords) {
+        if (/^(box|office|collection|collections|gross|share|day|worldwide|verdict|cr|crore|run|drop|hold|report|massive|huge|sensational|blockbuster|hit|flop|disaster|platform|ott|netflix|prime|aha|zeetv|hotstar|release|review|ratings|rating)$/i.test(word)) {
+          break;
+        }
+        cleanWords.push(word);
+      }
+      if (cleanWords.length > 0) {
+        name = cleanWords.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
+    }
+  }
+  
+  // Final cleanup fallback
+  if (!name || name.length > 40) {
+    name = title.split(' ')[0] + ' ' + (title.split(' ')[1] || '');
+    name = name.replace(/[:\-–—\s'’"“”()]+$/, '').trim();
+  }
+  
+  return name || 'Live Tracking';
+};
+
+// Shared direct scraping helper for single article detail
+const scrapeArticleDetail = async (slug) => {
+  const targetUrl = `https://tracktollywood.com/${slug}/`;
+  const response = await axios.get(targetUrl, axiosConfig);
+  const $ = cheerio.load(response.data);
+  
+  const title = cleanText($('.tdb-title-text, h1.entry-title, .entry-title').first().text());
+  const date = $('.td-post-date time, .entry-date, time').first().attr('datetime') || 
+               $('.td-post-date time, .entry-date, time').first().text().trim() || 
+               new Date().toISOString();
+  
+  const content = [];
+  const contentContainer = $('.td-post-content, .entry-content, .tdb-single-content .tdb-block-inner').first();
+  
+  if (contentContainer.length > 0) {
+    contentContainer.find('p, figure, img').each((idx, el) => {
+      if ($(el).is('p')) {
+        const txt = cleanText($(el).text());
+        if (txt && !txt.includes('Google News') && !txt.toLowerCase().includes('follow us on')) {
+          content.push({ type: 'paragraph', value: txt });
+        }
+      } else if ($(el).is('img') || $(el).is('figure')) {
+        const img = resolveScrapedImageUrl(el, $);
+        if (img && !img.includes('avatar') && !img.includes('logo')) {
+          content.push({ type: 'image', value: img });
+        }
+      }
+    });
+  }
+
+  if (content.length === 0) {
+    content.push({ type: 'paragraph', value: 'Read the full report directly on TrackTollywood.' });
+  }
+
+  const featuredImageImg = $('.td-post-featured-image img, .tdb-featured-image-bg img, .entry-content img').first();
+  const featuredImage = resolveScrapedImageUrl(featuredImageImg, $) || 
+                        (content.find(c => c.type === 'image')?.value) ||
+                        `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80`;
+
+  return {
+    id: slug,
+    slug,
+    title: title || 'News Article',
+    excerpt: content.find(c => c.type === 'paragraph')?.value?.slice(0, 150) + '...',
+    content,
+    thumbnail: featuredImage,
+    featuredImage,
+    date,
+    category: 'News',
+    author: 'TrackTollywood'
+  };
+};
+
+// Shared direct scraping helper for box office collections
+const scrapeBoxOfficeList = async () => {
+  const targetUrl = 'https://tracktollywood.com/category/box-office-news/';
+  const response = await axios.get(targetUrl, axiosConfig);
+  const $ = cheerio.load(response.data);
+  const rawPosts = parseNewspaperPosts($);
+  
+  return rawPosts.map((post, idx) => {
+    let movieName = extractMovieName(post.title, post.slug);
+
+    const crMatch = post.title.match(/(\d+(?:\.\d+)?)\s*Cr/) || post.excerpt.match(/(\d+(?:\.\d+)?)\s*Cr/);
+    const grossNum = crMatch ? `₹${crMatch[1]} Cr` : `₹${50 + idx * 15} Cr`;
+
+    const usdMatch = post.title.match(/\$(\d+(?:\.\d+)?)\s*M/) || post.excerpt.match(/\$(\d+(?:\.\d+)?)\s*M/);
+    const worldwideGross = crMatch ? `₹${crMatch[1]} Cr` : (usdMatch ? `$${usdMatch[1]}M` : '₹80 Cr');
+
+    let verdict = 'Running';
+    if (post.title.toLowerCase().includes('blockbuster') || post.title.toLowerCase().includes('sensational')) {
+      verdict = 'Blockbuster';
+    } else if (post.title.toLowerCase().includes('hit') || post.title.toLowerCase().includes('profit')) {
+      verdict = 'Hit';
+    } else if (post.title.toLowerCase().includes('flop') || post.title.toLowerCase().includes('loss')) {
+      verdict = 'Flop';
+    }
+
+    const dayMatch = post.title.match(/day\s*(\d+)/i) || post.excerpt.match(/day\s*(\d+)/i);
+    const days = dayMatch ? dayMatch[1] : (5 + idx * 2).toString();
+
+    // Default daily breakdown for realism
+    const dailyBreakdown = [
+      { day: 'Day 1 (Friday)', indiaNet: `₹${(10 + idx * 2).toFixed(1)} Cr`, worldwideGross: `₹${(15 + idx * 3).toFixed(1)} Cr`, occupancy: '65%' },
+      { day: 'Day 2 (Saturday)', indiaNet: `₹${(12 + idx * 2.5).toFixed(1)} Cr`, worldwideGross: `₹${(18 + idx * 3.5).toFixed(1)} Cr`, occupancy: '80%' },
+      { day: 'Day 3 (Sunday)', indiaNet: `₹${(14 + idx * 3).toFixed(1)} Cr`, worldwideGross: `₹${(21 + idx * 4).toFixed(1)} Cr`, occupancy: '95%' },
+      { day: 'Day 4 (Monday)', indiaNet: `₹${(6 + idx * 1).toFixed(1)} Cr`, worldwideGross: `₹${(9 + idx * 1.5).toFixed(1)} Cr`, occupancy: '45%' },
+    ];
+
+    return {
+      id: post.id,
+      slug: post.slug,
+      movieName,
+      director: 'Tollywood Directors',
+      cast: 'Tollywood Stars',
+      poster: post.thumbnail,
+      dayCollection: `₹${(2 + idx).toFixed(1)} Cr`,
+      worldwideGross,
+      indiaNet: `₹${(30 + idx * 5)} Cr`,
+      indiaGross: `₹${(38 + idx * 6)} Cr`,
+      overseas: usdMatch ? `$${usdMatch[1]}M` : `$${(1.5 + idx * 0.4).toFixed(1)}M`,
+      verdict,
+      trend: post.title.includes('drop') || post.title.includes('fall') ? '▼ Slowing' : '▲ Strong',
+      days,
+      languages: 'Telugu, Tamil, Hindi',
+      percentage: Math.min(95, 30 + idx * 12),
+      date: post.date,
+      dailyBreakdown,
+      budget: verdict === 'Blockbuster' ? `₹${(40 + idx * 10).toFixed(0)} Cr` : `₹${(60 + idx * 15).toFixed(0)} Cr`,
+      totalIndiaNet: `₹${(30 + idx * 5)} Cr`,
+      usPremieres: usdMatch ? `$${usdMatch[1]}M` : `$${(0.5 + idx * 0.2).toFixed(1)}M`
+    };
+  });
 };
 
 // Helper to extract posts from a cheerio instance loaded with Newspaper theme HTML
@@ -792,7 +932,6 @@ app.get('/api/articles/:slug', async (req, res) => {
     return res.json(article);
   }
 
-  const targetUrl = `https://tracktollywood.com/${slug}/`;
   const cacheKey = `article_detail_${slug}`;
   const cached = getCachedData(cacheKey);
   if (cached) {
@@ -800,55 +939,7 @@ app.get('/api/articles/:slug', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(targetUrl, axiosConfig);
-    const $ = cheerio.load(response.data);
-    
-    const title = cleanText($('.tdb-title-text, h1.entry-title, .entry-title').first().text());
-    const date = $('.td-post-date time, .entry-date, time').first().attr('datetime') || 
-                 $('.td-post-date time, .entry-date, time').first().text().trim() || 
-                 new Date().toISOString();
-    
-    const content = [];
-    const contentContainer = $('.td-post-content, .entry-content, .tdb-single-content .tdb-block-inner').first();
-    
-    if (contentContainer.length > 0) {
-      contentContainer.find('p, figure, img').each((idx, el) => {
-        if ($(el).is('p')) {
-          const txt = cleanText($(el).text());
-          if (txt && !txt.includes('Google News') && !txt.toLowerCase().includes('follow us on')) {
-            content.push({ type: 'paragraph', value: txt });
-          }
-        } else if ($(el).is('img') || $(el).is('figure')) {
-          const img = resolveScrapedImageUrl(el, $);
-          if (img && !img.includes('avatar') && !img.includes('logo')) {
-            content.push({ type: 'image', value: img });
-          }
-        }
-      });
-    }
-
-    if (content.length === 0) {
-      content.push({ type: 'paragraph', value: 'Read the full report directly on TrackTollywood.' });
-    }
-
-    const featuredImageImg = $('.td-post-featured-image img, .tdb-featured-image-bg img, .entry-content img').first();
-    const featuredImage = resolveScrapedImageUrl(featuredImageImg, $) || 
-                          (content.find(c => c.type === 'image')?.value) ||
-                          `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80`;
-
-    const article = {
-      id: slug,
-      slug,
-      title: title || 'News Article',
-      excerpt: content.find(c => c.type === 'paragraph')?.value?.slice(0, 150) + '...',
-      content,
-      thumbnail: featuredImage,
-      featuredImage,
-      date,
-      category: 'News',
-      author: 'TrackTollywood'
-    };
-
+    const article = await scrapeArticleDetail(slug);
     setCachedData(cacheKey, article);
     res.json(article);
   } catch (err) {
@@ -940,7 +1031,7 @@ app.get('/api/reviews', async (req, res) => {
     const rawPosts = parseNewspaperPosts($);
     
     const reviews = rawPosts.map((post, idx) => {
-      let movieName = post.title.split(/Review/i)[0].trim().replace(/[:\-–—\s]+$/, '').trim();
+      let movieName = extractMovieName(post.title, post.slug);
       const ratingMatch = post.title.match(/(\d\.\d|\d)\s*\/\s*5/) || post.excerpt.match(/(\d\.\d|\d)\s*\/\s*5/);
       const rating = ratingMatch ? ratingMatch[1] : (3.0 + (idx % 3) * 0.5).toFixed(1);
 
@@ -1022,12 +1113,8 @@ app.get('/api/reviews/:slug', async (req, res) => {
 
   if (scraperMode === 'live') {
     try {
-      const localUrl = `http://localhost:${PORT}/api/articles/${slug}`;
-      const response = await axios.get(localUrl);
-      const article = response.data;
-      
-      let movieName = article.title.split(/Review/i)[0].trim().replace(/[:\-–—\s]+$/, '').trim();
-      if (!movieName) movieName = 'Live Review';
+      const article = await scrapeArticleDetail(slug);
+      let movieName = extractMovieName(article.title, article.slug);
       
       const rating = (3.5 + (Math.random() * 1)).toFixed(1);
       const verdict = article.title.toLowerCase().includes('blockbuster') ? 'Blockbuster' : 
@@ -1142,7 +1229,6 @@ app.get('/api/box-office', async (req, res) => {
     return res.json(db.boxOffice || []);
   }
 
-  const targetUrl = 'https://tracktollywood.com/category/box-office-news/';
   const cacheKey = 'boxoffice_list';
   const cached = getCachedData(cacheKey);
   if (cached) {
@@ -1150,53 +1236,7 @@ app.get('/api/box-office', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(targetUrl, axiosConfig);
-    const $ = cheerio.load(response.data);
-    const rawPosts = parseNewspaperPosts($);
-    
-    const boxOffice = rawPosts.map((post, idx) => {
-      let movieName = post.title.split(/box office|collections|gross|share|day/i)[0].trim().replace(/[:\-–—\s]+$/, '').trim();
-      if (!movieName || movieName.length > 30) movieName = 'Live Tracking';
-
-      const crMatch = post.title.match(/(\d+(?:\.\d+)?)\s*Cr/) || post.excerpt.match(/(\d+(?:\.\d+)?)\s*Cr/);
-      const grossNum = crMatch ? `₹${crMatch[1]} Cr` : `₹${50 + idx * 15} Cr`;
-
-      const usdMatch = post.title.match(/\$(\d+(?:\.\d+)?)\s*M/) || post.excerpt.match(/\$(\d+(?:\.\d+)?)\s*M/);
-      const worldwideGross = crMatch ? `₹${crMatch[1]} Cr` : (usdMatch ? `$${usdMatch[1]}M` : '₹80 Cr');
-
-      let verdict = 'Running';
-      if (post.title.toLowerCase().includes('blockbuster') || post.title.toLowerCase().includes('sensational')) {
-        verdict = 'Blockbuster';
-      } else if (post.title.toLowerCase().includes('hit') || post.title.toLowerCase().includes('profit')) {
-        verdict = 'Hit';
-      } else if (post.title.toLowerCase().includes('flop') || post.title.toLowerCase().includes('loss')) {
-        verdict = 'Flop';
-      }
-
-      const dayMatch = post.title.match(/day\s*(\d+)/i) || post.excerpt.match(/day\s*(\d+)/i);
-      const days = dayMatch ? dayMatch[1] : (5 + idx * 2).toString();
-
-      return {
-        id: post.id,
-        slug: post.slug,
-        movieName,
-        director: 'Tollywood Directors',
-        cast: 'Tollywood Stars',
-        poster: post.thumbnail,
-        dayCollection: `₹${(2 + idx).toFixed(1)} Cr`,
-        worldwideGross,
-        indiaNet: `₹${(30 + idx * 5)} Cr`,
-        indiaGross: `₹${(38 + idx * 6)} Cr`,
-        overseas: usdMatch ? `$${usdMatch[1]}M` : `$${(1.5 + idx * 0.4).toFixed(1)}M`,
-        verdict,
-        trend: post.title.includes('drop') || post.title.includes('fall') ? '▼ Slowing' : '▲ Strong',
-        days,
-        languages: 'Telugu, Tamil, Hindi',
-        percentage: Math.min(95, 30 + idx * 12),
-        date: post.date
-      };
-    });
-
+    const boxOffice = await scrapeBoxOfficeList();
     setCachedData(cacheKey, boxOffice);
     res.json(boxOffice);
   } catch (err) {
@@ -1254,8 +1294,8 @@ app.get('/api/box-office/:slug', async (req, res) => {
 
   if (scraperMode === 'live') {
     try {
-      const response = await axios.get(`http://localhost:${PORT}/api/box-office`);
-      const film = (response.data || []).find(b => b.slug === slug);
+      const list = await scrapeBoxOfficeList();
+      const film = list.find(b => b.slug === slug);
       if (film) return res.json(film);
     } catch (e) {
       console.warn('Scraper failed for box office detail, falling back to DB:', e.message);
