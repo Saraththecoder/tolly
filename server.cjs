@@ -6,7 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
@@ -448,7 +448,7 @@ app.get('/api/reviews/:slug', async (req, res) => {
   if (settings.scraperMode === 'live') {
     try {
       // Fetch article detail from our own endpoint to utilize cache
-      const response = await axios.get(`http://localhost:5001/api/articles/${slug}`);
+      const response = await axios.get(`http://localhost:${PORT}/api/articles/${slug}`);
       const article = response.data;
       
       let movieName = article.title.split(/Review/i)[0].trim().replace(/[:\-–—\s]+$/, '').trim();
@@ -573,7 +573,7 @@ app.get('/api/box-office/:slug', async (req, res) => {
 
   if (settings.scraperMode === 'live') {
     try {
-      const response = await axios.get('http://localhost:5001/api/box-office');
+      const response = await axios.get(`http://localhost:${PORT}/api/box-office`);
       const film = (response.data || []).find(b => b.slug === slug);
       if (film) return res.json(film);
     } catch (e) {
@@ -704,6 +704,17 @@ app.post('/api/box-office-top5', (req, res) => {
 app.get('/api/galleries', (req, res) => {
   const db = readDb();
   res.json(db.galleries || []);
+});
+
+// Serve static assets in production
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve React's index.html
+app.get('*all', (req, res) => {
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Not Found' });
+  }
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Start listening
