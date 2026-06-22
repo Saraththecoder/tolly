@@ -39,12 +39,15 @@ const SingleReview = () => {
           {/* Background blur */}
           <div 
             className="absolute inset-0 opacity-20 blur-3xl scale-110"
-            style={{ backgroundImage: `url(${review.poster})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ backgroundImage: `url(${review.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
           ></div>
           
           <img 
-            src={review.poster} 
+            src={review.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
             alt={review.movieName} 
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+            }}
             className="w-48 md:w-64 rounded-xl shadow-2xl z-10 border-4 border-brand-red/10"
           />
           

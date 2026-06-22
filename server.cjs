@@ -436,6 +436,65 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date() });
 });
 
+// Helper to clean and resolve image URLs from cheerio elements
+const resolveScrapedImageUrl = (el, $) => {
+  if (!el || el.length === 0) return null;
+  
+  let imgUrl = $(el).attr('data-lazy-src') || 
+               $(el).attr('data-src') || 
+               $(el).attr('src') || 
+               $(el).attr('data-img-url');
+  
+  // If element is a figure/container, check inside it for img
+  if ($(el).is('figure') || !$(el).is('img')) {
+    const childImg = $(el).find('img').first();
+    if (childImg.length > 0) {
+      imgUrl = childImg.attr('data-lazy-src') || 
+               childImg.attr('data-src') || 
+               childImg.attr('src') || 
+               childImg.attr('data-img-url') ||
+               imgUrl;
+    }
+  }
+
+  if (!imgUrl) return null;
+
+  // Clean trailing query parameters
+  imgUrl = imgUrl.split('?')[0].trim();
+
+  // If it's a 1x1 spacer GIF or base64 placeholder, try to get standard sources
+  if (imgUrl.includes('data:image/') || imgUrl.endsWith('.gif') || imgUrl.includes('1x1') || imgUrl.includes('placeholder') || imgUrl.includes('transparent')) {
+    const childImg = $(el).is('img') ? $(el) : $(el).find('img').first();
+    const origFile = childImg.attr('data-orig-file');
+    if (origFile) {
+      imgUrl = origFile.split('?')[0].trim();
+    } else {
+      const srcset = childImg.attr('srcset') || childImg.attr('data-srcset');
+      if (srcset) {
+        const sources = srcset.split(',').map(s => s.trim().split(' ')[0]);
+        const bestSource = sources[sources.length - 1]; // highest resolution
+        if (bestSource && !bestSource.includes('data:image/')) {
+          imgUrl = bestSource.split('?')[0].trim();
+        }
+      }
+    }
+  }
+
+  // Double check if it is still a lazy load spacer or base64
+  if (imgUrl.includes('data:image/') || imgUrl.includes('1x1') || imgUrl.includes('transparent')) {
+    return null;
+  }
+
+  // Resolve relative protocols and paths
+  if (imgUrl.startsWith('//')) {
+    imgUrl = 'https:' + imgUrl;
+  } else if (imgUrl.startsWith('/')) {
+    imgUrl = 'https://tracktollywood.com' + imgUrl;
+  }
+
+  return imgUrl;
+};
+
 // Helper to extract posts from a cheerio instance loaded with Newspaper theme HTML
 const parseNewspaperPosts = ($) => {
   const posts = [];
@@ -446,10 +505,26 @@ const parseNewspaperPosts = ($) => {
     if (!title || !href) return;
 
     const slug = href.replace('https://tracktollywood.com/', '').replace(/\/$/, '');
-    const img = $(el).find('span.entry-thumb').attr('data-img-url') || 
-                $(el).find('img').attr('data-lazy-src') || 
-                $(el).find('img').attr('src') ||
-                $(el).find('.td-thumb-css').attr('data-img-url');
+    
+    // Parse thumbnail image
+    let img = null;
+    const imgEl = $(el).find('img, span.entry-thumb, .td-thumb-css').first();
+    if (imgEl.length > 0) {
+      img = resolveScrapedImageUrl(imgEl, $);
+    }
+    
+    // Background style fallback
+    if (!img) {
+      const style = $(el).find('.td-thumb-css, span.entry-thumb, [style*="background-image"]').first().attr('style');
+      if (style) {
+        const match = style.match(/url\s*\(\s*['"]?([^'")]+)['"]?\s*\)/i);
+        if (match && match[1]) {
+          img = match[1];
+          if (img.startsWith('//')) img = 'https:' + img;
+          else if (img.startsWith('/')) img = 'https://tracktollywood.com' + img;
+        }
+      }
+    }
                 
     const category = cleanText($(el).find('.td-post-category, .entry-category').first().text()) || 'News';
     const date = $(el).find('.td-post-date time, .entry-date, time').first().attr('datetime') || 
@@ -463,8 +538,8 @@ const parseNewspaperPosts = ($) => {
       slug,
       title,
       excerpt: excerpt || `${title}. Read the full report on tracktollywood.com.`,
-      thumbnail: img || `https://picsum.photos/seed/${slug}/400/250`,
-      featuredImage: img || `https://picsum.photos/seed/${slug}/1200/600`,
+      thumbnail: img || `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80`,
+      featuredImage: img || `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80`,
       date,
       category: category === 'Box Office News' ? 'Box Office' : category,
       author: 'TrackTollywood',
@@ -743,16 +818,9 @@ app.get('/api/articles/:slug', async (req, res) => {
           if (txt && !txt.includes('Google News') && !txt.toLowerCase().includes('follow us on')) {
             content.push({ type: 'paragraph', value: txt });
           }
-        } else if ($(el).is('img')) {
-          const img = $(el).attr('src') || $(el).attr('data-lazy-src') || $(el).attr('data-src');
+        } else if ($(el).is('img') || $(el).is('figure')) {
+          const img = resolveScrapedImageUrl(el, $);
           if (img && !img.includes('avatar') && !img.includes('logo')) {
-            content.push({ type: 'image', value: img });
-          }
-        } else if ($(el).is('figure')) {
-          const img = $(el).find('img').first().attr('src') || 
-                      $(el).find('img').first().attr('data-lazy-src') || 
-                      $(el).find('img').first().attr('data-src');
-          if (img) {
             content.push({ type: 'image', value: img });
           }
         }
@@ -763,10 +831,10 @@ app.get('/api/articles/:slug', async (req, res) => {
       content.push({ type: 'paragraph', value: 'Read the full report directly on TrackTollywood.' });
     }
 
-    const featuredImage = $('.td-post-featured-image img, .tdb-featured-image-bg img').first().attr('src') || 
-                          $('.td-post-featured-image img, .tdb-featured-image-bg img').first().attr('data-lazy-src') ||
+    const featuredImageImg = $('.td-post-featured-image img, .tdb-featured-image-bg img, .entry-content img').first();
+    const featuredImage = resolveScrapedImageUrl(featuredImageImg, $) || 
                           (content.find(c => c.type === 'image')?.value) ||
-                          `https://picsum.photos/seed/${slug}/1200/600`;
+                          `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80`;
 
     const article = {
       id: slug,

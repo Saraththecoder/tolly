@@ -59,7 +59,14 @@ const About = () => {
                 { name: 'Priya Sharma', role: 'Box Office Analyst', img: 'https://i.pravatar.cc/150?u=3' },
               ].map(member => (
                 <div key={member.name} className="text-center group">
-                  <img src={member.img} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-brand-red/20 group-hover:border-brand-red transition-colors" />
+                  <img 
+                    src={member.img} 
+                    alt={member.name} 
+                    onError={(e) => {
+                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=0d1b30&color=f5c842&size=128`;
+                    }}
+                    className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-brand-red/20 group-hover:border-brand-red transition-colors object-cover" 
+                  />
                   <h4 className="text-xl font-bold font-poppins text-gray-100">{member.name}</h4>
                   <p className="text-brand-red font-medium">{member.role}</p>
                 </div>

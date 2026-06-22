@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Calendar, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -18,8 +18,11 @@ const NewsCard = ({ article, isFeatured = false }) => {
         className={`relative overflow-hidden block ${isFeatured ? 'w-full aspect-[16/10] md:aspect-auto md:w-1/2' : 'w-full aspect-[16/10]'}`}
       >
         <img
-          src={isFeatured ? article.featuredImage : article.thumbnail}
+          src={isFeatured ? (article.featuredImage || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80') : (article.thumbnail || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80')}
           alt={article.title}
+          onError={(e) => {
+            e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+          }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

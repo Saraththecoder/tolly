@@ -59,8 +59,11 @@ const PopupAdModal = ({ forceShow = false }) => {
         {adData.imageUrl && (
           <div className="relative h-64 w-full overflow-hidden">
             <img 
-              src={adData.imageUrl} 
+              src={adData.imageUrl || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
               alt={adData.title || "Advertisement"} 
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+              }}
               className="w-full h-full object-cover"
             />
             {/* Top vignette overlay */}

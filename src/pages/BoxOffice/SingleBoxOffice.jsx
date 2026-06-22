@@ -35,8 +35,11 @@ const SingleBoxOffice = () => {
         {/* Top Header */}
           <div className="bg-[#18181B] text-gray-100 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 border-b border-brand-red/10">
           <img 
-            src={bo.poster} 
+            src={bo.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
             alt={bo.movieName} 
+            onError={(e) => {
+              e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+            }}
             className="w-48 rounded-xl shadow-[0_0_20px_rgba(255,255,255,0.1)] border-2 border-brand-red/10"
           />
           <div className="text-center md:text-left flex-grow">

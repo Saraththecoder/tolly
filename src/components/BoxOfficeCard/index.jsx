@@ -13,8 +13,11 @@ const BoxOfficeCard = ({ boxOffice }) => {
     >
       <Link to={`/box-office/${boxOffice.slug}`} className="w-full h-64 sm:h-auto sm:w-1/3 relative overflow-hidden shrink-0">
         <img 
-          src={boxOffice.poster} 
+          src={boxOffice.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
           alt={boxOffice.movieName} 
+          onError={(e) => {
+            e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+          }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

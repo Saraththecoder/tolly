@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import { Calendar, ChevronRight } from 'lucide-react';
@@ -26,8 +26,11 @@ const HeroSlider = ({ articles }) => {
           <SwiperSlide key={article.id}>
             <div className="relative w-full h-full">
               <img 
-                src={article.featuredImage} 
+                src={article.featuredImage || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80'} 
                 alt={article.title} 
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80';
+                }}
                 className="w-full h-full object-cover"
               />
               {/* Cinematic Vignette Fade */}

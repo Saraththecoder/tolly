@@ -66,8 +66,11 @@ const NorthAmericaCollections = () => {
               {/* Poster Thumbnail */}
               <div className="w-20 h-28 shrink-0 rounded-lg overflow-hidden border border-gray-800 bg-brand-dark shadow-md group-hover:border-brand-red/40 transition-colors">
                 <img 
-                  src={movie.poster || 'https://picsum.photos/seed/na_poster/150/220'} 
+                  src={movie.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
                   alt={movie.movieName} 
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>

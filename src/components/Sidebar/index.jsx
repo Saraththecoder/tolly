@@ -85,8 +85,11 @@ const Sidebar = () => {
             >
               <div className="relative shrink-0">
                 <img 
-                  src={article.thumbnail} 
+                  src={article.thumbnail || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
                   alt={article.title} 
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+                  }}
                   className="w-16 h-16 rounded-lg object-cover shadow-md border border-gray-800 group-hover:border-brand-red/50 transition-colors"
                 />
                 <div className="absolute -top-1.5 -left-1.5 w-6 h-6 bg-brand-red rounded-full flex items-center justify-center text-white font-poppins font-bold text-[10px] shadow-[0_0_10px_rgba(255,0,0,0.5)] ring-2 ring-[#18181B]">
@@ -178,8 +181,11 @@ const Sidebar = () => {
           {latestReviews?.map((review) => (
             <Link to={`/reviews/${review.slug}`} key={review.id} className="flex group items-center relative p-2 rounded-lg hover:bg-brand-red/5 transition-colors duration-300">
               <img 
-                src={review.poster} 
+                src={review.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
                 alt={review.movieName} 
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+                }}
                 className="w-12 h-18 object-cover rounded shadow-[0_0_15px_rgba(0,0,0,0.5)] border border-brand-red/10 group-hover:border-brand-red/80 transition-all group-hover:scale-105 z-10"
               />
               <div className="ml-4 flex flex-col justify-center z-10 w-full min-w-0">

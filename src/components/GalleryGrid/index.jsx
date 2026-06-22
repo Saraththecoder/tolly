@@ -26,8 +26,11 @@ const GalleryGrid = () => {
         {galleries.slice(0, 4).map((gallery) => (
           <div key={gallery.id} className="group relative rounded-xl overflow-hidden cursor-pointer aspect-[3/4] bg-[#18181B] shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
             <img 
-              src={gallery.coverImage || gallery.image} 
+              src={gallery.coverImage || gallery.image || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
               alt={gallery.title} 
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+              }}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-80"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 transition-opacity duration-300"></div>

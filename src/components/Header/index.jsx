@@ -12,7 +12,6 @@ const Header = () => {
           Chitram<span>Bhalare</span>
         </Link>
         <div className="h-right">
-          <button className="sbtn text-brand-red font-bold" onClick={() => navigate('/admin')} title="Admin Portal">⚙️</button>
           <button className="sbtn" onClick={() => navigate('/search')}>🔍</button>
           <button className="ham" onClick={() => setIsMenuOpen(!isMenuOpen)}>☰</button>
           <nav id="nav" className={`nav-drawer ${isMenuOpen ? 'open' : ''}`}>

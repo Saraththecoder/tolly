@@ -124,8 +124,24 @@ const SingleArticle = () => {
             </div>
 
             {/* HERO */}
-            <div className="art-hero-img" style={{ backgroundImage: `url(${article.featuredImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-              <div className="art-hero-text">
+            <div className="art-hero-img" style={{ position: 'relative' }}>
+              <img 
+                src={article.featuredImage || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80'}
+                alt={article.title}
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80';
+                }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  zIndex: 1
+                }}
+              />
+              <div className="art-hero-text" style={{ position: 'relative', zIndex: 2 }}>
                 {isPeddiArticle ? 'PEDDI' : article.category.toUpperCase()}
               </div>
             </div>
@@ -211,7 +227,14 @@ const SingleArticle = () => {
                 } else if (block.type === 'image') {
                   return (
                     <figure key={idx} className="my-8">
-                      <img src={block.value} alt="visual content" className="w-full rounded-xl" />
+                      <img 
+                        src={block.value} 
+                        alt="visual content" 
+                        className="w-full rounded-xl" 
+                        onError={(e) => {
+                          e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80';
+                        }}
+                      />
                     </figure>
                   );
                 }

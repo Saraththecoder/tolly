@@ -13,8 +13,11 @@ const ReviewCard = ({ review }) => {
     >
       <Link to={`/reviews/${review.slug}`} className="block relative aspect-[2/3] overflow-hidden">
         <img 
-          src={review.poster} 
+          src={review.poster || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80'} 
           alt={review.movieName} 
+          onError={(e) => {
+            e.target.src = 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80';
+          }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         {/* Darker Gradient Overlay for better text readability */}
