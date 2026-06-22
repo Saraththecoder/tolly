@@ -1,31 +1,14 @@
-import { getDb } from '../utils/db';
-
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+import axios from 'axios';
 
 export const getArticles = async ({ page = 1, limit = 10, category = null, search = '' }) => {
-  await delay(200); // Simulate network latency (reduced for snappier transitions)
-  
-  const db = getDb();
-  let filtered = db.articles || [];
-  
-  if (category) {
-    filtered = filtered.filter(a => a.category.toLowerCase() === category.toLowerCase());
-  }
-  
-  if (search) {
-    const s = search.toLowerCase();
-    filtered = filtered.filter(a => 
-      a.title.toLowerCase().includes(s) || a.excerpt.toLowerCase().includes(s)
-    );
-  }
-  
-  // Sort by date descending
-  filtered = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
-  
-  const total = filtered.length;
+  const response = await axios.get('/api/articles', {
+    params: { category, search }
+  });
+  const posts = response.data.data || [];
+  const total = response.data.total || posts.length;
   const start = (page - 1) * limit;
   const end = start + limit;
-  const paginated = filtered.slice(start, end);
+  const paginated = posts.slice(start, end);
   
   return {
     data: paginated,
@@ -36,71 +19,62 @@ export const getArticles = async ({ page = 1, limit = 10, category = null, searc
 };
 
 export const getArticleBySlug = async (slug) => {
-  await delay(100);
-  const db = getDb();
-  const article = (db.articles || []).find(a => a.slug === slug);
-  if (!article) throw new Error('Article not found');
-  return article;
+  const response = await axios.get(`/api/articles/${slug}`);
+  return response.data;
 };
 
 export const getArticlesByLetter = async (letter) => {
-  await delay(200);
-  const db = getDb();
-  const filtered = (db.articles || []).filter(a => a.title.toLowerCase().startsWith(letter.toLowerCase()));
-  return filtered;
+  const response = await axios.get('/api/articles');
+  const posts = response.data.data || [];
+  return posts.filter(a => a.title.toLowerCase().startsWith(letter.toLowerCase()));
 };
 
 export const getReviews = async () => {
-  await delay(200);
-  return getDb().reviews || [];
+  const response = await axios.get('/api/reviews');
+  return response.data || [];
 };
 
 export const getReviewBySlug = async (slug) => {
-  await delay(100);
-  const db = getDb();
-  const review = (db.reviews || []).find(r => r.slug === slug);
-  if (!review) throw new Error('Review not found');
-  return review;
+  const response = await axios.get(`/api/reviews/${slug}`);
+  return response.data;
 };
 
 export const getBoxOffice = async () => {
-  await delay(200);
-  return getDb().boxOffice || [];
+  const response = await axios.get('/api/box-office');
+  return response.data || [];
 };
 
 export const getBoxOfficeBySlug = async (slug) => {
-  await delay(100);
-  const db = getDb();
-  const bo = (db.boxOffice || []).find(b => b.slug === slug);
-  if (!bo) throw new Error('Box office entry not found');
-  return bo;
+  const response = await axios.get(`/api/box-office/${slug}`);
+  return response.data;
 };
 
 export const getGalleries = async () => {
-  await delay(200);
-  return getDb().galleries || [];
+  const response = await axios.get('/api/galleries');
+  return response.data || [];
 };
 
 // --- New dynamic API endpoints ---
 
 export const getPopupAd = async () => {
-  await delay(50);
-  return getDb().popupAd || { active: false };
+  const response = await axios.get('/api/popup-ad');
+  return response.data || { active: false };
 };
 
 export const getUpcomingSchedules = async () => {
-  await delay(150);
-  return getDb().upcomingSchedules || [];
+  const response = await axios.get('/api/schedules');
+  return response.data || [];
 };
 
 export const getNorthAmericaCollections = async () => {
-  await delay(150);
-  return getDb().northAmericaCollections || [];
+  const response = await axios.get('/api/north-america');
+  return response.data || [];
 };
 
 export const getBoxOfficeTop5 = async () => {
-  await delay(100);
-  return getDb().boxOfficeTop5 || [];
+  const response = await axios.get('/api/box-office-top5');
+  return response.data || [];
 };
+
 
 

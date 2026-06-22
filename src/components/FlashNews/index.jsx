@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getArticles } from '../../services/api';
 
 const FlashNews = () => {
-  const tickerItems = [
+  const { data: articlesData, refetch } = useQuery({
+    queryKey: ['flash-news-articles'],
+    queryFn: () => getArticles({ limit: 6 }),
+  });
+
+  useEffect(() => {
+    const handleDbChange = () => {
+      refetch();
+    };
+    window.addEventListener('tolly_db_change', handleDbChange);
+    return () => window.removeEventListener('tolly_db_change', handleDbChange);
+  }, [refetch]);
+
+  const defaultItems = [
     "Peddi crosses ₹320 Cr worldwide in 2 weeks",
     "Drishyam 3 streaming on Amazon Prime Video",
     "Nagabandham trailer at Prasads PCX June 19",
     "Dhurandhar unedited on Netflix from June 19"
   ];
+
+  const articles = articlesData?.data || [];
+  const tickerItems = articles.length > 0 
+    ? articles.map(a => a.title)
+    : defaultItems;
 
   return (
     <div className="topbar">

@@ -32,7 +32,7 @@ const Home = () => {
 
   const articles = articlesData?.data || [];
   const latestNews = articles.slice(5, 10); // After 5 slider items, fetch 5 to fill grid
-  const ottNews = articles.filter(a => a.category === 'OTT').slice(0, 4);
+  const ottNews = articles.filter(a => a.category && a.category.toLowerCase().includes('ott')).slice(0, 4);
 
   if (articlesLoading) {
     return <LoadingSkeleton type="page" />;

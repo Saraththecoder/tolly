@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { getDb, saveDb, resetDb } from '../../utils/db';
+import axios from 'axios';
 import { 
   Settings, 
   Tv, 
@@ -15,6 +15,11 @@ import {
   AlertTriangle,
   Eye
 } from 'lucide-react';
+
+const getNextId = (list) => {
+  const ids = (list || []).map(item => Number(item.id) || 0);
+  return ids.length > 0 ? Math.max(...ids) + 1 : 1;
+};
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -62,17 +67,47 @@ const AdminDashboard = () => {
     { rank: 5, movieName: '', gross: '', verdict: 'New', trend: '▲ Awaited' }
   ]);
 
-  // Load Database from LocalStorage
-  const loadDb = () => {
-    const data = getDb();
-    setDbData(data);
-    if (data.popupAd) setPopupForm(data.popupAd);
-    if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
+  const [scraperStatus, setScraperStatus] = useState('OFFLINE');
+  const [scraperMode, setScraperMode] = useState('live');
+
+  // Load Database from Express Backend
+  const loadDb = async () => {
+    const response = await axios.get('/api/db');
+    return response.data;
   };
 
   useEffect(() => {
-    loadDb();
+    loadDb()
+      .then((data) => {
+        setDbData(data);
+        if (data.popupAd) setPopupForm(data.popupAd);
+        if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
+      })
+      .catch((err) => {
+        console.error('Failed to load database from backend', err);
+      });
+    
+    // Check scraper backend health
+    axios.get('/api/health')
+      .then(() => setScraperStatus('ONLINE'))
+      .catch(() => setScraperStatus('OFFLINE'));
+
+    // Read current mode from server
+    axios.get('/api/settings')
+      .then((res) => setScraperMode(res.data.scraperMode || 'live'))
+      .catch(() => setScraperMode('live'));
   }, []);
+
+  const handleToggleScraperMode = async (mode) => {
+    try {
+      await axios.post('/api/settings', { scraperMode: mode });
+      setScraperMode(mode);
+      window.dispatchEvent(new Event('tolly_db_change'));
+      triggerNotification(`Data source switched to ${mode === 'live' ? 'Live Crawler' : 'Mock Database'}!`, 'info');
+    } catch {
+      triggerNotification('Failed to switch data source.', 'warning');
+    }
+  };
 
   const triggerNotification = (message, type = 'success') => {
     setNotification({ message, type });
@@ -80,12 +115,17 @@ const AdminDashboard = () => {
   };
 
   // -------------------- Popup Ad Save --------------------
-  const handleSavePopup = (e) => {
+  const handleSavePopup = async (e) => {
     e.preventDefault();
-    const updated = { ...dbData, popupAd: popupForm };
-    saveDb(updated);
-    setDbData(updated);
-    triggerNotification('Popup ad settings saved successfully!');
+    try {
+      await axios.post('/api/popup-ad', popupForm);
+      const updated = { ...dbData, popupAd: popupForm };
+      setDbData(updated);
+      window.dispatchEvent(new Event('tolly_db_change'));
+      triggerNotification('Popup ad settings saved successfully!');
+    } catch {
+      triggerNotification('Failed to save popup ad settings.', 'warning');
+    }
   };
 
   const handlePreviewAd = () => {
@@ -96,34 +136,43 @@ const AdminDashboard = () => {
   };
 
   // -------------------- North America Save / Edit / Delete --------------------
-  const handleSaveNaItem = (e) => {
+  const handleSaveNaItem = async (e) => {
     e.preventDefault();
     let updatedList = [...(dbData.northAmericaCollections || [])];
 
     if (editingId) {
       // Editing
       updatedList = updatedList.map(item => item.id === editingId ? { ...naForm, id: editingId } : item);
-      triggerNotification('North America entry updated!');
     } else {
       // Adding
-      const newId = Date.now();
+      const newId = getNextId(updatedList);
       updatedList.push({ ...naForm, id: newId });
-      triggerNotification('New North America entry added!');
     }
 
-    const updatedDb = { ...dbData, northAmericaCollections: updatedList };
-    saveDb(updatedDb);
-    setDbData(updatedDb);
-    resetNaForm();
+    try {
+      await axios.post('/api/north-america', updatedList);
+      const updatedDb = { ...dbData, northAmericaCollections: updatedList };
+      setDbData(updatedDb);
+      window.dispatchEvent(new Event('tolly_db_change'));
+      triggerNotification(editingId ? 'North America entry updated!' : 'New North America entry added!');
+      resetNaForm();
+    } catch {
+      triggerNotification('Failed to save North America entry.', 'warning');
+    }
   };
 
-  const handleDeleteNaItem = (id) => {
+  const handleDeleteNaItem = async (id) => {
     if (window.confirm('Are you sure you want to delete this collection entry?')) {
       const updatedList = (dbData.northAmericaCollections || []).filter(item => item.id !== id);
-      const updatedDb = { ...dbData, northAmericaCollections: updatedList };
-      saveDb(updatedDb);
-      setDbData(updatedDb);
-      triggerNotification('Collection entry deleted.', 'warning');
+      try {
+        await axios.post('/api/north-america', updatedList);
+        const updatedDb = { ...dbData, northAmericaCollections: updatedList };
+        setDbData(updatedDb);
+        window.dispatchEvent(new Event('tolly_db_change'));
+        triggerNotification('Collection entry deleted.', 'warning');
+      } catch {
+        triggerNotification('Failed to delete collection entry.', 'warning');
+      }
     }
   };
 
@@ -150,32 +199,41 @@ const AdminDashboard = () => {
   };
 
   // -------------------- Upcoming Schedules Save / Edit / Delete --------------------
-  const handleSaveSchedule = (e) => {
+  const handleSaveSchedule = async (e) => {
     e.preventDefault();
     let updatedList = [...(dbData.upcomingSchedules || [])];
 
     if (editingId) {
       updatedList = updatedList.map(item => item.id === editingId ? { ...scheduleForm, id: editingId } : item);
-      triggerNotification('Schedule updated!');
     } else {
-      const newId = Date.now();
+      const newId = getNextId(updatedList);
       updatedList.push({ ...scheduleForm, id: newId });
-      triggerNotification('New schedule added!');
     }
 
-    const updatedDb = { ...dbData, upcomingSchedules: updatedList };
-    saveDb(updatedDb);
-    setDbData(updatedDb);
-    resetScheduleForm();
+    try {
+      await axios.post('/api/schedules', updatedList);
+      const updatedDb = { ...dbData, upcomingSchedules: updatedList };
+      setDbData(updatedDb);
+      window.dispatchEvent(new Event('tolly_db_change'));
+      triggerNotification(editingId ? 'Schedule updated!' : 'New schedule added!');
+      resetScheduleForm();
+    } catch {
+      triggerNotification('Failed to save schedule.', 'warning');
+    }
   };
 
-  const handleDeleteSchedule = (id) => {
+  const handleDeleteSchedule = async (id) => {
     if (window.confirm('Are you sure you want to delete this schedule?')) {
       const updatedList = (dbData.upcomingSchedules || []).filter(item => item.id !== id);
-      const updatedDb = { ...dbData, upcomingSchedules: updatedList };
-      saveDb(updatedDb);
-      setDbData(updatedDb);
-      triggerNotification('Schedule deleted.', 'warning');
+      try {
+        await axios.post('/api/schedules', updatedList);
+        const updatedDb = { ...dbData, upcomingSchedules: updatedList };
+        setDbData(updatedDb);
+        window.dispatchEvent(new Event('tolly_db_change'));
+        triggerNotification('Schedule deleted.', 'warning');
+      } catch {
+        triggerNotification('Failed to delete schedule.', 'warning');
+      }
     }
   };
 
@@ -198,12 +256,17 @@ const AdminDashboard = () => {
   };
 
   // -------------------- Box Office Top 5 Save --------------------
-  const handleSaveTop5 = (e) => {
+  const handleSaveTop5 = async (e) => {
     e.preventDefault();
-    const updatedDb = { ...dbData, boxOfficeTop5: top5Form };
-    saveDb(updatedDb);
-    setDbData(updatedDb);
-    triggerNotification('Box Office Top 5 updated successfully!');
+    try {
+      await axios.post('/api/box-office-top5', top5Form);
+      const updatedDb = { ...dbData, boxOfficeTop5: top5Form };
+      setDbData(updatedDb);
+      window.dispatchEvent(new Event('tolly_db_change'));
+      triggerNotification('Box Office Top 5 updated successfully!');
+    } catch {
+      triggerNotification('Failed to update Box Office Top 5.', 'warning');
+    }
   };
 
   const handleTop5FieldChange = (index, field, value) => {
@@ -213,11 +276,19 @@ const AdminDashboard = () => {
   };
 
   // -------------------- Reset DB --------------------
-  const handleResetDb = () => {
+  const handleResetDb = async () => {
     if (window.confirm('WARNING: This will clear all admin customization and restore the default database. Continue?')) {
-      resetDb();
-      loadDb();
-      triggerNotification('Database reset to static default seeds!', 'warning');
+      try {
+        const response = await axios.post('/api/db/reset');
+        const data = response.data;
+        setDbData(data);
+        if (data.popupAd) setPopupForm(data.popupAd);
+        if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
+        window.dispatchEvent(new Event('tolly_db_change'));
+        triggerNotification('Database reset to static default seeds!', 'warning');
+      } catch {
+        triggerNotification('Failed to reset database.', 'warning');
+      }
     }
   };
 
@@ -341,6 +412,63 @@ const AdminDashboard = () => {
                     {(dbData.upcomingSchedules || []).length} Releases
                   </div>
                   <div className="text-[11px] text-gray-500 mt-1">Configured upcoming release dates</div>
+                </div>
+              </div>
+
+              {/* Scraper Status Controls */}
+              <div className="bg-brand-surface/30 p-6 rounded-xl border border-brand-red/10 space-y-4">
+                <h3 className="text-lg font-poppins font-bold text-gray-200 flex items-center gap-2">
+                  <Globe className="w-5 h-5 text-brand-red" />
+                  Live Crawler Backend Config
+                </h3>
+                <p className="text-xs text-gray-400">
+                  Manage the data source for your news articles, reviews, and box office lists. Switch between live scraping tracktollywood.com or loading from your admin-configured database.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between pt-2">
+                  <div className="flex items-center gap-4">
+                    <div>
+                      <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Crawler Server Status</div>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className={`w-3.5 h-3.5 rounded-full ${scraperStatus === 'ONLINE' ? 'bg-green-500 animate-pulse' : 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]'}`}></span>
+                        <span className={`text-sm font-bold uppercase tracking-wider ${scraperStatus === 'ONLINE' ? 'text-green-500' : 'text-red-500'}`}>
+                          {scraperStatus}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="border-l border-gray-800 pl-4">
+                      <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Active Data Source</div>
+                      <div className="text-sm font-bold text-gray-200 mt-1 uppercase tracking-wide">
+                        {scraperMode === 'live' ? '🌐 Live Crawler' : '💾 Mock Database'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleToggleScraperMode('live')}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                        scraperMode === 'live' 
+                          ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/15' 
+                          : 'bg-brand-surface text-gray-400 border-gray-800 hover:text-gray-200'
+                      }`}
+                    >
+                      Use Live Crawler
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleToggleScraperMode('mock')}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                        scraperMode === 'mock' 
+                          ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/15' 
+                          : 'bg-brand-surface text-gray-400 border-gray-800 hover:text-gray-200'
+                      }`}
+                    >
+                      Use Mock DB
+                    </button>
+                  </div>
                 </div>
               </div>
 
