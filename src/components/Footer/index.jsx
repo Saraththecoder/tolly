@@ -14,6 +14,7 @@ const Footer = () => {
             <a href="#">Advertise</a>
             <a href="#">Privacy</a>
             <a href="#">Contact</a>
+            <Link to="/admin" className="text-brand-red font-bold">Admin Panel</Link>
           </div>
           <div className="fcopy">© 2020–2026 chitrambhalare</div>
         </div>

@@ -9,6 +9,7 @@ import BoxOfficeCard from '../../components/BoxOfficeCard';
 import Sidebar from '../../components/Sidebar';
 import LoadingSkeleton from '../../components/LoadingSkeleton';
 import GalleryGrid from '../../components/GalleryGrid';
+import NorthAmericaCollections from '../../components/NorthAmericaCollections';
 import { getArticles, getReviews, getBoxOffice } from '../../services/api';
 
 const Home = () => {
@@ -91,6 +92,9 @@ const Home = () => {
               </div>
             </section>
           )}
+
+          {/* North America Collections */}
+          <NorthAmericaCollections />
 
           {/* Latest Reviews */}
           <section>

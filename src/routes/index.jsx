@@ -1,4 +1,4 @@
-﻿import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 
 // Lazy load pages for better performance
@@ -15,6 +15,7 @@ const SingleReview = lazy(() => import('../pages/Reviews/SingleReview'));
 const BoxOffice = lazy(() => import('../pages/BoxOffice'));
 const SingleBoxOffice = lazy(() => import('../pages/BoxOffice/SingleBoxOffice'));
 const Search = lazy(() => import('../pages/Search'));
+const Admin = lazy(() => import('../pages/Admin'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 // Wrapper to provide suspense fallback
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <SuspenseWrapper><Search /></SuspenseWrapper>,
+      },
+      {
+        path: 'admin',
+        element: <SuspenseWrapper><Admin /></SuspenseWrapper>,
       },
       {
         path: '*',

@@ -1,14 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { getBoxOffice } from '../../services/api';
+import { getBoxOffice, getUpcomingSchedules } from '../../services/api';
 
 const BoxOffice = () => {
   const { data: boxOfficeData, isLoading } = useQuery({
     queryKey: ['all-box-office'],
     queryFn: getBoxOffice,
   });
+
+  const { data: upcomingSchedules, refetch: refetchSchedules } = useQuery({
+    queryKey: ['boxoffice-schedules'],
+    queryFn: getUpcomingSchedules,
+  });
+
+  useEffect(() => {
+    const handleDbChange = () => {
+      refetchSchedules();
+    };
+    window.addEventListener('tolly_db_change', handleDbChange);
+    return () => window.removeEventListener('tolly_db_change', handleDbChange);
+  }, [refetchSchedules]);
+
+  const getDaysRemainingText = (dateStr, status) => {
+    if (status === 'TBA' || !dateStr) return 'TBA';
+    const release = new Date(dateStr);
+    if (isNaN(release.getTime())) return status || '2026';
+    const now = new Date();
+    release.setHours(0,0,0,0);
+    now.setHours(0,0,0,0);
+    const diffTime = release - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return 'Today';
+    if (diffDays < 0) return 'Released';
+    return `${diffDays} Days`;
+  };
 
   const [activeFilter, setActiveFilter] = useState('🔴 Running Now');
 
@@ -295,34 +322,19 @@ const BoxOffice = () => {
 
             <div className="sw">
               <div className="sw-hdr"><div className="sw-title">Upcoming Releases</div></div>
-              <div className="ud-row">
-                <div className="ud-body">
-                  <div className="ud-movie">Nagabandham</div>
-                  <div className="ud-day">Telugu · June 27, 2026</div>
+              {upcomingSchedules?.slice(0, 4).map((schedule, idx) => (
+                <div className="ud-row" key={idx}>
+                  <div className="ud-body">
+                    <div className="ud-movie">{schedule.movieName}</div>
+                    <div className="ud-day">
+                      {schedule.language} · {schedule.releaseDate ? new Date(schedule.releaseDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'TBA'}
+                    </div>
+                  </div>
+                  <div className="ud-right" style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                    {getDaysRemainingText(schedule.releaseDate, schedule.status)}
+                  </div>
                 </div>
-                <div className="ud-right" style={{ fontSize: '11px', color: 'var(--muted)' }}>9 Days</div>
-              </div>
-              <div className="ud-row">
-                <div className="ud-body">
-                  <div className="ud-movie">Raghuvaran B.Tech</div>
-                  <div className="ud-day">Re-Release · July 4, 2026</div>
-                </div>
-                <div className="ud-right" style={{ fontSize: '11px', color: 'var(--muted)' }}>16 Days</div>
-              </div>
-              <div className="ud-row">
-                <div className="ud-body">
-                  <div className="ud-movie">Vishwambhara</div>
-                  <div className="ud-day">Telugu · TBA 2026</div>
-                </div>
-                <div className="ud-right" style={{ fontSize: '11px', color: 'var(--muted)' }}>TBA</div>
-              </div>
-              <div className="ud-row">
-                <div className="ud-body">
-                  <div className="ud-movie">Aadarsha Kutumbam</div>
-                  <div className="ud-day">Telugu · Summer 2027</div>
-                </div>
-                <div className="ud-right" style={{ fontSize: '11px', color: 'var(--muted)' }}>2027</div>
-              </div>
+              ))}
             </div>
 
             <div className="sw">
