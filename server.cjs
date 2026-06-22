@@ -108,7 +108,7 @@ const initDb = async () => {
         slug TEXT UNIQUE,
         movie_name TEXT,
         director TEXT,
-        cast TEXT,
+        movie_cast TEXT,
         poster TEXT,
         day_collection TEXT,
         worldwide_gross TEXT,
@@ -257,7 +257,7 @@ const initDb = async () => {
     if (parseInt(boCheck.rows[0].count) === 0 && defaultData.boxOffice) {
       for (const b of defaultData.boxOffice) {
         await pool.query(
-          'INSERT INTO box_office (id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) ON CONFLICT DO NOTHING',
+          'INSERT INTO box_office (id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) ON CONFLICT DO NOTHING',
           [
             String(b.id || b.slug),
             b.slug,
@@ -1041,13 +1041,13 @@ app.get('/api/box-office', async (req, res) => {
   if (scraperMode === 'mock') {
     if (pool) {
       try {
-        const result = await pool.query('SELECT id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
+        const result = await pool.query('SELECT id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
         const boxOffice = result.rows.map(r => ({
           id: r.id,
           slug: r.slug,
           movieName: r.movie_name,
           director: r.director,
-          cast: r.cast,
+          cast: r.movie_cast,
           poster: r.poster,
           dayCollection: r.day_collection,
           worldwideGross: r.worldwide_gross,
@@ -1135,13 +1135,13 @@ app.get('/api/box-office', async (req, res) => {
     console.error('Error in /api/boxoffice, falling back to DB:', err.message);
     if (pool) {
       try {
-        const result = await pool.query('SELECT id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
+        const result = await pool.query('SELECT id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
         return res.json(result.rows.map(r => ({
           id: r.id,
           slug: r.slug,
           movieName: r.movie_name,
           director: r.director,
-          cast: r.cast,
+          cast: r.movie_cast,
           poster: r.poster,
           dayCollection: r.day_collection,
           worldwideGross: r.worldwide_gross,
@@ -1196,7 +1196,7 @@ app.get('/api/box-office/:slug', async (req, res) => {
 
   if (pool) {
     try {
-      const result = await pool.query('SELECT id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office WHERE slug = $1', [slug]);
+      const result = await pool.query('SELECT id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office WHERE slug = $1', [slug]);
       if (result.rows.length > 0) {
         const r = result.rows[0];
         return res.json({
@@ -1204,7 +1204,7 @@ app.get('/api/box-office/:slug', async (req, res) => {
           slug: r.slug,
           movieName: r.movie_name,
           director: r.director,
-          cast: r.cast,
+          cast: r.movie_cast,
           poster: r.poster,
           dayCollection: r.day_collection,
           worldwideGross: r.worldwide_gross,
@@ -1246,7 +1246,7 @@ app.get('/api/db', async (req, res) => {
       const galleriesRes = await pool.query('SELECT id, title, cover_image, images, date FROM galleries ORDER BY id ASC');
       const articlesRes = await pool.query('SELECT id, slug, title, excerpt, content, thumbnail, featured_image, date, category, author, tags FROM articles ORDER BY date DESC');
       const reviewsRes = await pool.query('SELECT id, slug, movie_name, poster, rating, snippet, verdict, story, performances, technical_aspects, verdict_text, ott_platform, ott_release_date, date FROM reviews ORDER BY date DESC');
-      const boRes = await pool.query('SELECT id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
+      const boRes = await pool.query('SELECT id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
       
       const db = {
         settings: { scraperMode: settingsRes.rows[0]?.scraper_mode || 'live' },
@@ -1323,7 +1323,7 @@ app.get('/api/db', async (req, res) => {
           slug: r.slug,
           movieName: r.movie_name,
           director: r.director,
-          cast: r.cast,
+          cast: r.movie_cast,
           poster: r.poster,
           dayCollection: r.day_collection,
           worldwideGross: r.worldwide_gross,
@@ -1366,7 +1366,7 @@ app.post('/api/db/reset', async (req, res) => {
       const galleriesRes = await pool.query('SELECT id, title, cover_image, images, date FROM galleries ORDER BY id ASC');
       const articlesRes = await pool.query('SELECT id, slug, title, excerpt, content, thumbnail, featured_image, date, category, author, tags FROM articles ORDER BY date DESC');
       const reviewsRes = await pool.query('SELECT id, slug, movie_name, poster, rating, snippet, verdict, story, performances, technical_aspects, verdict_text, ott_platform, ott_release_date, date FROM reviews ORDER BY date DESC');
-      const boRes = await pool.query('SELECT id, slug, movie_name, director, cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
+      const boRes = await pool.query('SELECT id, slug, movie_name, director, movie_cast, poster, day_collection, worldwide_gross, india_net, india_gross, overseas, verdict, trend, days, languages, percentage, date, daily_breakdown, budget, total_india_net, us_premieres FROM box_office ORDER BY date DESC');
       
       const db = {
         settings: { scraperMode: settingsRes.rows[0]?.scraper_mode || 'live' },
@@ -1443,7 +1443,7 @@ app.post('/api/db/reset', async (req, res) => {
           slug: r.slug,
           movieName: r.movie_name,
           director: r.director,
-          cast: r.cast,
+          cast: r.movie_cast,
           poster: r.poster,
           dayCollection: r.day_collection,
           worldwideGross: r.worldwide_gross,
