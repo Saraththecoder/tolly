@@ -60,6 +60,7 @@ const Header = () => {
             >
               OTT
             </Link>
+
             <NavLink 
               to="/box-office" 
               className="nav-hot-m" 

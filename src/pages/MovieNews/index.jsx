@@ -110,9 +110,17 @@ const MovieNews = () => {
                     <span className="see-all">See all →</span>
                   </div>
                   <Link to={`/movie-news/${featuredArticle.slug}`} className="feat-main" style={{ display: 'block', textDecoration: 'none' }}>
-                    <div className="feat-img">
-                      {featuredArticle.title.split(' ')[0]}
-                      <div className="feat-badge">🔥 Top Story</div>
+                    <div className="feat-img" style={{ position: 'relative', overflow: 'hidden' }}>
+                      {featuredArticle.featuredImage ? (
+                        <img 
+                          src={featuredArticle.featuredImage} 
+                          alt={featuredArticle.title} 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
+                        />
+                      ) : (
+                        featuredArticle.title.split(' ')[0]
+                      )}
+                      <div className="feat-badge" style={{ zIndex: 2 }}>🔥 Top Story</div>
                     </div>
                     <div className="feat-body">
                       <div className="feat-title">{featuredArticle.title}</div>
@@ -184,7 +192,17 @@ const MovieNews = () => {
                   <div className="news-grid">
                     {gridArticles.map((art) => (
                       <Link to={`/movie-news/${art.slug}`} key={art.id} className="n-card">
-                        <div className="n-thumb" style={{ background: '#0d1b30' }}>🎬</div>
+                        <div className="n-thumb" style={{ background: '#0d1b30', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {art.thumbnail ? (
+                            <img 
+                              src={art.thumbnail} 
+                              alt={art.title} 
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          ) : (
+                            '🎬'
+                          )}
+                        </div>
                         <div className="n-body">
                           <div className="n-cat">{art.category}</div>
                           <div className="n-title">{art.title}</div>

@@ -280,7 +280,17 @@ const SingleArticle = () => {
             <div className="related-grid">
               {relatedNews?.data.filter(n => n.id !== article.id).slice(0, 4).map((rel) => (
                 <Link to={`/movie-news/${rel.slug}`} key={rel.id} className="rel-card">
-                  <div className="rel-thumb" style={{ background: '#0d1b30' }}>🎬</div>
+                  <div className="rel-thumb" style={{ background: '#0d1b30', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {rel.thumbnail ? (
+                      <img 
+                        src={rel.thumbnail} 
+                        alt={rel.title} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      '🎬'
+                    )}
+                  </div>
                   <div className="rel-body">
                     <div className="rel-cat">{rel.category}</div>
                     <div className="rel-title">{rel.title}</div>

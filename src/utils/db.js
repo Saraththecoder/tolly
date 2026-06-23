@@ -19,7 +19,7 @@ const defaultNorthAmerica = [
     screens: "480",
     status: "Active",
     lastUpdated: "10 Mins ago",
-    poster: "https://picsum.photos/seed/peddinash/150/220"
+    poster: "https://images.unsplash.com/photo-1508847154043-be12a62861c1?auto=format&fit=crop&w=300&h=450&q=80"
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const defaultNorthAmerica = [
     screens: "120",
     status: "Slowing",
     lastUpdated: "1 Hour ago",
-    poster: "https://picsum.photos/seed/drishyam3nash/150/220"
+    poster: "https://images.unsplash.com/photo-1524712245354-2c4e5e7124c5?auto=format&fit=crop&w=300&h=450&q=80"
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const defaultNorthAmerica = [
     screens: "90",
     status: "Rentals",
     lastUpdated: "3 Hours ago",
-    poster: "https://picsum.photos/seed/obsessnash/150/220"
+    poster: "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=300&h=450&q=80"
   }
 ];
 

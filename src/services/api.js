@@ -76,5 +76,10 @@ export const getBoxOfficeTop5 = async () => {
   return response.data || [];
 };
 
+export const extractImages = async (url) => {
+  const response = await axios.post('/api/extract-images', { url });
+  return response.data;
+};
+
 
 
