@@ -3182,7 +3182,8 @@
     }
   ],
   "settings": {
-    "scraperMode": "live"
+    "scraperMode": "live",
+    "adminPassword": "$2b$10$p8JIBvMrxT/hVeSobWTCge4IgsjRCs8RJj6mBeGbPhw3Pu2qnEKfC"
   },
   "upcomingSchedules": [
     {

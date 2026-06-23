@@ -185,6 +185,10 @@ header {
   border-top: 1px solid var(--border);
   background: var(--card);
   width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
 }
 .nav-drawer.open {
   display: flex;
@@ -1828,6 +1832,8 @@ footer {
     gap: 2px;
     padding: 0;
     width: auto;
+    position: static;
+    box-shadow: none;
   }
   .nav-drawer a {
     padding: 6px 9px;

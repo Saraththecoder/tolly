@@ -39,6 +39,36 @@ const BoxOffice = () => {
 
   const [activeFilter, setActiveFilter] = useState('🔴 Running Now');
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const filteredBoxOffice = boxOfficeData?.filter(film => {
+    const filterLower = activeFilter.toLowerCase();
+    if (filterLower.includes('running')) {
+      return film.verdict?.toLowerCase() !== 'closed';
+    }
+    if (filterLower.includes('telugu')) {
+      return film.languages?.toLowerCase().includes('telugu');
+    }
+    if (filterLower.includes('hindi')) {
+      return film.languages?.toLowerCase().includes('hindi');
+    }
+    if (filterLower.includes('tamil')) {
+      return film.languages?.toLowerCase().includes('tamil');
+    }
+    if (filterLower.includes('ott')) {
+      return film.languages?.toLowerCase().includes('ott') || film.verdict?.toLowerCase().includes('ott');
+    }
+    if (filterLower.includes('closed')) {
+      return film.verdict?.toLowerCase().includes('closed') || film.verdict?.toLowerCase().includes('flop');
+    }
+    return true;
+  }) || [];
+
   const filters = [
     '🔴 Running Now',
     'All Telugu',
@@ -104,7 +134,12 @@ const BoxOffice = () => {
             <button
               key={tab}
               className={`ftab ${tab.includes('Running') ? 'live-tab' : ''} ${activeFilter === tab ? 'on' : ''}`}
-              onClick={() => setActiveFilter(tab)}
+              onClick={() => {
+                setActiveFilter(tab);
+                if (tab === 'All Time Records') {
+                  scrollToSection('all-time-records');
+                }
+              }}
             >
               {tab}
             </button>
@@ -132,7 +167,7 @@ const BoxOffice = () => {
                     const isNew = film.verdict === 'New';
                     const isHot = film.verdict === 'Blockbuster';
                     return (
-                      <Link to={`/box-office`} key={film.id} className={`live-card ${isHot ? 'hot' : ''}`}>
+                      <Link to={`/box-office/${film.slug}`} key={film.id} className={`live-card ${isHot ? 'hot' : ''}`}>
                         <div className="lc-indicator">
                           <div className={`lc-dot ${isNew ? 'green' : ''}`}></div>
                           <span className={isNew ? 'lc-label-new' : 'lc-label-live'}>
@@ -154,7 +189,7 @@ const BoxOffice = () => {
               </div>
 
               {/* DETAILED TABLE */}
-              <div className="sec-hdr">
+              <div className="sec-hdr" id="detailed-collections">
                 <div className="sec-title">Detailed Collections</div>
                 <span className="sec-link">Full Portal →</span>
               </div>
@@ -176,22 +211,32 @@ const BoxOffice = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {boxOfficeData?.map((film, idx) => (
-                        <tr key={film.id}>
-                          <td>
-                            <span className="t-rank">{idx + 1}</span>
-                            <div className="t-movie">
-                              {film.movieName}
-                              <div className="t-sub">{film.director}</div>
-                            </div>
+                      {filteredBoxOffice.length > 0 ? (
+                        filteredBoxOffice.map((film, idx) => (
+                          <tr key={film.id}>
+                            <td>
+                              <span className="t-rank">{idx + 1}</span>
+                              <div className="t-movie">
+                                <Link to={`/box-office/${film.slug}`} className="hover:text-brand-red font-semibold transition-colors">
+                                  {film.movieName}
+                                </Link>
+                                <div className="t-sub">{film.director}</div>
+                              </div>
+                            </td>
+                            <td><span className="t-amt">{film.worldwideGross}</span></td>
+                            <td><span className="t-share">{film.indiaNet}</span></td>
+                            <td><span className="t-days">{film.days}</span></td>
+                            <td><span className={getVerdictClass(film.verdict)}>{film.verdict}</span></td>
+                            <td><span className={getTrendClass(film.trend)}>{film.trend}</span></td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: 'var(--muted)' }}>
+                            No active releases found matching this filter.
                           </td>
-                          <td><span className="t-amt">{film.worldwideGross}</span></td>
-                          <td><span className="t-share">{film.indiaNet}</span></td>
-                          <td><span className="t-days">{film.days}</span></td>
-                          <td><span className={getVerdictClass(film.verdict)}>{film.verdict}</span></td>
-                          <td><span className={getTrendClass(film.trend)}>{film.trend}</span></td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -206,7 +251,7 @@ const BoxOffice = () => {
           )}
 
           {/* ALL TIME RECORDS */}
-          <div className="sec-hdr">
+          <div className="sec-hdr" id="all-time-records">
             <div className="sec-title">All Time WW Records</div>
             <span className="sec-link">Full List →</span>
           </div>
@@ -268,7 +313,7 @@ const BoxOffice = () => {
           </div>
 
           {/* AP/TS AREA WISE */}
-          <div className="sec-hdr">
+          <div className="sec-hdr" id="ap-ts-area-wise">
             <div className="sec-title">AP/TS Area Wise Top 5</div>
             <span className="sec-link">All Areas →</span>
           </div>
@@ -304,7 +349,7 @@ const BoxOffice = () => {
             <div className="sw">
               <div className="sw-hdr"><div className="live-dot"></div><div className="sw-title">Today's Updates</div></div>
               {boxOfficeData?.slice(0, 5).map((film, idx) => (
-                <Link to={`/box-office`} className="ud-row" key={film.id}>
+                <Link to={`/box-office/${film.slug}`} className="ud-row" key={film.id}>
                   <div className="ud-rank">{idx + 1}</div>
                   <div className="ud-body">
                     <div className="ud-movie">{film.movieName}</div>
@@ -340,11 +385,27 @@ const BoxOffice = () => {
             <div className="sw">
               <div className="sw-hdr"><div className="sw-title">Quick Access</div></div>
               <div style={{ padding: '10px 13px', display: 'flex', flexDirection: 'column', gap: '7px' }}>
-                <Link to="/box-office" className="quick-link">AP/TS Day 1 Top 5 <span>→</span></Link>
-                <Link to="/box-office" className="quick-link">AP/TS Week 1 Top 5 <span>→</span></Link>
-                <Link to="/box-office" className="quick-link">WW Day 1 Top 10 <span>→</span></Link>
-                <Link to="/box-office" className="quick-link">WW Closing Top 15 <span>→</span></Link>
-                <Link to="/box-office" className="quick-link">Telugu Verdicts <span>→</span></Link>
+                <a className="quick-link" onClick={() => scrollToSection('ap-ts-area-wise')}>
+                  AP/TS Day 1 Top 5 <span>→</span>
+                </a>
+                <a className="quick-link" onClick={() => scrollToSection('ap-ts-area-wise')}>
+                  AP/TS Week 1 Top 5 <span>→</span>
+                </a>
+                <a className="quick-link" onClick={() => scrollToSection('ap-ts-area-wise')}>
+                  WW Day 1 Top 10 <span>→</span>
+                </a>
+                <a className="quick-link" onClick={() => scrollToSection('all-time-records')}>
+                  WW Closing Top 15 <span>→</span>
+                </a>
+                <a 
+                  className="quick-link" 
+                  onClick={() => {
+                    setActiveFilter('All Telugu');
+                    scrollToSection('detailed-collections');
+                  }}
+                >
+                  Telugu Verdicts <span>→</span>
+                </a>
               </div>
             </div>
           </div>

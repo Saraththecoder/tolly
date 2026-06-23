@@ -4,9 +4,11 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const bcrypt = require('bcryptjs');
 
 // Load environment variables
 require('dotenv').config();
+const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || 'admin123';
 const { Pool } = require('pg');
 
 const app = express();
@@ -14,6 +16,108 @@ const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+
+// Global middleware to replace Picsum placeholder images with reliable, curated Unsplash cinematic images
+app.use((req, res, next) => {
+  const originalJson = res.json;
+  res.json = function (body) {
+    const deepReplace = (obj) => {
+      if (!obj) return obj;
+      if (typeof obj === 'string') {
+        if (obj.includes('picsum.photos')) {
+          const seed = obj.split('/seed/')[1]?.split('/')[0] || 'movie';
+          const unsplashIds = {
+            'vishwambhara': '1536440136628-849c177e76a1',
+            'dhurandhar': '1517604931442-7e0c8ed2963c',
+            'preity': '1496345875659-11f7dd282d1d',
+            'kannappa': '1509281373149-e957c6296406',
+            'aadarsha': '1489599849927-2ee91cede3ba',
+            'sunkara': '1485846234645-a62644f84728',
+            'raghuvaran': '1598899134739-24c46f58b8c0',
+            'drishyam': '1524712245354-2c4e5e7124c5',
+            'multistarrer': '1574267432553-4b4628081c31',
+            'vishwambhara2': '1536440136628-849c177e76a1',
+            'jailer': '1507679799987-c73779587ccf',
+            'nagabandham': '1478720568477-152d9b164e26',
+            'peddi': '1508847154043-be12a62861c1',
+            'gal1': '1524712245354-2c4e5e7124c5',
+            'gal2': '1509281373149-e957c6296406',
+            'gal3': '1496345875659-11f7dd282d1d',
+            'gal4': '1485846234645-a62644f84728',
+          };
+          const matchedId = Object.keys(unsplashIds).find(key => seed.includes(key));
+          const unsplashId = matchedId ? unsplashIds[matchedId] : '1489599849927-2ee91cede3ba';
+          
+          if (obj.includes('1200/600') || obj.includes('_feat')) {
+            return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&w=1200&h=600&q=80`;
+          }
+          return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&w=600&h=400&q=80`;
+        }
+        return obj;
+      }
+      if (Array.isArray(obj)) {
+        return obj.map(deepReplace);
+      }
+      if (typeof obj === 'object') {
+        const newObj = {};
+        for (const key in obj) {
+          newObj[key] = deepReplace(obj[key]);
+        }
+        return newObj;
+      }
+      return obj;
+    };
+    
+    const replacedBody = deepReplace(body);
+    return originalJson.call(this, replacedBody);
+  };
+  next();
+});
+
+const requireAdminPasscode = async (req, res, next) => {
+  const code = req.headers['x-admin-passcode'];
+  if (!code) {
+    return res.status(401).json({ error: 'Unauthorized: Missing admin passcode' });
+  }
+
+  let hash = null;
+  if (pool) {
+    try {
+      const result = await pool.query('SELECT admin_password FROM settings ORDER BY id DESC LIMIT 1');
+      if (result.rows.length > 0) {
+        hash = result.rows[0].admin_password;
+      }
+    } catch (e) {
+      console.error('Failed to read admin password from PG:', e.message);
+    }
+  }
+
+  if (!hash) {
+    try {
+      const db = readDb();
+      hash = db.settings?.adminPassword;
+    } catch (e) {
+      console.error('Failed to read admin password from JSON:', e.message);
+    }
+  }
+
+  if (!hash) {
+    const fallbackPass = process.env.ADMIN_PASSCODE || 'rajesh5678';
+    hash = bcrypt.hashSync(fallbackPass, 10);
+  }
+
+  try {
+    const match = await bcrypt.compare(code, hash);
+    if (match) {
+      next();
+    } else {
+      res.status(401).json({ error: 'Unauthorized: Invalid admin passcode' });
+    }
+  } catch (err) {
+    console.error('Bcrypt verification failed:', err.message);
+    res.status(500).json({ error: 'Internal validation error' });
+  }
+};
 
 const DB_PATH = path.join(__dirname, 'server-db.json');
 const MOCK_DATA_PATH = path.join(__dirname, 'src', 'data', 'mockData.json');
@@ -134,6 +238,7 @@ const initDb = async () => {
         date TEXT
       );
     `);
+    await pool.query('ALTER TABLE settings ADD COLUMN IF NOT EXISTS admin_password TEXT');
     console.log('PostgreSQL tables verified.');
 
     // Seeding Logic
@@ -157,7 +262,14 @@ const initDb = async () => {
     const settingsCheck = await pool.query('SELECT COUNT(*) FROM settings');
     if (parseInt(settingsCheck.rows[0].count) === 0) {
       const mode = (defaultData.settings && defaultData.settings.scraperMode) || 'live';
-      await pool.query('INSERT INTO settings (scraper_mode) VALUES ($1)', [mode]);
+      const hash = bcrypt.hashSync('rajesh5678', 10);
+      await pool.query('INSERT INTO settings (scraper_mode, admin_password) VALUES ($1, $2)', [mode, hash]);
+    } else {
+      const checkPass = await pool.query('SELECT admin_password FROM settings ORDER BY id DESC LIMIT 1');
+      if (checkPass.rows.length > 0 && !checkPass.rows[0].admin_password) {
+        const hash = bcrypt.hashSync('rajesh5678', 10);
+        await pool.query('UPDATE settings SET admin_password = $1', [hash]);
+      }
     }
 
     // 2. Seed popup_ad
@@ -317,7 +429,8 @@ const readDb = () => {
       const initialDb = {
         ...defaultData,
         settings: {
-          scraperMode: 'live'
+          scraperMode: 'live',
+          adminPassword: bcrypt.hashSync('rajesh5678', 10)
         },
         upcomingSchedules: [
           { id: 1, movieName: "Nagabandham", releaseDate: "2026-06-27", language: "Telugu", status: "Confirmed" },
@@ -382,7 +495,12 @@ const readDb = () => {
       return {};
     }
   }
-  return JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+  const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+  if (db && db.settings && !db.settings.adminPassword) {
+    db.settings.adminPassword = bcrypt.hashSync('rajesh5678', 10);
+    writeDb(db);
+  }
+  return db;
 };
 
 const writeDb = (data) => {
@@ -440,45 +558,67 @@ app.get('/api/health', (req, res) => {
 const resolveScrapedImageUrl = (el, $) => {
   if (!el || el.length === 0) return null;
   
-  const childImg = $(el).is('img') ? $(el) : $(el).find('img').first();
-  if (childImg.length === 0) return null;
-
-  let imgUrl = childImg.attr('data-orig-file') ||
-               childImg.attr('data-large-file') ||
-               childImg.attr('data-lazy-src') || 
-               childImg.attr('data-src') || 
-               childImg.attr('src') || 
-               childImg.attr('data-img-url');
-
+  let imgUrl = null;
+  
+  const getUrl = (node) => {
+    let url = node.attr('data-img-url') ||
+              node.attr('data-orig-file') ||
+              node.attr('data-large-file') ||
+              node.attr('data-lazy-src') || 
+              node.attr('data-src') || 
+              node.attr('src');
+              
+    if (!url) {
+      const style = node.attr('style');
+      if (style) {
+        const match = style.match(/url\s*\(\s*['"]?([^'")]+)['"]?\s*\)/i);
+        if (match && match[1]) {
+          url = match[1];
+          if (url.startsWith('//')) url = 'https:' + url;
+          else if (url.startsWith('/')) url = 'https://tracktollywood.com' + url;
+        }
+      }
+    }
+    return url;
+  };
+  
+  imgUrl = getUrl($(el));
+  
+  if (!imgUrl) {
+    const child = $(el).find('[data-img-url], img, [style*="background-image"], span.entry-thumb').first();
+    if (child.length > 0) {
+      imgUrl = getUrl(child);
+    }
+  }
+  
   if (!imgUrl) return null;
-
-  // Clean trailing query parameters
+  
   imgUrl = imgUrl.split('?')[0].trim();
-
-  // If it's a 1x1 spacer GIF or base64 placeholder, try to get standard sources
+  
   if (imgUrl.includes('data:image/') || imgUrl.endsWith('.gif') || imgUrl.includes('1x1') || imgUrl.includes('placeholder') || imgUrl.includes('transparent')) {
-    const srcset = childImg.attr('srcset') || childImg.attr('data-srcset');
-    if (srcset) {
-      const sources = srcset.split(',').map(s => s.trim().split(' ')[0]);
-      const bestSource = sources[sources.length - 1]; // highest resolution
-      if (bestSource && !bestSource.includes('data:image/')) {
-        imgUrl = bestSource.split('?')[0].trim();
+    const node = $(el).is('img') ? $(el) : $(el).find('img').first();
+    if (node.length > 0) {
+      const srcset = node.attr('srcset') || node.attr('data-srcset');
+      if (srcset) {
+        const sources = srcset.split(',').map(s => s.trim().split(' ')[0]);
+        const bestSource = sources[sources.length - 1];
+        if (bestSource && !bestSource.includes('data:image/')) {
+          imgUrl = bestSource.split('?')[0].trim();
+        }
       }
     }
   }
-
-  // Double check if it is still a lazy load spacer or base64
+  
   if (imgUrl.includes('data:image/') || imgUrl.includes('1x1') || imgUrl.includes('transparent')) {
     return null;
   }
-
-  // Resolve relative protocols and paths
+  
   if (imgUrl.startsWith('//')) {
     imgUrl = 'https:' + imgUrl;
   } else if (imgUrl.startsWith('/')) {
     imgUrl = 'https://tracktollywood.com' + imgUrl;
   }
-
+  
   return imgUrl;
 };
 
@@ -535,6 +675,8 @@ const scrapeArticleDetail = async (slug) => {
   const contentContainer = $('.td-post-content, .entry-content, .tdb-single-content .tdb-block-inner').first();
   
   if (contentContainer.length > 0) {
+    // Clean up inline style and script elements so their CSS/JS code is not extracted as text
+    contentContainer.find('style, script').remove();
     contentContainer.find('p, figure, img').each((idx, el) => {
       if ($(el).is('p')) {
         const txt = cleanText($(el).text());
@@ -551,7 +693,7 @@ const scrapeArticleDetail = async (slug) => {
   }
 
   if (content.length === 0) {
-    content.push({ type: 'paragraph', value: 'Read the full report directly on TrackTollywood.' });
+    content.push({ type: 'paragraph', value: 'Read the full report directly on ChitramBhalare.' });
   }
 
   const featuredImageImg = $('.td-post-featured-image img, .tdb-featured-image-bg img, .entry-content img').first();
@@ -569,7 +711,7 @@ const scrapeArticleDetail = async (slug) => {
     featuredImage,
     date,
     category: 'News',
-    author: 'TrackTollywood'
+    author: 'ChitramBhalare'
   };
 };
 
@@ -677,12 +819,12 @@ const parseNewspaperPosts = ($) => {
       id: slug,
       slug,
       title,
-      excerpt: excerpt || `${title}. Read the full report on tracktollywood.com.`,
+      excerpt: excerpt || `${title}. Read the full report on ChitramBhalare.`,
       thumbnail: img || `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80`,
       featuredImage: img || `https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80`,
       date,
       category: category === 'Box Office News' ? 'Box Office' : category,
-      author: 'TrackTollywood',
+      author: 'ChitramBhalare',
       tags: idx < 10 ? [category, 'Trending', 'Live'] : [category, 'Live']
     });
   });
@@ -1343,7 +1485,7 @@ app.get('/api/box-office/:slug', async (req, res) => {
 });
 
 // 5. GET /api/db - get entire database state
-app.get('/api/db', async (req, res) => {
+app.get('/api/db', requireAdminPasscode, async (req, res) => {
   if (pool) {
     try {
       const settingsRes = await pool.query('SELECT scraper_mode FROM settings ORDER BY id DESC LIMIT 1');
@@ -1459,7 +1601,7 @@ app.get('/api/db', async (req, res) => {
 });
 
 // 5.1 POST /api/db/reset - reset database state to seed mock data
-app.post('/api/db/reset', async (req, res) => {
+app.post('/api/db/reset', requireAdminPasscode, async (req, res) => {
   if (pool) {
     try {
       console.log('Resetting PG Database tables...');
@@ -1605,7 +1747,7 @@ app.get('/api/settings', async (req, res) => {
 });
 
 // 6.1 POST /api/settings - update settings config
-app.post('/api/settings', async (req, res) => {
+app.post('/api/settings', requireAdminPasscode, async (req, res) => {
   const { scraperMode } = req.body;
   if (pool) {
     try {
@@ -1651,7 +1793,7 @@ app.get('/api/popup-ad', async (req, res) => {
 });
 
 // 7.1 POST /api/popup-ad - update popup ad
-app.post('/api/popup-ad', async (req, res) => {
+app.post('/api/popup-ad', requireAdminPasscode, async (req, res) => {
   const ad = req.body;
   if (pool) {
     try {
@@ -1698,7 +1840,7 @@ app.get('/api/schedules', async (req, res) => {
 });
 
 // 8.1 POST /api/schedules - save upcoming release schedules
-app.post('/api/schedules', async (req, res) => {
+app.post('/api/schedules', requireAdminPasscode, async (req, res) => {
   const list = req.body;
   if (pool) {
     try {
@@ -1761,7 +1903,7 @@ app.get('/api/north-america', async (req, res) => {
 });
 
 // 9.1 POST /api/north-america - save North America collections
-app.post('/api/north-america', async (req, res) => {
+app.post('/api/north-america', requireAdminPasscode, async (req, res) => {
   const list = req.body;
   if (pool) {
     try {
@@ -1824,7 +1966,7 @@ app.get('/api/box-office-top5', async (req, res) => {
 });
 
 // 10.1 POST /api/box-office-top5 - save Box Office Top 5
-app.post('/api/box-office-top5', async (req, res) => {
+app.post('/api/box-office-top5', requireAdminPasscode, async (req, res) => {
   const list = req.body;
   if (pool) {
     try {

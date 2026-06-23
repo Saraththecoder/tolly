@@ -26,6 +26,12 @@ const AdminDashboard = () => {
   const [dbData, setDbData] = useState(null);
   const [notification, setNotification] = useState(null);
 
+  // Auth States
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcode, setPasscode] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Edit / Add States
   const [editingId, setEditingId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -76,27 +82,81 @@ const AdminDashboard = () => {
     return response.data;
   };
 
-  useEffect(() => {
-    loadDb()
-      .then((data) => {
-        setDbData(data);
-        if (data.popupAd) setPopupForm(data.popupAd);
-        if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
-      })
-      .catch((err) => {
-        console.error('Failed to load database from backend', err);
-      });
-    
-    // Check scraper backend health
-    axios.get('/api/health')
-      .then(() => setScraperStatus('ONLINE'))
-      .catch(() => setScraperStatus('OFFLINE'));
+  const checkAuth = async () => {
+    try {
+      const data = await loadDb();
+      setDbData(data);
+      if (data.popupAd) setPopupForm(data.popupAd);
+      if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
+      setIsAuthenticated(true);
+      
+      // Check scraper backend health
+      axios.get('/api/health')
+        .then(() => setScraperStatus('ONLINE'))
+        .catch(() => setScraperStatus('OFFLINE'));
 
-    // Read current mode from server
-    axios.get('/api/settings')
-      .then((res) => setScraperMode(res.data.scraperMode || 'live'))
-      .catch(() => setScraperMode('live'));
+      // Read current mode from server
+      axios.get('/api/settings')
+        .then((res) => setScraperMode(res.data.scraperMode || 'live'))
+        .catch(() => setScraperMode('live'));
+    } catch (err) {
+      console.error('Failed to load database from backend', err);
+      if (err.response && err.response.status === 401) {
+        setIsAuthenticated(false);
+      } else {
+        setIsAuthenticated(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
   }, []);
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    if (!passcode.trim()) return;
+    setIsSubmitting(true);
+    setAuthError('');
+    
+    // Store temporarily in sessionStorage
+    sessionStorage.setItem('tolly_admin_passcode', passcode);
+    
+    try {
+      const data = await loadDb();
+      setDbData(data);
+      if (data.popupAd) setPopupForm(data.popupAd);
+      if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
+      setIsAuthenticated(true);
+      
+      // Store in localStorage for convenience
+      localStorage.setItem('tolly_admin_passcode', passcode);
+
+      // Check scraper health & settings
+      axios.get('/api/health')
+        .then(() => setScraperStatus('ONLINE'))
+        .catch(() => setScraperStatus('OFFLINE'));
+
+      axios.get('/api/settings')
+        .then((res) => setScraperMode(res.data.scraperMode || 'live'))
+        .catch(() => setScraperMode('live'));
+    } catch (err) {
+      console.error(err);
+      setAuthError('Invalid passcode. Access Denied.');
+      sessionStorage.removeItem('tolly_admin_passcode');
+      localStorage.removeItem('tolly_admin_passcode');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('tolly_admin_passcode');
+    localStorage.removeItem('tolly_admin_passcode');
+    setIsAuthenticated(false);
+    setDbData(null);
+    setPasscode('');
+  };
 
   const handleToggleScraperMode = async (mode) => {
     try {
@@ -292,6 +352,61 @@ const AdminDashboard = () => {
     }
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
+        <Helmet>
+          <title>Admin Access | CHITRAMBHALARE</title>
+        </Helmet>
+        
+        <div className="w-full max-w-md bg-[#131a2b]/80 backdrop-blur-xl border border-brand-red/20 p-8 rounded-2xl shadow-[0_20px_50px_rgba(212,43,43,0.2)] text-center relative overflow-hidden">
+          <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-red/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="flex flex-col items-center mb-6 relative">
+            <div className="w-16 h-16 bg-brand-red/10 border border-brand-red/20 rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(212,43,43,0.25)]">
+              <Settings className="w-8 h-8 text-brand-red animate-spin-slow" />
+            </div>
+            <h1 className="text-3xl font-poppins font-bold text-gray-100 mb-2">Portal Security</h1>
+            <p className="text-gray-400 text-sm">Please verify the administrator passcode to access configurations.</p>
+          </div>
+
+          <form onSubmit={handleLoginSubmit} className="space-y-5 relative">
+            {authError && (
+              <div className="bg-red-950/40 border border-brand-red/30 text-brand-red text-sm font-semibold p-3.5 rounded-xl flex items-center justify-center gap-2">
+                <AlertTriangle className="w-4 h-4" />
+                {authError}
+              </div>
+            )}
+            
+            <div className="flex flex-col text-left gap-2">
+              <label htmlFor="adminPasscode" className="text-xs text-gray-400 font-bold uppercase tracking-wider pl-1">Passcode</label>
+              <input
+                id="adminPasscode"
+                type="password"
+                value={passcode}
+                onChange={(e) => setPasscode(e.target.value)}
+                className="w-full bg-brand-surface border border-gray-800 text-gray-100 px-5 py-3.5 rounded-xl focus:border-brand-red focus:ring-1 focus:ring-brand-red outline-none text-base tracking-widest text-center"
+                placeholder="••••••••"
+                required
+                disabled={isSubmitting}
+                autoFocus
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-brand-red hover:bg-brand-red/90 text-white font-bold py-3.5 rounded-xl text-base transition-all shadow-[0_0_20px_rgba(212,43,43,0.3)] disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? 'Verifying...' : 'Authorize Console'}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   if (!dbData) return <div className="text-center py-20 text-gray-400">Loading Database...</div>;
 
   return (
@@ -311,12 +426,20 @@ const AdminDashboard = () => {
             Configure dynamic content widgets, banner sliders, popup advertisements, and box office lists.
           </p>
         </div>
-        <button 
-          onClick={handleResetDb}
-          className="bg-red-950/40 hover:bg-brand-red text-brand-red hover:text-white border border-brand-red/30 px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all"
-        >
-          <RotateCcw className="w-4 h-4" /> Reset Database
-        </button>
+        <div className="flex items-center gap-3.5 w-full md:w-auto">
+          <button 
+            onClick={handleResetDb}
+            className="bg-red-950/40 hover:bg-brand-red text-brand-red hover:text-white border border-brand-red/30 px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition-all flex-grow md:flex-grow-0 justify-center"
+          >
+            <RotateCcw className="w-4 h-4" /> Reset Database
+          </button>
+          <button 
+            onClick={handleLogout}
+            className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex-grow md:flex-grow-0 text-center"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {/* Notification Banner */}
@@ -422,7 +545,7 @@ const AdminDashboard = () => {
                   Live Crawler Backend Config
                 </h3>
                 <p className="text-xs text-gray-400">
-                  Manage the data source for your news articles, reviews, and box office lists. Switch between live scraping tracktollywood.com or loading from your admin-configured database.
+                  Manage the data source for your news articles, reviews, and box office lists. Switch between live crawling or loading from your admin-configured database.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between pt-2">
