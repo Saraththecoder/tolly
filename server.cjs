@@ -23,7 +23,83 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-// Global middleware to replace Picsum placeholder images with reliable, curated Unsplash cinematic images
+// In-memory cache for keyword → tracktollywood image URL
+const movieImageCache = {};
+
+// Helper: search tracktollywood.com by keyword, return first article image URL
+async function fetchTollywoodImageByKeyword(keyword) {
+  const cacheKey = keyword.toLowerCase().trim().replace(/[^a-z0-9]/g, '-');
+  if (movieImageCache[cacheKey]) return movieImageCache[cacheKey];
+
+  const searchUrl = `https://tracktollywood.com/?s=${encodeURIComponent(keyword)}`;
+  try {
+    const resp = await axios.get(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://tracktollywood.com/'
+      },
+      timeout: 8000
+    });
+
+    const $ = cheerio.load(resp.data);
+    let imgUrl = null;
+
+    // Try all common image attributes across tracktollywood's WordPress theme
+    const selectors = [
+      '[data-img-url]',
+      'img[data-lazy-src]',
+      'img[data-src]',
+      'img[src*="tracktollywood.com/wp-content"]'
+    ];
+
+    for (const sel of selectors) {
+      if (imgUrl) break;
+      $(sel).each((_, el) => {
+        if (imgUrl) return;
+        const node = $(el);
+        const src = node.attr('data-img-url') ||
+                    node.attr('data-lazy-src') ||
+                    node.attr('data-src') ||
+                    node.attr('src') || '';
+        if (
+          src.includes('tracktollywood.com/wp-content') &&
+          !src.includes('logo') &&
+          !src.includes('avatar') &&
+          !src.includes('1x1') &&
+          !src.startsWith('data:')
+        ) {
+          imgUrl = src.split('?')[0];
+        }
+      });
+    }
+
+    // Fallback: background-image styles
+    if (!imgUrl) {
+      $('[style*="background-image"]').each((_, el) => {
+        if (imgUrl) return;
+        const style = $(el).attr('style') || '';
+        const match = style.match(/url\s*\(\s*['"']?([^'"')\s]+)['"']?\s*\)/i);
+        if (match && match[1] && match[1].includes('tracktollywood.com')) {
+          imgUrl = match[1].split('?')[0];
+        }
+      });
+    }
+
+    if (imgUrl) {
+      movieImageCache[cacheKey] = imgUrl;
+      console.log(`[movie-image] "${keyword}" → ${imgUrl.slice(0, 80)}`);
+      return imgUrl;
+    }
+  } catch (e) {
+    console.warn(`[movie-image] tracktollywood search failed for "${keyword}":`, e.message);
+  }
+  return null;
+}
+
+
+// Global middleware — route picsum placeholders through IMDb image search
 app.use((req, res, next) => {
   const originalJson = res.json;
   res.json = function (body) {
@@ -31,36 +107,14 @@ app.use((req, res, next) => {
       if (!obj) return obj;
       if (typeof obj === 'string') {
         if (obj.includes('picsum.photos')) {
-          const seed = obj.split('/seed/')[1]?.split('/')[0] || 'movie';
-          const unsplashIds = {
-            'vishwambhara': '1536440136628-849c177e76a1',
-            'dhurandhar': '1517604931442-7e0c8ed2963c',
-            'preity': '1496345875659-11f7dd282d1d',
-            'kannappa': '1509281373149-e957c6296406',
-            'aadarsha': '1489599849927-2ee91cede3ba',
-            'sunkara': '1485846234645-a62644f84728',
-            'raghuvaran': '1598899134739-24c46f58b8c0',
-            'drishyam': '1524712245354-2c4e5e7124c5',
-            'multistarrer': '1574267432553-4b4628081c31',
-            'vishwambhara2': '1536440136628-849c177e76a1',
-            'jailer': '1507679799987-c73779587ccf',
-            'nagabandham': '1478720568477-152d9b164e26',
-            'peddi': '1508847154043-be12a62861c1',
-            'gal1': '1524712245354-2c4e5e7124c5',
-            'gal2': '1509281373149-e957c6296406',
-            'gal3': '1496345875659-11f7dd282d1d',
-            'gal4': '1485846234645-a62644f84728',
-          };
-          const matchedId = Object.keys(unsplashIds).find(key => seed.includes(key));
-          const unsplashId = matchedId ? unsplashIds[matchedId] : '1489599849927-2ee91cede3ba';
-          
-          if (obj.includes('1200/600') || obj.includes('_feat')) {
-            return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&w=1200&h=600&q=80`;
-          }
-          return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&w=600&h=400&q=80`;
+          // Extract seed keyword and route through /api/imdb-image (tracktollywood-backed)
+          const seed = obj.split('/seed/')[1]?.split('/')[0] || 'tollywood';
+          const isFeatured = obj.includes('1200/600') || obj.includes('_feat');
+          return `/api/imdb-image?q=${encodeURIComponent(seed)}&featured=${isFeatured ? '1' : '0'}`;
         }
         if (/^https?:\/\/tracktollywood\.com/i.test(obj)) {
-          const b64 = Buffer.from(obj).toString('base64');
+          // FIXED: #6 — encodeURIComponent before base64 so proxy can do decodeURIComponent(atob(...))
+          const b64 = Buffer.from(encodeURIComponent(obj)).toString('base64');
           return `/api/image-proxy?url=${encodeURIComponent(b64)}`;
         }
         return obj;
@@ -77,12 +131,13 @@ app.use((req, res, next) => {
       }
       return obj;
     };
-    
+
     const replacedBody = deepReplace(body);
     return originalJson.call(this, replacedBody);
   };
   next();
 });
+
 
 const requireAdminPasscode = async (req, res, next) => {
   const code = req.headers['x-admin-passcode'];
@@ -559,9 +614,19 @@ const axiosConfig = {
   timeout: 8000
 };
 
+// FIXED: #11 — Vercel warmup route to prevent cold-start timeouts
+app.get('/api/warmup', (req, res) => {
+  res.json({ status: 'warm', time: new Date() });
+});
+
 // Health Check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date() });
+});
+
+// Admin passcode verify — returns {ok:true} or 401. Does NOT return any DB data.
+app.get('/api/admin/verify', requireAdminPasscode, (req, res) => {
+  res.json({ ok: true });
 });
 
 // Image Proxy to bypass hotlinking protection
@@ -572,16 +637,15 @@ app.get('/api/image-proxy', async (req, res) => {
     return res.status(400).send('URL is required');
   }
 
-  // Decode with decodeURIComponent(atob(encodedUrl))
-  try { // FIXED: Issue 2
-    // Buffer.from(..., 'base64').toString('binary') is equivalent to atob
-    const binary = Buffer.from(imageUrl, 'base64').toString('binary');
-    imageUrl = decodeURIComponent(binary);
+  // FIXED: #6 — decode: base64 → utf8 string → decodeURIComponent
+  try { // FIXED: #2
+    const decoded = Buffer.from(imageUrl, 'base64').toString('utf8');
+    imageUrl = decodeURIComponent(decoded);
     if (!/^https?:\/\//i.test(imageUrl)) {
       throw new Error("Invalid URL protocol");
     }
   } catch (e) {
-    return res.status(400).json({ error: "Invalid image URL encoding" }); // FIXED: Issue 2
+    return res.status(400).json({ error: "Invalid image URL encoding" }); // FIXED: #2
   }
 
   try {
@@ -611,6 +675,38 @@ app.get('/api/image-proxy', async (req, res) => {
     res.status(500).send(`Failed to fetch image: ${err.message}\nStack: ${err.stack}`);
   }
 });
+
+// Movie image by keyword from tracktollywood.com
+// GET /api/imdb-image?q=keyword&featured=0|1
+app.get('/api/imdb-image', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', 'public, max-age=86400'); // cache 24h in browser
+
+  const keyword = (req.query.q || 'tollywood').trim();
+
+  try {
+    const imgUrl = await fetchTollywoodImageByKeyword(keyword);
+    if (imgUrl) {
+      // Proxy through server so tracktollywood hotlink protection is bypassed
+      const imgResp = await axios.get(imgUrl, {
+        responseType: 'stream',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
+          'Referer': 'https://tracktollywood.com/'
+        },
+        timeout: 10000
+      });
+      res.setHeader('Content-Type', imgResp.headers['content-type'] || 'image/jpeg');
+      return imgResp.data.pipe(res);
+    }
+  } catch (e) {
+    console.warn('[movie-image] proxy stream failed:', e.message);
+  }
+
+  // Fallback: a reliable Tollywood-themed image from tracktollywood's CDN
+  res.redirect(302, 'https://tracktollywood.com/wp-content/uploads/2026/06/Vishwambhara-release-tensions-696x522.webp');
+});
+
 
 // Helper to clean and resolve image URLs from cheerio elements
 const resolveScrapedImageUrl = (el, $) => {

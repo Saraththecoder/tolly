@@ -159,29 +159,32 @@ const AdminDashboard = () => {
   };
 
   const checkAuth = async () => {
+    // Only attempt silent re-auth if sessionStorage has a token
+    const storedCode = sessionStorage.getItem('tolly_admin_passcode');
+    if (!storedCode) {
+      setIsAuthenticated(false);
+      return;
+    }
+
     try {
+      // /api/db is already guarded by requireAdminPasscode — 401 if wrong, data if right
       const data = await loadDb();
       setDbData(data);
       if (data.popupAd) setPopupForm(data.popupAd);
       if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
       setIsAuthenticated(true);
-      
-      // Check scraper backend health
+
       axios.get('/api/health')
         .then(() => setScraperStatus('ONLINE'))
         .catch(() => setScraperStatus('OFFLINE'));
 
-      // Read current mode from server
       axios.get('/api/settings')
         .then((res) => setScraperMode(res.data.scraperMode || 'live'))
         .catch(() => setScraperMode('live'));
     } catch (err) {
-      console.error('Failed to load database from backend', err);
-      if (err.response && err.response.status === 401) {
-        setIsAuthenticated(false);
-      } else {
-        setIsAuthenticated(false);
-      }
+      // Bad or expired token — clear and show login
+      sessionStorage.removeItem('tolly_admin_passcode');
+      setIsAuthenticated(false);
     }
   };
 
@@ -194,21 +197,18 @@ const AdminDashboard = () => {
     if (!passcode.trim()) return;
     setIsSubmitting(true);
     setAuthError('');
-    
-    // Store temporarily in sessionStorage
+
+    // Store in sessionStorage only (clears on tab close — no localStorage)
     sessionStorage.setItem('tolly_admin_passcode', passcode);
-    
+
     try {
+      // /api/db is already guarded — 401 on wrong passcode, data on right one
       const data = await loadDb();
       setDbData(data);
       if (data.popupAd) setPopupForm(data.popupAd);
       if (data.boxOfficeTop5) setTop5Form(data.boxOfficeTop5);
       setIsAuthenticated(true);
-      
-      // Store in localStorage for convenience
-      localStorage.setItem('tolly_admin_passcode', passcode);
 
-      // Check scraper health & settings
       axios.get('/api/health')
         .then(() => setScraperStatus('ONLINE'))
         .catch(() => setScraperStatus('OFFLINE'));
@@ -220,7 +220,6 @@ const AdminDashboard = () => {
       console.error(err);
       setAuthError('Invalid passcode. Access Denied.');
       sessionStorage.removeItem('tolly_admin_passcode');
-      localStorage.removeItem('tolly_admin_passcode');
     } finally {
       setIsSubmitting(false);
     }
@@ -228,7 +227,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem('tolly_admin_passcode');
-    localStorage.removeItem('tolly_admin_passcode');
+    // Do NOT touch localStorage — it was never written to
     setIsAuthenticated(false);
     setDbData(null);
     setPasscode('');

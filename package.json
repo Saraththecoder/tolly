@@ -8,8 +8,27 @@
     "server": "node server.cjs",
     "dev": "concurrently \"node server.cjs\" \"vite\"",
     "build": "vite build",
+    "postbuild": "react-snap",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "destination": "dist",
+    "crawl": false,
+    "include": [
+      "/",
+      "/movie-news",
+      "/reviews",
+      "/box-office",
+      "/about"
+    ],
+    "headless": true,
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "inlineCss": false
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
@@ -41,6 +60,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "react-snap": "^1.23.0",
     "vite": "^8.0.12"
   }
 }

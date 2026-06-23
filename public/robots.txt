@@ -1,0 +1,7 @@
+# FIXED: #15 — robots.txt for SEO crawler directives
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://chitrambhalare.com/sitemap.xml
